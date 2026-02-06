@@ -149,6 +149,73 @@
   .nav-item:hover {
     background: hsla(43, 56%, 52%, 0.1);
   }
+
+  /* Prediction Drawer Styles */
+  .prediction-drawer {
+    background: transparent !important;
+    border-top: 2px solid hsl(var(--gold)) !important;
+  }
+
+  .prediction-drawer-inner {
+    background: linear-gradient(180deg, hsla(270, 40%, 12%, 0.95), hsla(270, 40%, 6%, 0.98));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .prediction-option-btn {
+    @apply flex items-center justify-center gap-2 p-4 rounded-xl border-2 transition-all duration-300;
+  }
+
+  .prediction-option-inactive {
+    @apply border-muted bg-muted/30;
+  }
+
+  .prediction-option-inactive:hover {
+    @apply border-primary/40 bg-muted/50;
+  }
+
+  .prediction-option-superhit-active {
+    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(50 70% 45%));
+    border-color: hsl(var(--gold));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 0 30px hsla(43, 56%, 52%, 0.4);
+  }
+
+  .prediction-option-flop-active {
+    background: linear-gradient(135deg, hsl(350 82% 34%), hsl(350 70% 45%));
+    border-color: hsl(var(--crimson));
+    color: hsl(var(--secondary-foreground));
+    box-shadow: 0 0 30px hsla(350, 82%, 34%, 0.4);
+  }
+
+  .prediction-slider [data-orientation="horizontal"] {
+    @apply h-3 rounded-full;
+    background: linear-gradient(90deg, hsl(var(--muted)), hsl(var(--gold)));
+  }
+
+  .payout-box {
+    background: linear-gradient(135deg, hsla(43, 56%, 52%, 0.1), hsla(43, 56%, 52%, 0.05));
+    border: 1px solid hsla(43, 56%, 52%, 0.3);
+  }
+
+  .confirm-btn-active {
+    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(35 70% 45%));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 0 40px hsla(43, 56%, 52%, 0.4);
+  }
+
+  .confirm-btn-active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px hsla(43, 56%, 52%, 0.5);
+  }
+
+  .confirm-btn-disabled {
+    @apply bg-muted text-muted-foreground cursor-not-allowed;
+  }
+
+  .confirm-btn-success {
+    background: linear-gradient(135deg, hsl(150 60% 40%), hsl(150 50% 35%));
+  }
 }
 
 @layer utilities {

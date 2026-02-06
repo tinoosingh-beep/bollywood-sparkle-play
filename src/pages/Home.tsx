@@ -4,6 +4,7 @@ const newsItems = [
   {
     id: 1,
     title: "The Return of the Don? Shah Rukh Khan spotted with a mysterious script.",
+    shortTitle: "SRK: Don Returns?",
     image: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800&auto=format&fit=crop&q=80",
     category: "Exclusive",
     quiz: {
@@ -15,6 +16,7 @@ const newsItems = [
   {
     id: 2,
     title: "Box Office Shock: Small-budget indie film 'Chai & Chaos' beats the blockbusters.",
+    shortTitle: "Chai & Chaos: Blockbuster?",
     image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800&auto=format&fit=crop&q=80",
     category: "Box Office",
     quiz: {
@@ -26,6 +28,7 @@ const newsItems = [
   {
     id: 3,
     title: "Deepika's New Global Brand Deal: A look inside the Parisian photoshoot.",
+    shortTitle: "Deepika: Global Icon?",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
     category: "Fashion",
     quiz: {
@@ -41,7 +44,7 @@ export function Home() {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="font-display text-3xl font-bold text-gradient-gold">Today's Gossip</h2>
-        <p className="text-muted-foreground mt-2">Verify stories to earn MP</p>
+        <p className="text-muted-foreground mt-2">Verify stories & predict outcomes</p>
       </div>
 
       <div className="space-y-5">
@@ -49,6 +52,7 @@ export function Home() {
           <div key={item.id} style={{ animationDelay: `${index * 0.1}s` }}>
             <NewsCard
               title={item.title}
+              shortTitle={item.shortTitle}
               image={item.image}
               category={item.category}
               quiz={item.quiz}

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { CheckCircle, Play } from 'lucide-react';
+import { CheckCircle, Zap } from 'lucide-react';
 import { useBalance } from '@/contexts/BalanceContext';
 import { Button } from '@/components/ui/button';
+import { PredictionDrawer } from '@/components/PredictionDrawer';
 import {
   Dialog,
   DialogContent,
@@ -13,6 +14,7 @@ interface NewsCardProps {
   title: string;
   image: string;
   category: string;
+  shortTitle: string;
   quiz: {
     question: string;
     options: string[];
@@ -20,8 +22,9 @@ interface NewsCardProps {
   };
 }
 
-export function NewsCard({ title, image, category, quiz }: NewsCardProps) {
+export function NewsCard({ title, image, category, shortTitle, quiz }: NewsCardProps) {
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showPrediction, setShowPrediction] = useState(false);
   const [verified, setVerified] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -53,7 +56,7 @@ export function NewsCard({ title, image, category, quiz }: NewsCardProps) {
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
-          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-crimson text-foreground">
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">
             {category}
           </span>
         </div>
@@ -63,23 +66,35 @@ export function NewsCard({ title, image, category, quiz }: NewsCardProps) {
             {title}
           </h3>
           
-          {verified ? (
-            <div className="flex items-center gap-2 text-gold">
-              <CheckCircle className="w-5 h-5" />
-              <span className="font-medium">Verified • +50 MP Earned</span>
-            </div>
-          ) : (
+          <div className="flex gap-3">
+            {verified ? (
+              <div className="flex items-center gap-2 text-gold flex-1">
+                <CheckCircle className="w-5 h-5" />
+                <span className="font-medium">Verified • +50 MP</span>
+              </div>
+            ) : (
+              <Button
+                onClick={() => setShowQuiz(true)}
+                variant="outline"
+                className="flex-1 btn-glass rounded-xl py-5 flex items-center justify-center gap-2"
+              >
+                <CheckCircle className="w-4 h-4" />
+                Verify
+              </Button>
+            )}
+            
             <Button
-              onClick={() => setShowQuiz(true)}
-              className="w-full btn-gold rounded-xl py-5 flex items-center justify-center gap-2"
+              onClick={() => setShowPrediction(true)}
+              className="flex-1 btn-gold rounded-xl py-5 flex items-center justify-center gap-2"
             >
-              <Play className="w-4 h-4" />
-              Verify to Earn
+              <Zap className="w-4 h-4" />
+              Predict
             </Button>
-          )}
+          </div>
         </div>
       </article>
 
+      {/* Quiz Modal */}
       <Dialog open={showQuiz} onOpenChange={setShowQuiz}>
         <DialogContent className="glass-card border-gold/40 max-w-md">
           <DialogHeader>
@@ -104,7 +119,7 @@ export function NewsCard({ title, image, category, quiz }: NewsCardProps) {
                         : selectedOption === index
                         ? 'bg-red-500/20 border-red-500'
                         : 'bg-muted/50 border-muted'
-                      : 'bg-muted/50 border-muted hover:border-gold/60 hover:bg-muted'
+                      : 'bg-muted/50 border-muted hover:border-primary/60 hover:bg-muted'
                   } border`}
                 >
                   {option}
@@ -113,13 +128,21 @@ export function NewsCard({ title, image, category, quiz }: NewsCardProps) {
             </div>
             
             {showResult && selectedOption !== quiz.correctIndex && (
-              <p className="text-crimson text-center font-medium">
+              <p className="text-secondary text-center font-medium">
                 Incorrect! Try another article.
               </p>
             )}
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Prediction Bottom Sheet */}
+      <PredictionDrawer
+        isOpen={showPrediction}
+        onClose={() => setShowPrediction(false)}
+        title={title}
+        shortTitle={shortTitle}
+      />
     </>
   );
 }
