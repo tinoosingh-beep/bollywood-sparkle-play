@@ -62,7 +62,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     background: linear-gradient(180deg, hsl(var(--deep-purple)) 0%, hsl(270 50% 4%) 100%);
     min-height: 100vh;
   }
