@@ -1,25 +1,59 @@
+import { useState } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { BalanceProvider } from '@/contexts/BalanceContext';
+import { Header } from '@/components/Header';
+import { BottomNav } from '@/components/BottomNav';
+import { FloatingPoints } from '@/components/FloatingPoints';
+import { Home } from '@/pages/Home';
+import { Markets } from '@/pages/Markets';
+import { Games } from '@/pages/Games';
+import { Leaderboard } from '@/components/Leaderboard';
 
 const queryClient = new QueryClient();
+
+function AppContent() {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return <Home />;
+      case 'markets':
+        return <Markets />;
+      case 'games':
+        return <Games />;
+      case 'leaderboard':
+        return <Leaderboard />;
+      default:
+        return <Home />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen pb-24 pt-20">
+      <Header />
+      <FloatingPoints />
+      
+      <main className="px-4 py-6 max-w-lg mx-auto">
+        {renderContent()}
+      </main>
+      
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+    </div>
+  );
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <BalanceProvider>
+        <Toaster />
+        <Sonner />
+        <AppContent />
+      </BalanceProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
