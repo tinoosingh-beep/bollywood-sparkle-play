@@ -42,7 +42,7 @@ export function PredictionMarket({ title, optionA, optionB, oddsA, oddsB }: Pred
   return (
     <div className="glass-card-gold p-5 space-y-5 animate-slide-up">
       <div className="flex items-start gap-3">
-        <div className="p-2 rounded-lg bg-gold/20">
+        <div className="p-2 rounded-lg bg-primary/20">
           <Zap className="w-5 h-5 text-gold" />
         </div>
         <h3 className="font-display text-lg font-semibold text-foreground flex-1">
@@ -56,13 +56,13 @@ export function PredictionMarket({ title, optionA, optionB, oddsA, oddsB }: Pred
           disabled={hasPlaced}
           className={`p-4 rounded-xl border transition-all duration-300 ${
             selectedOption === 'A'
-              ? 'border-gold bg-gold/20 glow-gold'
-              : 'border-muted bg-muted/30 hover:border-gold/50'
+              ? 'border-gold bg-primary/20 glow-gold'
+              : 'border-muted bg-muted/30 hover:border-primary/50'
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-4 h-4 text-green-400" />
-            <span className="text-green-400 font-semibold">{oddsA}x</span>
+            <TrendingUp className="w-4 h-4 text-accent" />
+            <span className="text-accent font-semibold">{oddsA}x</span>
           </div>
           <p className="text-foreground font-medium text-sm">{optionA}</p>
         </button>
@@ -72,13 +72,13 @@ export function PredictionMarket({ title, optionA, optionB, oddsA, oddsB }: Pred
           disabled={hasPlaced}
           className={`p-4 rounded-xl border transition-all duration-300 ${
             selectedOption === 'B'
-              ? 'border-crimson bg-crimson/20 glow-crimson'
-              : 'border-muted bg-muted/30 hover:border-crimson/50'
+              ? 'border-secondary bg-secondary/20 glow-crimson'
+              : 'border-muted bg-muted/30 hover:border-secondary/50'
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
-            <TrendingDown className="w-4 h-4 text-crimson" />
-            <span className="text-crimson font-semibold">{oddsB}x</span>
+            <TrendingDown className="w-4 h-4 text-secondary" />
+            <span className="text-secondary font-semibold">{oddsB}x</span>
           </div>
           <p className="text-foreground font-medium text-sm">{optionB}</p>
         </button>
@@ -101,7 +101,7 @@ export function PredictionMarket({ title, optionA, optionB, oddsA, oddsB }: Pred
             />
           </div>
 
-          <div className="p-4 rounded-xl bg-muted/40 border border-gold/20">
+          <div className="p-4 rounded-xl bg-muted/40 border border-primary/20">
             <div className="flex justify-between items-center">
               <span className="text-muted-foreground">Potential Return</span>
               <span className="text-gold font-bold text-xl">
@@ -125,7 +125,7 @@ export function PredictionMarket({ title, optionA, optionB, oddsA, oddsB }: Pred
       )}
 
       {hasPlaced && (
-        <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 text-center">
+        <div className="p-4 rounded-xl bg-primary/10 border border-primary/30 text-center">
           <p className="text-gold font-medium">Prediction Placed!</p>
           <p className="text-muted-foreground text-sm mt-1">
             Waiting for result...

@@ -15,9 +15,9 @@ export function Leaderboard() {
       case 1:
         return <Crown className="w-6 h-6 text-gold" />;
       case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
+        return <Medal className="w-6 h-6 text-muted-foreground" />;
       case 3:
-        return <Award className="w-6 h-6 text-amber-600" />;
+        return <Award className="w-6 h-6 text-secondary" />;
       default:
         return <span className="w-6 h-6 flex items-center justify-center text-muted-foreground font-bold">{rank}</span>;
     }
@@ -35,7 +35,7 @@ export function Leaderboard() {
           <div
             key={player.rank}
             className={`glass-card p-4 flex items-center gap-4 ${
-              player.isUser ? 'border-gold/50 glow-gold' : ''
+              player.isUser ? 'border-gold glow-gold' : ''
             }`}
           >
             <div className="flex-shrink-0">
