@@ -1,10 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useBalance } from '@/contexts/BalanceContext';
-
-interface ScriptDoctorProps {
   onClose: () => void;
 }
 
