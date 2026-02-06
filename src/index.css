@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300..700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -319,6 +319,74 @@
 
   .shadow-neon-cyan {
     box-shadow: 0 0 30px hsla(180, 60%, 45%, 0.5);
+  }
+
+  /* Market Trading Styles */
+  .market-row {
+    @apply flex items-center p-3 rounded-xl transition-all duration-200;
+    background: hsla(270, 40%, 10%, 0.5);
+    border: 1px solid hsla(270, 30%, 20%, 0.5);
+  }
+
+  .market-row:hover {
+    background: hsla(270, 40%, 12%, 0.7);
+    border-color: hsla(210, 100%, 50%, 0.3);
+  }
+
+  .market-name {
+    @apply text-sm font-medium text-foreground leading-tight line-clamp-2;
+  }
+
+  .market-category {
+    @apply text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-0.5 block;
+  }
+
+  .market-btn-yes {
+    @apply flex flex-col items-center px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200;
+    background: hsla(142, 100%, 39%, 0.1);
+    border: 1px solid hsla(142, 100%, 39%, 0.3);
+    color: hsl(142, 100%, 39%);
+  }
+
+  .market-btn-yes:hover {
+    background: hsla(142, 100%, 39%, 0.2);
+    border-color: hsla(142, 100%, 39%, 0.5);
+    transform: translateY(-1px);
+  }
+
+  .market-btn-no {
+    @apply flex flex-col items-center px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200;
+    background: hsla(17, 100%, 50%, 0.1);
+    border: 1px solid hsla(17, 100%, 50%, 0.3);
+    color: hsl(17, 100%, 50%);
+  }
+
+  .market-btn-no:hover {
+    background: hsla(17, 100%, 50%, 0.2);
+    border-color: hsla(17, 100%, 50%, 0.5);
+    transform: translateY(-1px);
+  }
+
+  /* Trading Drawer */
+  .trading-drawer {
+    background: transparent !important;
+    border-top: 2px solid hsl(210, 100%, 50%) !important;
+  }
+
+  .trading-drawer-inner {
+    background: linear-gradient(180deg, hsla(220, 20%, 8%, 0.98), hsla(220, 25%, 5%, 0.99));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .market-slider [data-orientation="horizontal"] {
+    @apply h-2 rounded-full;
+    background: hsla(210, 100%, 50%, 0.2);
+  }
+
+  .market-slider [role="slider"] {
+    background: hsl(210, 100%, 50%);
+    border: 2px solid white;
   }
 }
 

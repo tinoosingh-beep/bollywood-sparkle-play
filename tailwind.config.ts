@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 const fontFamily = {
   sans: ['DM Sans', 'sans-serif'],
   display: ['Space Grotesk', 'sans-serif'],
+  mono: ['Roboto Mono', 'monospace'],
 };
 
 export default {
@@ -79,10 +80,16 @@ export default {
           DEFAULT: "hsl(var(--glass))",
           border: "hsl(var(--glass-border))",
         },
+        market: {
+          green: "hsl(142, 100%, 39%)",
+          red: "hsl(17, 100%, 50%)",
+          blue: "hsl(210, 100%, 50%)",
+        },
       },
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
+        mono: ['Roboto Mono', 'monospace'],
       },
       borderRadius: {
         lg: "var(--radius)",
