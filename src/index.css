@@ -350,6 +350,30 @@
     border-color: hsla(43, 56%, 52%, 0.4);
   }
 
+  .text-neon-pink {
+    color: hsl(320, 70%, 55%);
+  }
+
+  .text-neon-cyan {
+    color: hsl(180, 60%, 50%);
+  }
+
+  .bg-neon-pink {
+    background-color: hsl(320, 70%, 50%);
+  }
+
+  .bg-neon-cyan {
+    background-color: hsl(180, 60%, 45%);
+  }
+
+  .border-neon-pink {
+    border-color: hsla(320, 70%, 50%, 0.5);
+  }
+
+  .border-neon-cyan {
+    border-color: hsla(180, 60%, 45%, 0.5);
+  }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
