@@ -6,54 +6,59 @@
 
 @layer base {
   :root {
-    --background: 270 60% 6%;
+    --background: 250 30% 12%;
     --foreground: 45 30% 95%;
     
-    --card: 270 40% 10%;
+    --card: 250 25% 18%;
     --card-foreground: 45 30% 95%;
     
-    --popover: 270 40% 8%;
+    --popover: 250 25% 15%;
     --popover-foreground: 45 30% 95%;
     
-    --primary: 43 56% 52%;
-    --primary-foreground: 270 60% 6%;
+    --primary: 45 100% 55%;
+    --primary-foreground: 250 30% 10%;
     
-    --secondary: 350 82% 34%;
+    --secondary: 340 85% 55%;
     --secondary-foreground: 45 30% 95%;
     
-    --muted: 270 30% 15%;
-    --muted-foreground: 270 10% 60%;
+    --muted: 250 20% 22%;
+    --muted-foreground: 250 15% 65%;
     
-    --accent: 43 56% 52%;
-    --accent-foreground: 270 60% 6%;
+    --accent: 180 70% 50%;
+    --accent-foreground: 250 30% 10%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 43 30% 25%;
-    --input: 270 30% 15%;
-    --ring: 43 56% 52%;
+    --border: 250 20% 28%;
+    --input: 250 20% 22%;
+    --ring: 45 100% 55%;
     
     --radius: 1rem;
     
-    /* Custom BollyBet tokens */
-    --gold: 43 56% 52%;
-    --gold-glow: 43 70% 60%;
-    --crimson: 350 82% 34%;
-    --crimson-glow: 350 80% 45%;
-    --deep-purple: 270 60% 6%;
-    --glass: 270 40% 12%;
-    --glass-border: 43 30% 30%;
+    /* Custom BollyBet tokens - Brighter palette */
+    --gold: 45 100% 55%;
+    --gold-glow: 50 100% 65%;
+    --crimson: 340 85% 55%;
+    --crimson-glow: 340 80% 65%;
+    --deep-purple: 250 30% 12%;
+    --glass: 250 25% 20%;
+    --glass-border: 45 50% 40%;
+    
+    /* Neon accent colors */
+    --neon-pink: 320 100% 60%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 280 100% 65%;
     
     /* Sidebar tokens */
-    --sidebar-background: 270 40% 8%;
+    --sidebar-background: 250 25% 15%;
     --sidebar-foreground: 45 30% 95%;
-    --sidebar-primary: 43 56% 52%;
-    --sidebar-primary-foreground: 270 60% 6%;
-    --sidebar-accent: 270 30% 15%;
+    --sidebar-primary: 45 100% 55%;
+    --sidebar-primary-foreground: 250 30% 10%;
+    --sidebar-accent: 250 20% 22%;
     --sidebar-accent-foreground: 45 30% 95%;
-    --sidebar-border: 43 30% 25%;
-    --sidebar-ring: 43 56% 52%;
+    --sidebar-border: 250 20% 28%;
+    --sidebar-ring: 45 100% 55%;
   }
 
   * {
@@ -63,7 +68,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(180deg, hsl(var(--deep-purple)) 0%, hsl(270 50% 4%) 100%);
+    background: linear-gradient(180deg, hsl(var(--deep-purple)) 0%, hsl(250 35% 8%) 100%);
     min-height: 100vh;
   }
 }
@@ -72,17 +77,17 @@
   /* Glassmorphism card */
   .glass-card {
     @apply relative overflow-hidden rounded-2xl;
-    background: linear-gradient(135deg, hsla(270, 40%, 15%, 0.6), hsla(270, 40%, 8%, 0.8));
+    background: linear-gradient(135deg, hsla(250, 25%, 22%, 0.85), hsla(250, 25%, 16%, 0.9));
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsla(43, 30%, 30%, 0.5);
-    box-shadow: 0 8px 32px hsla(270, 60%, 3%, 0.6);
+    border: 1px solid hsla(45, 50%, 50%, 0.3);
+    box-shadow: 0 8px 32px hsla(250, 30%, 5%, 0.5);
   }
 
   .glass-card-gold {
     @apply glass-card;
-    border: 1px solid hsla(43, 56%, 52%, 0.4);
-    box-shadow: 0 8px 32px hsla(270, 60%, 3%, 0.6), 0 0 30px hsla(43, 56%, 52%, 0.3);
+    border: 1px solid hsla(45, 100%, 55%, 0.5);
+    box-shadow: 0 8px 32px hsla(250, 30%, 5%, 0.5), 0 0 40px hsla(45, 100%, 55%, 0.25);
   }
 
   /* Typography */
@@ -93,36 +98,36 @@
 
   /* Gold glow effect */
   .glow-gold {
-    box-shadow: 0 0 30px hsla(43, 56%, 52%, 0.3);
+    box-shadow: 0 0 35px hsla(45, 100%, 55%, 0.4);
   }
 
   .glow-crimson {
-    box-shadow: 0 0 20px hsla(350, 82%, 34%, 0.4);
+    box-shadow: 0 0 25px hsla(340, 85%, 55%, 0.5);
   }
 
   /* Button variants */
   .btn-gold {
     @apply relative overflow-hidden font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(35 70% 45%));
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(40 100% 50%));
     color: hsl(var(--deep-purple));
-    box-shadow: 0 0 30px hsla(43, 56%, 52%, 0.3);
+    box-shadow: 0 0 35px hsla(45, 100%, 55%, 0.4);
   }
 
   .btn-gold:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 40px hsla(43, 56%, 52%, 0.5);
+    box-shadow: 0 0 50px hsla(45, 100%, 55%, 0.6);
   }
 
   .btn-crimson {
     @apply relative overflow-hidden font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, hsl(350 82% 34%), hsl(350 70% 45%));
+    background: linear-gradient(135deg, hsl(340 85% 55%), hsl(350 80% 60%));
     color: hsl(var(--foreground));
-    box-shadow: 0 0 20px hsla(350, 82%, 34%, 0.4);
+    box-shadow: 0 0 25px hsla(340, 85%, 55%, 0.5);
   }
 
   .btn-crimson:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px hsla(350, 82%, 34%, 0.6);
+    box-shadow: 0 0 40px hsla(340, 85%, 55%, 0.7);
   }
 
   .btn-glass {
@@ -131,8 +136,8 @@
   }
 
   .btn-glass:hover {
-    border-color: hsla(43, 56%, 52%, 0.6);
-    box-shadow: 0 0 30px hsla(43, 56%, 52%, 0.3);
+    border-color: hsla(45, 100%, 55%, 0.7);
+    box-shadow: 0 0 35px hsla(45, 100%, 55%, 0.4);
   }
 
   /* Bottom nav styling */
@@ -142,12 +147,12 @@
 
   .nav-item-active {
     @apply nav-item;
-    background: hsla(43, 56%, 52%, 0.15);
+    background: hsla(45, 100%, 55%, 0.2);
     color: hsl(var(--gold));
   }
 
   .nav-item:hover {
-    background: hsla(43, 56%, 52%, 0.1);
+    background: hsla(45, 100%, 55%, 0.15);
   }
 
   /* Prediction Drawer Styles */
@@ -157,7 +162,7 @@
   }
 
   .prediction-drawer-inner {
-    background: linear-gradient(180deg, hsla(270, 40%, 12%, 0.95), hsla(270, 40%, 6%, 0.98));
+    background: linear-gradient(180deg, hsla(250, 25%, 18%, 0.98), hsla(250, 25%, 12%, 0.99));
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
   }
@@ -175,17 +180,17 @@
   }
 
   .prediction-option-superhit-active {
-    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(50 70% 45%));
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(50 100% 50%));
     border-color: hsl(var(--gold));
     color: hsl(var(--primary-foreground));
-    box-shadow: 0 0 30px hsla(43, 56%, 52%, 0.4);
+    box-shadow: 0 0 40px hsla(45, 100%, 55%, 0.5);
   }
 
   .prediction-option-flop-active {
-    background: linear-gradient(135deg, hsl(350 82% 34%), hsl(350 70% 45%));
+    background: linear-gradient(135deg, hsl(340 85% 55%), hsl(350 80% 60%));
     border-color: hsl(var(--crimson));
     color: hsl(var(--secondary-foreground));
-    box-shadow: 0 0 30px hsla(350, 82%, 34%, 0.4);
+    box-shadow: 0 0 35px hsla(340, 85%, 55%, 0.5);
   }
 
   .prediction-slider [data-orientation="horizontal"] {
@@ -194,19 +199,19 @@
   }
 
   .payout-box {
-    background: linear-gradient(135deg, hsla(43, 56%, 52%, 0.1), hsla(43, 56%, 52%, 0.05));
-    border: 1px solid hsla(43, 56%, 52%, 0.3);
+    background: linear-gradient(135deg, hsla(45, 100%, 55%, 0.15), hsla(45, 100%, 55%, 0.08));
+    border: 1px solid hsla(45, 100%, 55%, 0.4);
   }
 
   .confirm-btn-active {
-    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(35 70% 45%));
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(40 100% 50%));
     color: hsl(var(--primary-foreground));
-    box-shadow: 0 0 40px hsla(43, 56%, 52%, 0.4);
+    box-shadow: 0 0 50px hsla(45, 100%, 55%, 0.5);
   }
 
   .confirm-btn-active:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 50px hsla(43, 56%, 52%, 0.5);
+    box-shadow: 0 0 60px hsla(45, 100%, 55%, 0.6);
   }
 
   .confirm-btn-disabled {
@@ -214,67 +219,67 @@
   }
 
   .confirm-btn-success {
-    background: linear-gradient(135deg, hsl(150 60% 40%), hsl(150 50% 35%));
+    background: linear-gradient(135deg, hsl(150 70% 45%), hsl(150 60% 40%));
   }
 
   /* Neon Game Cards */
   .game-card {
-    background: linear-gradient(135deg, hsla(270, 40%, 12%, 0.9), hsla(270, 40%, 6%, 0.95));
+    background: linear-gradient(135deg, hsla(250, 25%, 20%, 0.95), hsla(250, 25%, 14%, 0.98));
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: all 0.3s ease;
   }
 
   .neon-border-pink {
-    border: 2px solid hsla(320, 70%, 50%, 0.6);
+    border: 2px solid hsla(320, 100%, 60%, 0.7);
     box-shadow: 
-      0 0 15px hsla(320, 70%, 50%, 0.3),
-      inset 0 0 15px hsla(320, 70%, 50%, 0.1);
+      0 0 20px hsla(320, 100%, 60%, 0.4),
+      inset 0 0 15px hsla(320, 100%, 60%, 0.1);
   }
 
   .neon-border-pink:hover {
-    border-color: hsla(320, 70%, 60%, 0.8);
+    border-color: hsla(320, 100%, 65%, 0.9);
     box-shadow: 
-      0 0 25px hsla(320, 70%, 50%, 0.5),
-      inset 0 0 20px hsla(320, 70%, 50%, 0.15);
+      0 0 30px hsla(320, 100%, 60%, 0.6),
+      inset 0 0 20px hsla(320, 100%, 60%, 0.15);
   }
 
   .neon-border-gold {
-    border: 2px solid hsla(43, 56%, 52%, 0.6);
+    border: 2px solid hsla(45, 100%, 55%, 0.7);
     box-shadow: 
-      0 0 15px hsla(43, 56%, 52%, 0.3),
-      inset 0 0 15px hsla(43, 56%, 52%, 0.1);
+      0 0 20px hsla(45, 100%, 55%, 0.4),
+      inset 0 0 15px hsla(45, 100%, 55%, 0.1);
   }
 
   .neon-border-gold:hover {
-    border-color: hsla(43, 56%, 62%, 0.8);
+    border-color: hsla(45, 100%, 60%, 0.9);
     box-shadow: 
-      0 0 25px hsla(43, 56%, 52%, 0.5),
-      inset 0 0 20px hsla(43, 56%, 52%, 0.15);
+      0 0 30px hsla(45, 100%, 55%, 0.6),
+      inset 0 0 20px hsla(45, 100%, 55%, 0.15);
   }
 
   .neon-border-cyan {
-    border: 2px solid hsla(180, 60%, 45%, 0.6);
+    border: 2px solid hsla(180, 100%, 50%, 0.7);
     box-shadow: 
-      0 0 15px hsla(180, 60%, 45%, 0.3),
-      inset 0 0 15px hsla(180, 60%, 45%, 0.1);
+      0 0 20px hsla(180, 100%, 50%, 0.4),
+      inset 0 0 15px hsla(180, 100%, 50%, 0.1);
   }
 
   .neon-border-cyan:hover {
-    border-color: hsla(180, 60%, 55%, 0.8);
+    border-color: hsla(180, 100%, 55%, 0.9);
     box-shadow: 
-      0 0 25px hsla(180, 60%, 45%, 0.5),
-      inset 0 0 20px hsla(180, 60%, 45%, 0.15);
+      0 0 30px hsla(180, 100%, 50%, 0.6),
+      inset 0 0 20px hsla(180, 100%, 50%, 0.15);
   }
 
   /* 3D Icon effect */
   .icon-3d {
     @apply p-3 rounded-xl;
-    background: linear-gradient(145deg, hsla(320, 70%, 50%, 0.3), hsla(270, 40%, 15%, 0.8));
+    background: linear-gradient(145deg, hsla(320, 100%, 60%, 0.35), hsla(250, 25%, 18%, 0.85));
     box-shadow: 
-      4px 4px 8px hsla(270, 60%, 3%, 0.5),
-      -2px -2px 6px hsla(320, 70%, 50%, 0.2);
-    color: hsl(320, 70%, 60%);
+      4px 4px 8px hsla(250, 30%, 5%, 0.5),
+      -2px -2px 6px hsla(320, 100%, 60%, 0.25);
+    color: hsl(320, 100%, 65%);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -283,54 +288,54 @@
   /* Neon buttons */
   .btn-neon-pink {
     @apply font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, hsl(320 70% 50%), hsl(350 82% 40%));
+    background: linear-gradient(135deg, hsl(320 100% 60%), hsl(340 90% 55%));
     color: white;
-    box-shadow: 0 0 20px hsla(320, 70%, 50%, 0.4);
+    box-shadow: 0 0 25px hsla(320, 100%, 60%, 0.5);
   }
 
   .btn-neon-pink:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px hsla(320, 70%, 50%, 0.6);
+    box-shadow: 0 0 40px hsla(320, 100%, 60%, 0.7);
   }
 
   .btn-neon-cyan {
     @apply font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, hsl(180 60% 40%), hsl(180 50% 35%));
+    background: linear-gradient(135deg, hsl(180 100% 45%), hsl(180 80% 40%));
     color: white;
-    box-shadow: 0 0 20px hsla(180, 60%, 45%, 0.4);
+    box-shadow: 0 0 25px hsla(180, 100%, 50%, 0.5);
   }
 
   .btn-neon-cyan:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px hsla(180, 60%, 45%, 0.6);
+    box-shadow: 0 0 40px hsla(180, 100%, 50%, 0.7);
   }
 
   /* Game modal */
   .game-modal-content {
-    background: linear-gradient(180deg, hsla(270, 40%, 10%, 0.98), hsla(270, 40%, 5%, 0.99));
-    border: 2px solid hsla(320, 70%, 50%, 0.4);
-    box-shadow: 0 0 50px hsla(320, 70%, 50%, 0.2);
+    background: linear-gradient(180deg, hsla(250, 25%, 16%, 0.99), hsla(250, 25%, 10%, 0.99));
+    border: 2px solid hsla(320, 100%, 60%, 0.5);
+    box-shadow: 0 0 60px hsla(320, 100%, 60%, 0.3);
   }
 
   /* Neon shadows */
   .shadow-neon-pink {
-    box-shadow: 0 0 30px hsla(320, 70%, 50%, 0.5);
+    box-shadow: 0 0 35px hsla(320, 100%, 60%, 0.6);
   }
 
   .shadow-neon-cyan {
-    box-shadow: 0 0 30px hsla(180, 60%, 45%, 0.5);
+    box-shadow: 0 0 35px hsla(180, 100%, 50%, 0.6);
   }
 
   /* Market Trading Styles */
   .market-row {
     @apply flex items-center p-3 rounded-xl transition-all duration-200;
-    background: hsla(270, 40%, 10%, 0.5);
-    border: 1px solid hsla(270, 30%, 20%, 0.5);
+    background: hsla(250, 25%, 16%, 0.6);
+    border: 1px solid hsla(250, 20%, 25%, 0.5);
   }
 
   .market-row:hover {
-    background: hsla(270, 40%, 12%, 0.7);
-    border-color: hsla(210, 100%, 50%, 0.3);
+    background: hsla(250, 25%, 20%, 0.8);
+    border-color: hsla(210, 100%, 55%, 0.4);
   }
 
   .market-name {
@@ -370,29 +375,29 @@
   /* Trading Drawer */
   .trading-drawer {
     background: transparent !important;
-    border-top: 2px solid hsl(210, 100%, 50%) !important;
+    border-top: 2px solid hsl(210, 100%, 55%) !important;
   }
 
   .trading-drawer-inner {
-    background: linear-gradient(180deg, hsla(220, 20%, 8%, 0.98), hsla(220, 25%, 5%, 0.99));
+    background: linear-gradient(180deg, hsla(250, 25%, 16%, 0.98), hsla(250, 25%, 10%, 0.99));
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
   }
 
   .market-slider [data-orientation="horizontal"] {
     @apply h-2 rounded-full;
-    background: hsla(210, 100%, 50%, 0.2);
+    background: hsla(210, 100%, 55%, 0.25);
   }
 
   .market-slider [role="slider"] {
-    background: hsl(210, 100%, 50%);
+    background: hsl(210, 100%, 55%);
     border: 2px solid white;
   }
 }
 
 @layer utilities {
   .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(35 70% 55%));
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(40 100% 60%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -407,39 +412,39 @@
   }
 
   .bg-gradient-gold {
-    background: linear-gradient(135deg, hsl(43 56% 52%), hsl(35 70% 45%));
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(40 100% 50%));
   }
 
   .bg-gradient-crimson {
-    background: linear-gradient(135deg, hsl(350 82% 34%), hsl(350 70% 45%));
+    background: linear-gradient(135deg, hsl(340 85% 55%), hsl(350 80% 60%));
   }
 
   .border-gold {
-    border-color: hsla(43, 56%, 52%, 0.4);
+    border-color: hsla(45, 100%, 55%, 0.5);
   }
 
   .text-neon-pink {
-    color: hsl(320, 70%, 55%);
+    color: hsl(320, 100%, 65%);
   }
 
   .text-neon-cyan {
-    color: hsl(180, 60%, 50%);
+    color: hsl(180, 100%, 50%);
   }
 
   .bg-neon-pink {
-    background-color: hsl(320, 70%, 50%);
+    background-color: hsl(320, 100%, 60%);
   }
 
   .bg-neon-cyan {
-    background-color: hsl(180, 60%, 45%);
+    background-color: hsl(180, 100%, 45%);
   }
 
   .border-neon-pink {
-    border-color: hsla(320, 70%, 50%, 0.5);
+    border-color: hsla(320, 100%, 60%, 0.6);
   }
 
   .border-neon-cyan {
-    border-color: hsla(180, 60%, 45%, 0.5);
+    border-color: hsla(180, 100%, 50%, 0.6);
   }
 
   .scrollbar-hide::-webkit-scrollbar {
