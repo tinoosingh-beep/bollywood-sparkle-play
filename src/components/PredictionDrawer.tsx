@@ -9,15 +9,25 @@ interface PredictionDrawerProps {
   onClose: () => void;
   title: string;
   shortTitle: string;
+  options?: string[];
+  initialPrice?: number;
 }
 
-export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: PredictionDrawerProps) {
-  const [selectedOption, setSelectedOption] = useState<'superhit' | 'flop' | null>(null);
+export function PredictionDrawer({ 
+  isOpen, 
+  onClose, 
+  title, 
+  shortTitle,
+  options = ['SUPERHIT', 'FLOP'],
+  initialPrice = 0.50,
+}: PredictionDrawerProps) {
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [stake, setStake] = useState(50);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasConfirmed, setHasConfirmed] = useState(false);
   const { balance, deductPoints, addPoints, triggerFloatingPoints } = useBalance();
 
+  // Calculate potential payout with 1.85x multiplier
   const potentialPayout = Math.round(stake * 1.85);
 
   // Trigger pulse animation when stake changes
@@ -28,7 +38,7 @@ export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: Predict
   }, [stake]);
 
   const handleConfirm = (event: React.MouseEvent) => {
-    if (!selectedOption || hasConfirmed) return;
+    if (selectedOption === null || hasConfirmed) return;
     
     if (deductPoints(stake)) {
       setHasConfirmed(true);
@@ -65,6 +75,22 @@ export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: Predict
     }
   };
 
+  // Determine button styling based on option text
+  const getOptionStyle = (index: number, optionText: string) => {
+    const isPositive = ['SUPERHIT', 'YES', 'CONFIRMED', 'HOLLYWOOD FIRST'].includes(optionText.toUpperCase());
+    const isSelected = selectedOption === index;
+    
+    if (isSelected) {
+      return isPositive ? 'prediction-option-superhit-active' : 'prediction-option-flop-active';
+    }
+    return 'prediction-option-inactive';
+  };
+
+  const getOptionIcon = (optionText: string) => {
+    const isPositive = ['SUPERHIT', 'YES', 'CONFIRMED', 'HOLLYWOOD FIRST'].includes(optionText.toUpperCase());
+    return isPositive ? TrendingUp : TrendingDown;
+  };
+
   return (
     <Drawer open={isOpen} onOpenChange={handleOpenChange}>
       <DrawerContent className="prediction-drawer h-[60vh] border-t-2 border-gold bg-transparent">
@@ -75,13 +101,13 @@ export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: Predict
               <div className="p-2 rounded-lg bg-primary/20">
                 <Sparkles className="w-5 h-5 text-gold" />
               </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-foreground">{shortTitle}</h3>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-display text-lg font-bold text-foreground line-clamp-1">{shortTitle}</h3>
                 <p className="text-xs text-muted-foreground line-clamp-1">{title}</p>
               </div>
             </div>
             <DrawerClose asChild>
-              <button className="p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors">
+              <button className="p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors flex-shrink-0">
                 <X className="w-5 h-5 text-muted-foreground" />
               </button>
             </DrawerClose>
@@ -89,35 +115,36 @@ export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: Predict
 
           {/* Content */}
           <div className="flex-1 p-5 space-y-6 overflow-y-auto">
+            {/* Price Indicator */}
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">Market Price</span>
+              <span className="text-gold font-bold">{Math.round(initialPrice * 100)}¢</span>
+            </div>
+
             {/* Segmented Control */}
             <div className="space-y-3">
               <p className="text-sm text-muted-foreground font-medium">Your Prediction</p>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => setSelectedOption('superhit')}
-                  disabled={hasConfirmed}
-                  className={`prediction-option-btn ${
-                    selectedOption === 'superhit' 
-                      ? 'prediction-option-superhit-active' 
-                      : 'prediction-option-inactive'
-                  }`}
-                >
-                  <TrendingUp className={`w-5 h-5 ${selectedOption === 'superhit' ? 'text-primary-foreground' : 'text-accent'}`} />
-                  <span className="font-bold">SUPERHIT</span>
-                </button>
-
-                <button
-                  onClick={() => setSelectedOption('flop')}
-                  disabled={hasConfirmed}
-                  className={`prediction-option-btn ${
-                    selectedOption === 'flop' 
-                      ? 'prediction-option-flop-active' 
-                      : 'prediction-option-inactive'
-                  }`}
-                >
-                  <TrendingDown className={`w-5 h-5 ${selectedOption === 'flop' ? 'text-secondary-foreground' : 'text-secondary'}`} />
-                  <span className="font-bold">FLOP</span>
-                </button>
+              <div className={`grid gap-3 ${options.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                {options.map((option, index) => {
+                  const Icon = getOptionIcon(option);
+                  const isPositive = ['SUPERHIT', 'YES', 'CONFIRMED', 'HOLLYWOOD FIRST'].includes(option.toUpperCase());
+                  
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedOption(index)}
+                      disabled={hasConfirmed}
+                      className={`prediction-option-btn ${getOptionStyle(index, option)}`}
+                    >
+                      <Icon className={`w-5 h-5 ${
+                        selectedOption === index 
+                          ? 'text-primary-foreground' 
+                          : isPositive ? 'text-accent' : 'text-secondary'
+                      }`} />
+                      <span className="font-bold uppercase">{option}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -177,9 +204,9 @@ export function PredictionDrawer({ isOpen, onClose, title, shortTitle }: Predict
             ) : (
               <button
                 onClick={handleConfirm}
-                disabled={!selectedOption || stake > balance}
+                disabled={selectedOption === null || stake > balance}
                 className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
-                  selectedOption && stake <= balance
+                  selectedOption !== null && stake <= balance
                     ? 'confirm-btn-active'
                     : 'confirm-btn-disabled'
                 }`}
