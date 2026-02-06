@@ -1,5 +1,10 @@
 import type { Config } from "tailwindcss";
 
+const fontFamily = {
+  sans: ['DM Sans', 'sans-serif'],
+  display: ['Space Grotesk', 'sans-serif'],
+};
+
 export default {
   darkMode: ["class"],
   content: [
@@ -76,8 +81,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Playfair Display", "serif"],
+        sans: ['DM Sans', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
