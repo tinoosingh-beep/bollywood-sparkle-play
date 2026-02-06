@@ -195,6 +195,3 @@ export function ScriptDoctor({ onClose }: ScriptDoctorProps) {
     </div>
   );
 }
-
-// Add missing import
-import { useEffect } from 'react';
