@@ -1,5 +1,10 @@
 import type { Config } from "tailwindcss";
 
+const fontFamily = {
+  sans: ['DM Sans', 'sans-serif'],
+  display: ['Space Grotesk', 'sans-serif'],
+};
+
 export default {
   darkMode: ["class"],
   content: [

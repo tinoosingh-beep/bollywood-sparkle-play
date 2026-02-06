@@ -87,7 +87,7 @@
 
   /* Typography */
   .headline-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Space Grotesk', sans-serif;
     @apply font-bold tracking-tight;
   }
 
