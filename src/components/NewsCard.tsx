@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { CheckCircle, Zap, ChevronDown, ChevronUp, Send } from 'lucide-react';
+import { CheckCircle, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { useBalance } from '@/contexts/BalanceContext';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PredictionDrawer } from '@/components/PredictionDrawer';
 import { Confetti } from '@/components/Confetti';
 import { toast } from 'sonner';
@@ -20,20 +20,21 @@ export function NewsCard({ story }: NewsCardProps) {
   const [showConfetti, setShowConfetti] = useState(false);
   const { addPoints, triggerFloatingPoints } = useBalance();
 
-  const handleQuizSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  // Generate default options if not provided
+  const quizOptions = story.quizOptions || [story.correctAnswer, 'Option A', 'Option B', 'Option C'];
+
+  const handleQuizSubmit = (selectedValue: string) => {
+    setQuizAnswer(selectedValue);
     
-    const isCorrect = quizAnswer.toLowerCase().trim() === story.correctAnswer.toLowerCase().trim();
+    const isCorrect = selectedValue.toLowerCase().trim() === story.correctAnswer.toLowerCase().trim();
     
     if (isCorrect) {
       setShowConfetti(true);
       setVerified(true);
       
-      // Get position for floating points
-      const form = event.target as HTMLFormElement;
-      const rect = form.getBoundingClientRect();
+      // Get position for floating points using a fixed position
       addPoints(50);
-      triggerFloatingPoints(50, rect.left + rect.width / 2, rect.top);
+      triggerFloatingPoints(50, window.innerWidth / 2, window.innerHeight / 2);
       
       toast.success('Correct! +50 MP earned! 🎉', {
         className: 'bg-gold/20 border-gold text-gold',
@@ -42,6 +43,7 @@ export function NewsCard({ story }: NewsCardProps) {
       toast.error('Try again! That\'s not quite right.', {
         className: 'bg-crimson/20 border-crimson text-crimson',
       });
+      setQuizAnswer(''); // Reset selection on wrong answer
     }
   };
 
@@ -101,17 +103,25 @@ export function NewsCard({ story }: NewsCardProps) {
                     <span className="text-sm font-medium text-gold">Spotlight Quiz • +50 MP</span>
                   </div>
                   <p className="text-foreground font-medium">{story.quizQuestion}</p>
-                  <form onSubmit={handleQuizSubmit} className="flex gap-2">
-                    <Input
-                      value={quizAnswer}
-                      onChange={(e) => setQuizAnswer(e.target.value)}
-                      placeholder="Type your answer..."
-                      className="flex-1 bg-muted/50 border-muted focus:border-gold"
-                    />
-                    <Button type="submit" className="btn-gold px-4">
-                      <Send className="w-4 h-4" />
-                    </Button>
-                  </form>
+                  <Select 
+                    value={quizAnswer} 
+                    onValueChange={handleQuizSubmit}
+                  >
+                    <SelectTrigger className="w-full bg-card border-muted focus:border-gold">
+                      <SelectValue placeholder="Select your answer..." />
+                    </SelectTrigger>
+                    <SelectContent className="bg-card border-border z-50">
+                      {quizOptions.map((option, index) => (
+                        <SelectItem 
+                          key={index} 
+                          value={option}
+                          className="hover:bg-muted focus:bg-muted cursor-pointer"
+                        >
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               ) : (
                 <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-2">
