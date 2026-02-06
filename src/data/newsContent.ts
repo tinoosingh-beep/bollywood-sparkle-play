@@ -5,6 +5,7 @@ export interface NewsStory {
   image: string;
   quizQuestion: string;
   correctAnswer: string;
+  quizOptions?: string[];
   predictionMarketQuestion: string;
   predictionMarketOptions: string[];
   initialYesPrice: number;
@@ -18,6 +19,7 @@ export const newsContent: NewsStory[] = [
     image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
     quizQuestion: "Which studio is rumored to be producing 'Pathaan 2'?",
     correctAnswer: "YRF",
+    quizOptions: ["YRF", "Dharma", "Red Chillies", "T-Series"],
     predictionMarketQuestion: "Will 'Pathaan 2' officially be announced by the end of next month?",
     predictionMarketOptions: ["Yes", "No"],
     initialYesPrice: 0.50
