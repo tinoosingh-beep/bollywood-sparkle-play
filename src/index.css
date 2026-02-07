@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --background: 45 30% 97%;
-    --foreground: 250 30% 15%;
+    --background: 40 70% 90%;
+    --foreground: 250 35% 12%;
     
     --card: 0 0% 100%;
     --card-foreground: 250 30% 15%;
@@ -68,7 +68,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(180deg, hsl(45 35% 97%) 0%, hsl(45 25% 94%) 100%);
+    background: linear-gradient(180deg, hsl(40 75% 90%) 0%, hsl(35 65% 85%) 100%);
     min-height: 100vh;
   }
 }
