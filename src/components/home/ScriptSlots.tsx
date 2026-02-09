@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Film, Lock, Gift } from 'lucide-react';
+import { Film, Lock, Gift, Plus } from 'lucide-react';
+
+interface ScriptSlotsProps {
+  onNavigateToNews?: () => void;
+}
 
 interface Slot {
   id: number;
   type: 'empty' | 'locked' | 'ready';
-  unlockTime?: number; // seconds remaining
+  unlockTime?: number;
 }
 
 const initialSlots: Slot[] = [
@@ -23,7 +27,7 @@ function formatTime(seconds: number) {
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
-export function ScriptSlots() {
+export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
   const [slots, setSlots] = useState(initialSlots);
 
   useEffect(() => {
@@ -60,7 +64,7 @@ export function ScriptSlots() {
             ) : slot.type === 'locked' ? (
               <LockedSlot time={slot.unlockTime!} />
             ) : (
-              <EmptySlot />
+              <EmptySlot onTap={onNavigateToNews} />
             )}
           </motion.div>
         ))}
@@ -72,14 +76,17 @@ export function ScriptSlots() {
 function ReadySlot() {
   return (
     <motion.button
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(145deg, hsl(45 100% 60%), hsl(40 95% 50%))',
-        boxShadow: '0 4px 20px hsla(45, 100%, 50%, 0.5), inset 0 2px 4px hsla(50, 100%, 70%, 0.5)',
-      }}
+      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
       whileTap={{ scale: 0.95 }}
-      animate={{ boxShadow: ['0 4px 20px hsla(45,100%,50%,0.4)', '0 4px 30px hsla(45,100%,50%,0.7)', '0 4px 20px hsla(45,100%,50%,0.4)'] }}
-      transition={{ duration: 1.5, repeat: Infinity }}
+      animate={{
+        boxShadow: [
+          '0 0 20px hsla(45,100%,55%,0.4)',
+          '0 0 35px hsla(45,100%,55%,0.7)',
+          '0 0 20px hsla(45,100%,55%,0.4)',
+        ],
+        scale: [1, 1.03, 1],
+      }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
     >
       {/* Shimmer overlay */}
       <div
@@ -106,18 +113,26 @@ function LockedSlot({ time }: { time: number }) {
       }}
     >
       <Lock className="w-5 h-5 text-muted-foreground" />
-      <span className="text-[9px] font-mono text-muted-foreground font-medium">{formatTime(time)}</span>
+      <span className="text-[9px] font-mono font-bold" style={{ color: 'hsl(0 0% 95%)' }}>
+        {formatTime(time)}
+      </span>
     </div>
   );
 }
 
-function EmptySlot() {
+function EmptySlot({ onTap }: { onTap?: () => void }) {
   return (
-    <div
-      className="w-full aspect-square rounded-2xl flex items-center justify-center border-2 border-dashed"
+    <motion.button
+      onClick={onTap}
+      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
       style={{ borderColor: 'hsla(250, 15%, 40%, 0.4)' }}
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.6)' }}
     >
-      <Film className="w-5 h-5 text-muted-foreground/40" />
-    </div>
+      <Plus className="w-5 h-5 text-gold" />
+      <span className="text-[8px] font-semibold text-muted-foreground leading-tight text-center">
+        Earn Script
+      </span>
+    </motion.button>
   );
 }

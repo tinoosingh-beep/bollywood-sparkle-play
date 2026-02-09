@@ -51,7 +51,13 @@ export function HubHeader({ trophies }: HubHeaderProps) {
             border: '1px solid hsla(320, 100%, 55%, 0.3)',
           }}
         >
-          <Coins className="w-4 h-4 text-neon-pink" />
+          {/* Floating MP icon */}
+          <motion.div
+            animate={{ y: [0, -3, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <Coins className="w-4 h-4 text-neon-pink" />
+          </motion.div>
           <span className="text-sm font-bold text-neon-pink font-mono">{balance}</span>
         </div>
       </div>

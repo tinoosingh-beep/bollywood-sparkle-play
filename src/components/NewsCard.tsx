@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { CheckCircle, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { CheckCircle, Zap, Clock, Swords } from 'lucide-react';
 import { useBalance } from '@/contexts/BalanceContext';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -18,24 +18,41 @@ export function NewsCard({ story }: NewsCardProps) {
   const [quizAnswer, setQuizAnswer] = useState('');
   const [verified, setVerified] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { addPoints, triggerFloatingPoints } = useBalance();
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  // Generate default options if not provided
   const quizOptions = story.quizOptions || [story.correctAnswer, 'Option A', 'Option B', 'Option C'];
+
+  // Scroll progress tracker
+  useEffect(() => {
+    if (!isExpanded || !contentRef.current) return;
+
+    const handleScroll = () => {
+      const el = contentRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      const totalH = el.scrollHeight;
+      // How much of the element has scrolled past the top of the viewport
+      const scrolled = Math.max(0, -rect.top + viewportH * 0.5);
+      const progress = Math.min(1, scrolled / totalH);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isExpanded]);
 
   const handleQuizSubmit = (selectedValue: string) => {
     setQuizAnswer(selectedValue);
-    
     const isCorrect = selectedValue.toLowerCase().trim() === story.correctAnswer.toLowerCase().trim();
-    
     if (isCorrect) {
       setShowConfetti(true);
       setVerified(true);
-      
-      // Get position for floating points using a fixed position
       addPoints(50);
       triggerFloatingPoints(50, window.innerWidth / 2, window.innerHeight / 2);
-      
       toast.success('Correct! +50 MP earned! 🎉', {
         className: 'bg-gold/20 border-gold text-gold',
       });
@@ -43,9 +60,13 @@ export function NewsCard({ story }: NewsCardProps) {
       toast.error('Try again! That\'s not quite right.', {
         className: 'bg-crimson/20 border-crimson text-crimson',
       });
-      setQuizAnswer(''); // Reset selection on wrong answer
+      setQuizAnswer('');
     }
   };
+
+  const progressColor = scrollProgress >= 0.9
+    ? 'hsl(45 100% 55%)'
+    : `hsl(${45 * scrollProgress} ${20 + 80 * scrollProgress}% ${45 + 10 * scrollProgress}%)`;
 
   return (
     <>
@@ -62,35 +83,52 @@ export function NewsCard({ story }: NewsCardProps) {
           <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">
             #{story.id}
           </span>
+          {/* Reading time badge */}
+          <span
+            className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-semibold flex items-center gap-1"
+            style={{
+              background: 'hsla(0, 0%, 0%, 0.6)',
+              color: 'hsl(0 0% 95%)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <Clock className="w-3 h-3" />
+            2 min read
+          </span>
         </div>
         
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-3">
           <h3 className="font-display text-lg font-semibold leading-tight text-foreground">
             {story.headline}
           </h3>
-          
-          {/* Expand/Collapse Button */}
-          <Button
-            onClick={() => setIsExpanded(!isExpanded)}
-            variant="ghost"
-            className="w-full flex items-center justify-center gap-2 text-muted-foreground hover:text-gold"
-          >
-            {isExpanded ? (
-              <>
-                <ChevronUp className="w-4 h-4" />
-                Hide Details
-              </>
-            ) : (
-              <>
-                <ChevronDown className="w-4 h-4" />
-                Read Full Story
-              </>
-            )}
-          </Button>
+
+          {/* Scroll progress bar (visible when expanded) */}
+          {isExpanded && (
+            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'hsl(var(--muted))' }}>
+              <div
+                className="h-full rounded-full transition-all duration-200"
+                style={{
+                  width: `${scrollProgress * 100}%`,
+                  background: progressColor,
+                }}
+              />
+            </div>
+          )}
+
+          {/* ENTER THE STORY button */}
+          {!isExpanded && (
+            <Button
+              onClick={() => setIsExpanded(true)}
+              className="w-full btn-gold rounded-full py-5 flex items-center justify-center gap-2 text-base font-bold"
+            >
+              <Swords className="w-5 h-5" />
+              ENTER THE STORY
+            </Button>
+          )}
 
           {/* Expanded Content */}
           {isExpanded && (
-            <div className="space-y-4 animate-slide-up">
+            <div ref={contentRef} className="space-y-4 animate-slide-up">
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {story.summary}
               </p>
@@ -156,7 +194,6 @@ export function NewsCard({ story }: NewsCardProps) {
         </div>
       </article>
 
-      {/* Prediction Bottom Sheet */}
       <PredictionDrawer
         isOpen={showPrediction}
         onClose={() => setShowPrediction(false)}

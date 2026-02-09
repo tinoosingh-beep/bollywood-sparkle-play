@@ -1,4 +1,5 @@
 import { Home, TrendingUp, Gamepad2, ShoppingBag, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface BottomNavProps {
   activeTab: string;
@@ -29,15 +30,14 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           const isActive = activeTab === item.id;
           
           return (
-            <button
+            <motion.button
               key={item.id}
               onClick={() => onTabChange(item.id)}
-              className="relative flex flex-col items-center gap-0.5 p-2 rounded-xl transition-all duration-200 flex-1 max-w-16"
-              style={isActive ? {
-                background: 'hsla(45, 100%, 55%, 0.2)',
-              } : {}}
+              className="relative flex flex-col items-center gap-0.5 p-2 rounded-xl transition-colors duration-200 flex-1 max-w-16"
+              style={isActive ? { background: 'hsla(45, 100%, 55%, 0.2)' } : {}}
+              whileTap={{ scale: 1.25 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             >
-              {/* Notification badge */}
               {item.badge > 0 && (
                 <span
                   className="absolute -top-0.5 right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white z-10"
@@ -53,7 +53,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               <span className={`text-[10px] ${isActive ? 'text-gold font-semibold' : 'text-white/50'}`}>
                 {item.label}
               </span>
-            </button>
+            </motion.button>
           );
         })}
       </div>
