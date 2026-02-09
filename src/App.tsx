@@ -22,10 +22,13 @@ function AppContent() {
       case 'home':
         return <Home />;
       case 'markets':
+      case 'collection':
         return <Markets />;
       case 'games':
+      case 'shop':
         return <Games />;
       case 'leaderboard':
+      case 'social':
         return <Leaderboard />;
       default:
         return <Home />;
@@ -33,11 +36,10 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen pb-24 pt-20">
-      <Header />
+    <div className="min-h-screen pb-20 pt-4">
       <FloatingPoints />
       
-      <main className="px-4 py-6 max-w-lg mx-auto">
+      <main className="px-4 py-2 max-w-lg mx-auto">
         {renderContent()}
       </main>
       
