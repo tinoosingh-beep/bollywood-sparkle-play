@@ -16,6 +16,8 @@ interface NewsCardProps {
 export function NewsCard({ story }: NewsCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showPrediction, setShowPrediction] = useState(false);
+  const [hasPredicted, setHasPredicted] = useState(false);
+  const [predictedOption, setPredictedOption] = useState<string | null>(null);
   const [quizAnswer, setQuizAnswer] = useState('');
   const [verified, setVerified] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
