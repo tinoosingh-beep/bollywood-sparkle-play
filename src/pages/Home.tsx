@@ -11,9 +11,12 @@ export function Home() {
     <div className="flex flex-col gap-5 animate-slide-up">
       <HubHeader trophies={trophies} />
       
-      <ScriptSlots />
+      <ScriptSlots onNavigateToNews={() => {
+        const feed = document.getElementById('news-feed');
+        feed?.scrollIntoView({ behavior: 'smooth' });
+      }} />
 
-      <div>
+      <div id="news-feed">
         <h2 className="font-display text-xl font-bold text-gradient-gold mb-3">Today's Gossip</h2>
         <div className="space-y-4">
           {newsContent.map((story, index) => (
