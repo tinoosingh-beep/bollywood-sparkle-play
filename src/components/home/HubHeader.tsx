@@ -11,7 +11,25 @@ export function HubHeader({ trophies }: HubHeaderProps) {
 
   return (
     <div className="flex items-center justify-between px-1">
-      {/* Left: Trophies + MP */}
+      {/* Left: BollyPass badge */}
+      <motion.button
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+        style={{
+          background: 'linear-gradient(135deg, hsl(280 80% 55%), hsl(320 90% 50%))',
+          boxShadow: '0 4px 16px hsla(300, 80%, 50%, 0.4)',
+        }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Sparkles className="w-4 h-4 text-white" />
+        <span className="text-xs font-bold text-white">BollyPass</span>
+        <span
+          className="ml-0.5 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold text-white"
+        >
+          7
+        </span>
+      </motion.button>
+
+      {/* Right: Trophies + MP */}
       <div className="flex items-center gap-2">
         <div
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
@@ -37,24 +55,6 @@ export function HubHeader({ trophies }: HubHeaderProps) {
           <span className="text-sm font-bold text-neon-pink font-mono">{balance}</span>
         </div>
       </div>
-
-      {/* Right: BollyPass badge */}
-      <motion.button
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-        style={{
-          background: 'linear-gradient(135deg, hsl(280 80% 55%), hsl(320 90% 50%))',
-          boxShadow: '0 4px 16px hsla(300, 80%, 50%, 0.4)',
-        }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Sparkles className="w-4 h-4 text-white" />
-        <span className="text-xs font-bold text-white">BollyPass</span>
-        <span
-          className="ml-0.5 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold text-white"
-        >
-          7
-        </span>
-      </motion.button>
     </div>
   );
 }
