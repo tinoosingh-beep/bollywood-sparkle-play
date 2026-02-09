@@ -194,10 +194,19 @@ export function NewsCard({ story }: NewsCardProps) {
             )}
             <Button
               onClick={() => setShowPrediction(true)}
-              className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} btn-gold rounded-xl py-5 flex items-center justify-center gap-2`}
+              className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} rounded-xl py-5 flex items-center justify-center gap-2 ${hasPredicted ? 'bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30' : 'btn-gold'}`}
             >
-              <Zap className="w-4 h-4" />
-              Predict Now
+              {hasPredicted ? (
+                <>
+                  <CheckCircle className="w-4 h-4" />
+                  Predicted: {predictedOption}
+                </>
+              ) : (
+                <>
+                  <Zap className="w-4 h-4" />
+                  Predict Now
+                </>
+              )}
             </Button>
           </div>
         </div>
