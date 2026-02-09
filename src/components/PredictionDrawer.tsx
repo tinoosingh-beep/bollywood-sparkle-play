@@ -21,6 +21,7 @@ export function PredictionDrawer({
   shortTitle,
   options = ['SUPERHIT', 'FLOP'],
   initialPrice = 0.50,
+  onPredictionConfirmed,
 }: PredictionDrawerProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [stake, setStake] = useState(50);
