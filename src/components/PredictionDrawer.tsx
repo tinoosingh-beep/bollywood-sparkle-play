@@ -44,6 +44,7 @@ export function PredictionDrawer({
     
     if (deductPoints(stake)) {
       setHasConfirmed(true);
+      onPredictionConfirmed?.(options[selectedOption]);
       const rect = event.currentTarget.getBoundingClientRect();
       
       // Simulate win (demo - 50% chance)
