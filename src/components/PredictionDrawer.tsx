@@ -11,6 +11,7 @@ interface PredictionDrawerProps {
   shortTitle: string;
   options?: string[];
   initialPrice?: number;
+  onPredictionConfirmed?: (option: string) => void;
 }
 
 export function PredictionDrawer({ 
