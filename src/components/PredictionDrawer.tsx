@@ -11,6 +11,7 @@ interface PredictionDrawerProps {
   shortTitle: string;
   options?: string[];
   initialPrice?: number;
+  onPredictionConfirmed?: (option: string) => void;
 }
 
 export function PredictionDrawer({ 
@@ -20,6 +21,7 @@ export function PredictionDrawer({
   shortTitle,
   options = ['SUPERHIT', 'FLOP'],
   initialPrice = 0.50,
+  onPredictionConfirmed,
 }: PredictionDrawerProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [stake, setStake] = useState(50);
@@ -42,6 +44,7 @@ export function PredictionDrawer({
     
     if (deductPoints(stake)) {
       setHasConfirmed(true);
+      onPredictionConfirmed?.(options[selectedOption]);
       const rect = event.currentTarget.getBoundingClientRect();
       
       // Simulate win (demo - 50% chance)
