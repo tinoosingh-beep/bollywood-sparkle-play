@@ -4,13 +4,14 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BalanceProvider } from '@/contexts/BalanceContext';
-import { Header } from '@/components/Header';
+import { ScriptSlotsProvider } from '@/contexts/ScriptSlotsContext';
 import { BottomNav } from '@/components/BottomNav';
 import { FloatingPoints } from '@/components/FloatingPoints';
 import { Home } from '@/pages/Home';
 import { Markets } from '@/pages/Markets';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
+import { Collection } from '@/pages/Collection';
 
 const queryClient = new QueryClient();
 
@@ -22,8 +23,9 @@ function AppContent() {
       case 'home':
         return <Home />;
       case 'markets':
-      case 'collection':
         return <Markets />;
+      case 'collection':
+        return <Collection />;
       case 'games':
       case 'shop':
         return <Games />;
@@ -52,9 +54,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <BalanceProvider>
-        <Toaster />
-        <Sonner />
-        <AppContent />
+        <ScriptSlotsProvider>
+          <Toaster />
+          <Sonner />
+          <AppContent />
+        </ScriptSlotsProvider>
       </BalanceProvider>
     </TooltipProvider>
   </QueryClientProvider>
