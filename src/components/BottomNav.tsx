@@ -1,4 +1,4 @@
-import { Home, TrendingUp, Gamepad2, Crown } from 'lucide-react';
+import { Home, TrendingUp, Gamepad2, ShoppingBag, Users } from 'lucide-react';
 
 interface BottomNavProps {
   activeTab: string;
@@ -6,16 +6,24 @@ interface BottomNavProps {
 }
 
 const navItems = [
-  { id: 'home', label: 'Home', icon: Home },
-  { id: 'markets', label: 'Markets', icon: TrendingUp },
-  { id: 'games', label: 'Games', icon: Gamepad2 },
-  { id: 'leaderboard', label: 'A-List', icon: Crown },
+  { id: 'shop', label: 'Shop', icon: ShoppingBag, badge: 3 },
+  { id: 'collection', label: 'Collection', icon: TrendingUp, badge: 0 },
+  { id: 'home', label: 'Home', icon: Home, badge: 0 },
+  { id: 'markets', label: 'Markets', icon: Gamepad2, badge: 1 },
+  { id: 'social', label: 'Social', icon: Users, badge: 5 },
 ];
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-4">
-      <div className="glass-card px-2 py-2 flex justify-around">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 px-3 pb-3">
+      <div
+        className="px-1 py-1.5 flex justify-around rounded-2xl"
+        style={{
+          background: 'linear-gradient(180deg, hsl(250 30% 18%), hsl(250 35% 12%))',
+          boxShadow: '0 -4px 24px hsla(250, 30%, 5%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.3)',
+          border: '1px solid hsla(45, 100%, 50%, 0.15)',
+        }}
+      >
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -24,10 +32,25 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
             <button
               key={item.id}
               onClick={() => onTabChange(item.id)}
-              className={`${isActive ? 'nav-item-active' : 'nav-item'} flex-1 max-w-20`}
+              className="relative flex flex-col items-center gap-0.5 p-2 rounded-xl transition-all duration-200 flex-1 max-w-16"
+              style={isActive ? {
+                background: 'hsla(45, 100%, 55%, 0.2)',
+              } : {}}
             >
-              <Icon className={`w-5 h-5 ${isActive ? 'text-gold' : 'text-muted-foreground'}`} />
-              <span className={`text-xs ${isActive ? 'text-gold font-medium' : 'text-muted-foreground'}`}>
+              {/* Notification badge */}
+              {item.badge > 0 && (
+                <span
+                  className="absolute -top-0.5 right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white z-10"
+                  style={{
+                    background: 'hsl(0, 80%, 55%)',
+                    boxShadow: '0 2px 6px hsla(0, 80%, 50%, 0.5)',
+                  }}
+                >
+                  {item.badge}
+                </span>
+              )}
+              <Icon className={`w-5 h-5 ${isActive ? 'text-gold' : 'text-white/50'}`} />
+              <span className={`text-[10px] ${isActive ? 'text-gold font-semibold' : 'text-white/50'}`}>
                 {item.label}
               </span>
             </button>

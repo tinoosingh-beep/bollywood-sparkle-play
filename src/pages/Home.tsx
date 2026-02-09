@@ -1,22 +1,28 @@
-import { NewsCard } from '@/components/NewsCard';
-import { newsContent } from '@/data/newsContent';
+import { useState } from 'react';
+import { HubHeader } from '@/components/home/HubHeader';
+import { ArenaDisplay } from '@/components/home/ArenaDisplay';
+import { PredictButton } from '@/components/home/PredictButton';
+import { ScriptSlots } from '@/components/home/ScriptSlots';
 
 export function Home() {
+  const [trophies] = useState(420);
+
+  const handlePredict = () => {
+    // Navigate to markets or open prediction flow
+    // For now this is a placeholder
+  };
+
   return (
-    <div className="space-y-6">
-      <div className="text-center">
-        <h2 className="font-display text-3xl font-bold text-gradient-gold">Today's Gossip</h2>
-        <p className="text-muted-foreground mt-2">Verify stories & predict outcomes</p>
-        <p className="text-xs text-muted-foreground/70 mt-1">{newsContent.length} stories</p>
+    <div className="flex flex-col gap-4 animate-slide-up min-h-[calc(100vh-10rem)]">
+      <HubHeader trophies={trophies} />
+      
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <ArenaDisplay trophies={trophies} />
       </div>
 
-      <div className="space-y-5">
-        {newsContent.map((story, index) => (
-          <div key={story.id} style={{ animationDelay: `${Math.min(index * 0.05, 0.5)}s` }}>
-            <NewsCard story={story} />
-          </div>
-        ))}
-      </div>
+      <PredictButton onPress={handlePredict} />
+      
+      <ScriptSlots />
     </div>
   );
 }
