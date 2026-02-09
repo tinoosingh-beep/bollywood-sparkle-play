@@ -219,6 +219,10 @@ export function NewsCard({ story }: NewsCardProps) {
         shortTitle={story.predictionMarketQuestion}
         options={story.predictionMarketOptions}
         initialPrice={story.initialYesPrice}
+        onPredictionConfirmed={(option) => {
+          setHasPredicted(true);
+          setPredictedOption(option);
+        }}
       />
     </>
   );
