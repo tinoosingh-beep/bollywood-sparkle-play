@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { CheckCircle, Zap, Clock, Swords } from 'lucide-react';
 import { useBalance } from '@/contexts/BalanceContext';
+import { useScriptSlots, STORY_TIME_REDUCTION } from '@/contexts/ScriptSlotsContext';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PredictionDrawer } from '@/components/PredictionDrawer';
@@ -20,6 +21,7 @@ export function NewsCard({ story }: NewsCardProps) {
   const [showConfetti, setShowConfetti] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const { addPoints, triggerFloatingPoints } = useBalance();
+  const { fillEmptySlot, slots, reduceSlotTime } = useScriptSlots();
   const contentRef = useRef<HTMLDivElement>(null);
 
   const quizOptions = story.quizOptions || [story.correctAnswer, 'Option A', 'Option B', 'Option C'];
@@ -27,19 +29,16 @@ export function NewsCard({ story }: NewsCardProps) {
   // Scroll progress tracker
   useEffect(() => {
     if (!isExpanded || !contentRef.current) return;
-
     const handleScroll = () => {
       const el = contentRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const viewportH = window.innerHeight;
       const totalH = el.scrollHeight;
-      // How much of the element has scrolled past the top of the viewport
       const scrolled = Math.max(0, -rect.top + viewportH * 0.5);
       const progress = Math.min(1, scrolled / totalH);
       setScrollProgress(progress);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -53,11 +52,29 @@ export function NewsCard({ story }: NewsCardProps) {
       setVerified(true);
       addPoints(50);
       triggerFloatingPoints(50, window.innerWidth / 2, window.innerHeight / 2);
-      toast.success('Correct! +50 MP earned! 🎉', {
-        className: 'bg-gold/20 border-gold text-gold',
-      });
+
+      // Fill an empty script slot
+      const rarity = fillEmptySlot();
+      if (rarity) {
+        toast.success(`Correct! +50 MP & a ${rarity.charAt(0).toUpperCase() + rarity.slice(1)} Film Reel earned! 🎬`, {
+          className: 'bg-gold/20 border-gold text-gold',
+        });
+      } else {
+        // No empty slot — reduce time on a locked slot instead
+        const lockedSlot = slots.find(s => s.type === 'locked');
+        if (lockedSlot) {
+          reduceSlotTime(lockedSlot.id, STORY_TIME_REDUCTION);
+          toast.success('Correct! +50 MP & 30 min off your reel timer! ⏱️', {
+            className: 'bg-gold/20 border-gold text-gold',
+          });
+        } else {
+          toast.success('Correct! +50 MP earned! 🎉', {
+            className: 'bg-gold/20 border-gold text-gold',
+          });
+        }
+      }
     } else {
-      toast.error('Try again! That\'s not quite right.', {
+      toast.error("Try again! That's not quite right.", {
         className: 'bg-crimson/20 border-crimson text-crimson',
       });
       setQuizAnswer('');
@@ -83,7 +100,6 @@ export function NewsCard({ story }: NewsCardProps) {
           <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">
             #{story.id}
           </span>
-          {/* Reading time badge */}
           <span
             className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-semibold flex items-center gap-1"
             style={{
@@ -102,20 +118,15 @@ export function NewsCard({ story }: NewsCardProps) {
             {story.headline}
           </h3>
 
-          {/* Scroll progress bar (visible when expanded) */}
           {isExpanded && (
             <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'hsl(var(--muted))' }}>
               <div
                 className="h-full rounded-full transition-all duration-200"
-                style={{
-                  width: `${scrollProgress * 100}%`,
-                  background: progressColor,
-                }}
+                style={{ width: `${scrollProgress * 100}%`, background: progressColor }}
               />
             </div>
           )}
 
-          {/* ENTER THE STORY button */}
           {!isExpanded && (
             <Button
               onClick={() => setIsExpanded(true)}
@@ -126,14 +137,10 @@ export function NewsCard({ story }: NewsCardProps) {
             </Button>
           )}
 
-          {/* Expanded Content */}
           {isExpanded && (
             <div ref={contentRef} className="space-y-4 animate-slide-up">
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {story.summary}
-              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{story.summary}</p>
 
-              {/* Quiz Section */}
               {!verified ? (
                 <div className="p-4 rounded-xl bg-muted/30 border border-gold/20 space-y-3">
                   <div className="flex items-center gap-2">
@@ -141,20 +148,13 @@ export function NewsCard({ story }: NewsCardProps) {
                     <span className="text-sm font-medium text-gold">Spotlight Quiz • +50 MP</span>
                   </div>
                   <p className="text-foreground font-medium">{story.quizQuestion}</p>
-                  <Select 
-                    value={quizAnswer} 
-                    onValueChange={handleQuizSubmit}
-                  >
+                  <Select value={quizAnswer} onValueChange={handleQuizSubmit}>
                     <SelectTrigger className="w-full bg-card border-muted focus:border-gold">
                       <SelectValue placeholder="Select your answer..." />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border z-50">
                       {quizOptions.map((option, index) => (
-                        <SelectItem 
-                          key={index} 
-                          value={option}
-                          className="hover:bg-muted focus:bg-muted cursor-pointer"
-                        >
+                        <SelectItem key={index} value={option} className="hover:bg-muted focus:bg-muted cursor-pointer">
                           {option}
                         </SelectItem>
                       ))}
@@ -170,7 +170,6 @@ export function NewsCard({ story }: NewsCardProps) {
             </div>
           )}
           
-          {/* Action Buttons */}
           <div className="flex gap-3">
             {!verified && !isExpanded && (
               <Button
@@ -182,7 +181,6 @@ export function NewsCard({ story }: NewsCardProps) {
                 Verify to Earn
               </Button>
             )}
-            
             <Button
               onClick={() => setShowPrediction(true)}
               className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} btn-gold rounded-xl py-5 flex items-center justify-center gap-2`}
