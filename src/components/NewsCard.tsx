@@ -130,7 +130,16 @@ export function NewsCard({ story }: NewsCardProps) {
           {!isExpanded && (
             <Button
               onClick={() => setIsExpanded(true)}
-              className="w-full btn-gold rounded-full py-5 flex items-center justify-center gap-2 text-base font-bold"
+              className="w-full rounded-full py-5 flex items-center justify-center gap-2 text-base tracking-wider"
+              style={{
+                background: 'hsl(var(--gold))',
+                color: 'hsl(0 0% 5%)',
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: '1.15rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                boxShadow: '0 4px 20px hsla(45, 100%, 50%, 0.4)',
+              }}
             >
               <Swords className="w-5 h-5" />
               ENTER THE STORY

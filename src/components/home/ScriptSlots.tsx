@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { Lock, Gift, Plus, Zap, Film } from 'lucide-react';
 import { useScriptSlots, type ReelRarity, type ReelReward } from '@/contexts/ScriptSlotsContext';
@@ -175,18 +176,43 @@ function LockedSlot({
 }
 
 function EmptySlot({ onTap }: { onTap?: () => void }) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleClick = () => {
+    setShowTooltip(true);
+    setTimeout(() => setShowTooltip(false), 2000);
+    onTap?.();
+  };
+
   return (
-    <motion.button
-      onClick={onTap}
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
-      style={{ borderColor: 'hsla(250, 15%, 40%, 0.4)' }}
-      whileTap={{ scale: 0.95 }}
-      whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.6)' }}
-    >
-      <Plus className="w-5 h-5 text-gold" />
-      <span className="text-[8px] font-semibold text-muted-foreground leading-tight text-center">
-        Earn Script
-      </span>
-    </motion.button>
+    <div className="relative">
+      <motion.button
+        onClick={handleClick}
+        className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
+        style={{ borderColor: 'hsla(45, 100%, 55%, 0.35)' }}
+        whileTap={{ scale: 0.95 }}
+        whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
+      >
+        <Film className="w-5 h-5 text-gold/60" />
+        <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
+          Earn Script
+        </span>
+      </motion.button>
+      {showTooltip && (
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1 rounded-lg text-[9px] font-semibold z-50"
+          style={{
+            background: 'hsl(var(--gold))',
+            color: 'hsl(var(--primary-foreground))',
+            boxShadow: '0 4px 12px hsla(45, 100%, 50%, 0.3)',
+          }}
+        >
+          Read a story to earn a Script!
+        </motion.div>
+      )}
+    </div>
   );
 }
