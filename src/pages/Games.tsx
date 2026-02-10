@@ -214,7 +214,7 @@ export function Games() {
               icon={game.icon}
               cost={game.cost}
               reward={game.reward}
-              glowColor={game.glowColor}
+              category={game.category}
               onClick={() => setActiveGame(game.id)}
             />
           </motion.div>
