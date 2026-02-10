@@ -12,11 +12,13 @@ import { Markets } from '@/pages/Markets';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
 import { Collection } from '@/pages/Collection';
+import { SplashScreen } from '@/components/SplashScreen';
 
 const queryClient = new QueryClient();
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
+  const [splashDone, setSplashDone] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -38,15 +40,18 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen pb-20 pt-4">
-      <FloatingPoints />
-      
-      <main className="px-4 py-2 max-w-lg mx-auto">
-        {renderContent()}
-      </main>
-      
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
+    <>
+      {!splashDone && <SplashScreen onComplete={() => setSplashDone(true)} />}
+      <div className="min-h-screen pb-20 pt-4">
+        <FloatingPoints />
+        
+        <main className="px-4 py-2 max-w-lg mx-auto">
+          {renderContent()}
+        </main>
+        
+        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
+    </>
   );
 }
 
