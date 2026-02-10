@@ -144,7 +144,7 @@ export function NewsCard({ story }: NewsCardProps) {
               }}
             >
               <Swords className="w-5 h-5" />
-              ENTER THE STORY
+              READ THE STORY
             </Button>
           )}
 
