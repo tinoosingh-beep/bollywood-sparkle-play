@@ -162,7 +162,7 @@ function LockedSlot({
   return (
     <motion.button
       onClick={onSpeedUp}
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-0.5"
+      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-0.5"
       style={{
         background: 'linear-gradient(145deg, hsl(250 25% 22%), hsl(250 30% 16%))',
         boxShadow: `0 4px 16px hsla(250, 30%, 8%, 0.6), inset 0 1px 4px hsla(250, 20%, 30%, 0.3)`,
