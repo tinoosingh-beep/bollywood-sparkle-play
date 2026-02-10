@@ -7,7 +7,7 @@ interface BottomNavProps {
 }
 
 const navItems = [
-  { id: 'shop', label: 'Shop', icon: ShoppingBag, badge: 3 },
+  { id: 'shop', label: 'Games', icon: Gamepad2, badge: 3 },
   { id: 'collection', label: 'Collection', icon: TrendingUp, badge: 0 },
   { id: 'home', label: 'Home', icon: Home, badge: 0 },
   { id: 'markets', label: 'Markets', icon: Gamepad2, badge: 1 },
