@@ -50,6 +50,7 @@ const games = [
     cost: 5,
     reward: '20-100 MP',
     category: 'action' as const,
+    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'casting' as const,
@@ -59,6 +60,7 @@ const games = [
     cost: 5,
     reward: '20-100 MP',
     category: 'puzzle' as const,
+    image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'dialogue' as const,
@@ -68,6 +70,7 @@ const games = [
     cost: 5,
     reward: '50 MP',
     category: 'puzzle' as const,
+    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'boxoffice' as const,
@@ -77,6 +80,7 @@ const games = [
     cost: 5,
     reward: '10-100 MP',
     category: 'action' as const,
+    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'mystery' as const,
@@ -86,6 +90,7 @@ const games = [
     cost: 5,
     reward: '10-100 MP',
     category: 'puzzle' as const,
+    image: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'heardle' as const,
@@ -95,6 +100,7 @@ const games = [
     cost: 5,
     reward: '20-100 MP',
     category: 'puzzle' as const,
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'redcarpet' as const,
@@ -104,6 +110,7 @@ const games = [
     cost: 5,
     reward: '20-100 MP',
     category: 'rewards' as const,
+    image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'signature' as const,
@@ -113,6 +120,7 @@ const games = [
     cost: 5,
     reward: '15-90 MP',
     category: 'rewards' as const,
+    image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'script' as const,
@@ -122,6 +130,7 @@ const games = [
     cost: 5,
     reward: '25-100 MP',
     category: 'rewards' as const,
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&auto=format&fit=crop&q=80',
   },
   {
     id: 'directors' as const,
@@ -131,6 +140,7 @@ const games = [
     cost: 5,
     reward: '5-100 MP',
     category: 'rewards' as const,
+    image: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=400&auto=format&fit=crop&q=80',
   },
 ];
 
@@ -215,6 +225,7 @@ export function Games() {
               cost={game.cost}
               reward={game.reward}
               category={game.category}
+              image={game.image}
               onClick={() => setActiveGame(game.id)}
             />
           </motion.div>

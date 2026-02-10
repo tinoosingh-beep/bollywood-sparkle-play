@@ -12,6 +12,7 @@ interface GameCardProps {
   onClick: () => void;
   glowColor?: 'pink' | 'gold' | 'cyan';
   category?: GameCategory;
+  image?: string;
 }
 
 const categoryStyles: Record<GameCategory, {
@@ -48,6 +49,7 @@ export function GameCard({
   reward,
   onClick,
   category = 'puzzle',
+  image,
 }: GameCardProps) {
   const style = categoryStyles[category];
   const isRewards = category === 'rewards';
@@ -62,9 +64,17 @@ export function GameCard({
       style={{ padding: 0 }}
     >
       {/* Icon Tile */}
-      <div className={`relative aspect-square ${style.gradient} ${style.border} border-2 overflow-hidden`}
+      <div className={`relative aspect-square ${style.border} border-2 overflow-hidden`}
         style={{ borderRadius: '1rem 1rem 0 0' }}
       >
+        {/* Background image */}
+        {image ? (
+          <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div className={`absolute inset-0 ${style.gradient}`} />
+        )}
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/30" />
         {/* Shine animation for rewards */}
         {isRewards && (
           <motion.div
