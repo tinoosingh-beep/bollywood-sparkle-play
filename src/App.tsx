@@ -40,15 +40,18 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen pb-20 pt-4">
-      <FloatingPoints />
-      
-      <main className="px-4 py-2 max-w-lg mx-auto">
-        {renderContent()}
-      </main>
-      
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
+    <>
+      {!splashDone && <SplashScreen onComplete={() => setSplashDone(true)} />}
+      <div className="min-h-screen pb-20 pt-4">
+        <FloatingPoints />
+        
+        <main className="px-4 py-2 max-w-lg mx-auto">
+          {renderContent()}
+        </main>
+        
+        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
+    </>
   );
 }
 
