@@ -42,7 +42,7 @@ export function Home() {
       }} />
 
       <div id="news-feed">
-        <h2 className="font-display text-xl font-bold text-gradient-gold mb-3">Today's Gossip</h2>
+        <h2 className="headline-display text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>Today's News</h2>
         <div className="space-y-4">
           {feedItems.map((item, index) => (
             <div key={item.key} style={{ animationDelay: `${Math.min(index * 0.05, 0.5)}s` }}>
