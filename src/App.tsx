@@ -12,11 +12,13 @@ import { Markets } from '@/pages/Markets';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
 import { Collection } from '@/pages/Collection';
+import { SplashScreen } from '@/components/SplashScreen';
 
 const queryClient = new QueryClient();
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
+  const [splashDone, setSplashDone] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
