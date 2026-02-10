@@ -149,7 +149,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
               }}
             >
               <PenLine className="w-4 h-4" />
-              WRITE A REVIEW (+25 MP)
+              RATE THIS (+25 MP)
             </Button>
           ) : (
             <div className="flex-1 rounded-xl py-3 flex items-center justify-center gap-2 bg-accent/20 border border-accent/40">
