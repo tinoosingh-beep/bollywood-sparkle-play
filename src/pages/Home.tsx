@@ -48,8 +48,10 @@ export function Home() {
             <div key={item.key} style={{ animationDelay: `${Math.min(index * 0.05, 0.5)}s` }}>
               {item.type === 'news' ? (
                 <NewsCard story={item.data} />
-              ) : (
+              ) : item.type === 'review' ? (
                 <ReviewCard review={item.data} />
+              ) : (
+                <VideoPreviewCard video={item.data} />
               )}
             </div>
           ))}
