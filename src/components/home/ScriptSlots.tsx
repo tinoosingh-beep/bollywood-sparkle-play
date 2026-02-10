@@ -67,8 +67,15 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
 
   return (
     <>
-      <div className="px-2">
-        <p className="text-xs font-display font-semibold text-muted-foreground uppercase tracking-wider text-center mb-3">
+      <div
+        className="px-3 py-3 rounded-2xl"
+        style={{
+          background: 'linear-gradient(145deg, hsla(250, 25%, 18%, 0.95), hsla(250, 30%, 14%, 0.9))',
+          border: '1px solid hsla(45, 100%, 55%, 0.25)',
+          boxShadow: '0 6px 24px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.2)',
+        }}
+      >
+        <p className="text-xs font-display font-semibold uppercase tracking-wider text-center mb-3" style={{ color: 'hsla(45, 100%, 70%, 0.85)' }}>
           Daily Rewards
         </p>
         <div className="grid grid-cols-4 gap-2">
