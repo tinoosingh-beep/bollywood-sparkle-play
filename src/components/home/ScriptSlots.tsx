@@ -135,8 +135,8 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
           backgroundSize: '200% 100%',
         }}
       />
-      <Gift className="w-6 h-6 text-primary-foreground relative z-10" />
-      <span className="text-[10px] font-bold text-primary-foreground relative z-10">OPEN</span>
+      <Gift className="w-4.5 h-4.5 text-primary-foreground relative z-10 drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
+      <span className="text-[9px] font-bold text-primary-foreground relative z-10 drop-shadow-[0_0_4px_hsla(45,100%,80%,0.6)]">OPEN</span>
     </motion.button>
   );
 }
@@ -163,7 +163,7 @@ function LockedSlot({
       }}
       whileTap={{ scale: 0.95 }}
     >
-      <Lock className="w-4 h-4 text-muted-foreground" />
+      <Lock className="w-3.5 h-3.5 text-muted-foreground drop-shadow-[0_0_4px_hsla(250,60%,70%,0.5)]" />
       <span className="text-[9px] font-mono font-bold" style={{ color: 'hsl(0 0% 95%)' }}>
         {formatTime(time)}
       </span>
@@ -193,7 +193,7 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
         whileTap={{ scale: 0.95 }}
         whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
       >
-        <Film className="w-5 h-5 text-gold/60" />
+        <Film className="w-4 h-4 text-gold/60 drop-shadow-[0_0_5px_hsla(45,100%,55%,0.4)]" />
         <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
           Earn Script
         </span>
