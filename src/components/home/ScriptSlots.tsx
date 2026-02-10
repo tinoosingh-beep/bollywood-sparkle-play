@@ -118,7 +118,7 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
   return (
     <motion.button
       onClick={onOpen}
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
+      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
       whileTap={{ scale: 0.95 }}
       animate={{
         boxShadow: [
