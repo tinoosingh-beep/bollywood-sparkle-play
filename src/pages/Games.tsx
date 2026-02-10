@@ -225,6 +225,7 @@ export function Games() {
               cost={game.cost}
               reward={game.reward}
               category={game.category}
+              image={game.image}
               onClick={() => setActiveGame(game.id)}
             />
           </motion.div>
