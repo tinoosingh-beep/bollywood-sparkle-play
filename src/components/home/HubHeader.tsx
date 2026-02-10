@@ -13,17 +13,24 @@ export function HubHeader({ trophies }: HubHeaderProps) {
     <div className="flex items-center justify-between px-1">
       {/* Left: BollyPass badge */}
       <motion.button
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+        className="flex items-center gap-1.5 px-3.5 py-2 rounded-full"
         style={{
-          background: 'linear-gradient(135deg, hsl(280 80% 55%), hsl(320 90% 50%))',
-          boxShadow: '0 4px 16px hsla(300, 80%, 50%, 0.4)',
+          background: 'linear-gradient(135deg, hsl(280 80% 55%), hsl(320 90% 50%), hsl(45 100% 55%))',
+          backgroundSize: '200% 200%',
+          boxShadow: '0 4px 20px hsla(300, 80%, 50%, 0.5), 0 0 10px hsla(45, 100%, 55%, 0.3)',
+          border: '1px solid hsla(45, 100%, 70%, 0.4)',
         }}
         whileTap={{ scale: 0.95 }}
+        animate={{
+          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <Sparkles className="w-4 h-4 text-white" />
-        <span className="text-xs font-bold text-white">BollyPass</span>
+        <Sparkles className="w-4 h-4 text-white drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
+        <span className="text-xs font-extrabold text-white tracking-wide drop-shadow-[0_0_4px_hsla(0,0%,0%,0.5)]">BollyPass</span>
         <span
-          className="ml-0.5 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold text-white"
+          className="ml-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+          style={{ background: 'hsla(0, 0%, 100%, 0.25)', boxShadow: 'inset 0 1px 2px hsla(0,0%,0%,0.2)' }}
         >
           7
         </span>
