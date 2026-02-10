@@ -12,6 +12,7 @@ interface GameCardProps {
   onClick: () => void;
   glowColor?: 'pink' | 'gold' | 'cyan';
   category?: GameCategory;
+  image?: string;
 }
 
 const categoryStyles: Record<GameCategory, {
