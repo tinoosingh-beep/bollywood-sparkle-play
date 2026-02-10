@@ -69,7 +69,7 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
     <>
       <div className="px-2">
         <p className="text-xs font-display font-semibold text-muted-foreground uppercase tracking-wider text-center mb-3">
-          Script Slots
+          Daily Rewards
         </p>
         <div className="grid grid-cols-4 gap-2">
           {slots.map((slot, i) => (
