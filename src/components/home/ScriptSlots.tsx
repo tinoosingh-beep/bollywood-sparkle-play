@@ -193,7 +193,7 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
         whileTap={{ scale: 0.95 }}
         whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
       >
-        <Film className="w-5 h-5 text-gold/60" />
+        <Film className="w-4 h-4 text-gold/60 drop-shadow-[0_0_5px_hsla(45,100%,55%,0.4)]" />
         <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
           Earn Script
         </span>
