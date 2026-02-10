@@ -118,7 +118,7 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
   return (
     <motion.button
       onClick={onOpen}
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
+      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
       whileTap={{ scale: 0.95 }}
       animate={{
         boxShadow: [
@@ -162,7 +162,7 @@ function LockedSlot({
   return (
     <motion.button
       onClick={onSpeedUp}
-      className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-0.5"
+      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-0.5"
       style={{
         background: 'linear-gradient(145deg, hsl(250 25% 22%), hsl(250 30% 16%))',
         boxShadow: `0 4px 16px hsla(250, 30%, 8%, 0.6), inset 0 1px 4px hsla(250, 20%, 30%, 0.3)`,
@@ -195,7 +195,7 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
     <div className="relative">
       <motion.button
         onClick={handleClick}
-        className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
+        className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
         style={{ borderColor: 'hsla(45, 100%, 55%, 0.35)' }}
         whileTap={{ scale: 0.95 }}
         whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
