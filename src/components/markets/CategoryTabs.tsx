@@ -13,10 +13,10 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange }: C
         <button
           key={category}
           onClick={() => onCategoryChange(category)}
-          className={`relative px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+          className={`relative px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors border ${
             activeCategory === category
-              ? 'text-foreground'
-              : 'text-muted-foreground hover:text-foreground'
+              ? 'text-foreground bg-market-blue/20 border-market-blue/50'
+              : 'text-muted-foreground border-muted/50 bg-muted/20 hover:text-foreground hover:border-muted'
           }`}
         >
           {activeCategory === category && (
