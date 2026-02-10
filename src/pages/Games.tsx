@@ -49,7 +49,7 @@ const games = [
     icon: Camera,
     cost: 5,
     reward: '20-100 MP',
-    glowColor: 'pink' as const,
+    category: 'action' as const,
   },
   {
     id: 'casting' as const,
@@ -58,7 +58,7 @@ const games = [
     icon: Shuffle,
     cost: 5,
     reward: '20-100 MP',
-    glowColor: 'cyan' as const,
+    category: 'puzzle' as const,
   },
   {
     id: 'dialogue' as const,
@@ -67,7 +67,7 @@ const games = [
     icon: MessageSquare,
     cost: 5,
     reward: '50 MP',
-    glowColor: 'gold' as const,
+    category: 'puzzle' as const,
   },
   {
     id: 'boxoffice' as const,
@@ -76,7 +76,7 @@ const games = [
     icon: Ticket,
     cost: 5,
     reward: '10-100 MP',
-    glowColor: 'gold' as const,
+    category: 'action' as const,
   },
   {
     id: 'mystery' as const,
@@ -85,7 +85,7 @@ const games = [
     icon: Eye,
     cost: 5,
     reward: '10-100 MP',
-    glowColor: 'pink' as const,
+    category: 'puzzle' as const,
   },
   {
     id: 'heardle' as const,
@@ -94,7 +94,7 @@ const games = [
     icon: Music,
     cost: 5,
     reward: '20-100 MP',
-    glowColor: 'cyan' as const,
+    category: 'puzzle' as const,
   },
   {
     id: 'redcarpet' as const,
@@ -103,7 +103,7 @@ const games = [
     icon: Crown,
     cost: 5,
     reward: '20-100 MP',
-    glowColor: 'gold' as const,
+    category: 'rewards' as const,
   },
   {
     id: 'signature' as const,
@@ -112,7 +112,7 @@ const games = [
     icon: Target,
     cost: 5,
     reward: '15-90 MP',
-    glowColor: 'gold' as const,
+    category: 'rewards' as const,
   },
   {
     id: 'script' as const,
@@ -121,7 +121,7 @@ const games = [
     icon: FileText,
     cost: 5,
     reward: '25-100 MP',
-    glowColor: 'pink' as const,
+    category: 'rewards' as const,
   },
   {
     id: 'directors' as const,
@@ -130,7 +130,7 @@ const games = [
     icon: Film,
     cost: 5,
     reward: '5-100 MP',
-    glowColor: 'pink' as const,
+    category: 'rewards' as const,
   },
 ];
 
