@@ -49,6 +49,7 @@ export function GameCard({
   reward,
   onClick,
   category = 'puzzle',
+  image,
 }: GameCardProps) {
   const style = categoryStyles[category];
   const isRewards = category === 'rewards';
