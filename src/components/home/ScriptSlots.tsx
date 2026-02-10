@@ -163,7 +163,7 @@ function LockedSlot({
       }}
       whileTap={{ scale: 0.95 }}
     >
-      <Lock className="w-4 h-4 text-muted-foreground" />
+      <Lock className="w-3.5 h-3.5 text-muted-foreground drop-shadow-[0_0_4px_hsla(250,60%,70%,0.5)]" />
       <span className="text-[9px] font-mono font-bold" style={{ color: 'hsl(0 0% 95%)' }}>
         {formatTime(time)}
       </span>
