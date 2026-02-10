@@ -195,7 +195,7 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
     <div className="relative">
       <motion.button
         onClick={handleClick}
-        className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
+        className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
         style={{ borderColor: 'hsla(45, 100%, 55%, 0.35)' }}
         whileTap={{ scale: 0.95 }}
         whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
