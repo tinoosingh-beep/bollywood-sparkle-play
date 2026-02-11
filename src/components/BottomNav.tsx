@@ -1,4 +1,4 @@
-import { Home, TrendingUp, Gamepad2, ShoppingBag, Users } from 'lucide-react';
+import { Home, TrendingUp, Gamepad2, ShoppingBag, Users, Presentation } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
@@ -11,6 +11,7 @@ const navItems = [
   { id: 'collection', label: 'Collection', icon: TrendingUp, badge: 0 },
   { id: 'home', label: 'Home', icon: Home, badge: 0 },
   { id: 'markets', label: 'Markets', icon: Gamepad2, badge: 1 },
+  { id: 'pitch', label: 'Pitch', icon: Presentation, badge: 0 },
   { id: 'social', label: 'Social', icon: Users, badge: 5 },
 ];
 
