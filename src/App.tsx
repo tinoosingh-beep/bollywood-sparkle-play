@@ -13,6 +13,7 @@ import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
 import { Collection } from '@/pages/Collection';
 import { SplashScreen } from '@/components/SplashScreen';
+import { PitchDeck } from '@/pages/PitchDeck';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,8 @@ function AppContent() {
       case 'leaderboard':
       case 'social':
         return <Leaderboard />;
+      case 'pitch':
+        return <PitchDeck />;
       default:
         return <Home />;
     }
