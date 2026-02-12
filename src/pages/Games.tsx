@@ -43,106 +43,16 @@ type GameType =
   | null;
 
 const games = [
-  {
-    id: 'paparazzi' as const,
-    title: 'Paparazzi Chase',
-    description: 'Dodge cameras as a star!',
-    icon: Camera,
-    cost: 5,
-    reward: '20-100 MP',
-    category: 'action' as const,
-    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'casting' as const,
-    title: 'Casting Shuffle',
-    description: 'Match celebrity pairs',
-    icon: Shuffle,
-    cost: 5,
-    reward: '20-100 MP',
-    category: 'puzzle' as const,
-    image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'dialogue' as const,
-    title: 'Dialogue Dash',
-    description: 'Unscramble famous lines',
-    icon: MessageSquare,
-    cost: 5,
-    reward: '50 MP',
-    category: 'puzzle' as const,
-    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'boxoffice' as const,
-    title: 'Box Office Tycoon',
-    description: 'Tap to sell tickets!',
-    icon: Ticket,
-    cost: 5,
-    reward: '10-100 MP',
-    category: 'action' as const,
-    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'mystery' as const,
-    title: 'Mystery Trailer',
-    description: 'Guess the blurred movie',
-    icon: Eye,
-    cost: 5,
-    reward: '10-100 MP',
-    category: 'puzzle' as const,
-    image: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'heardle' as const,
-    title: 'Bolly-Heardle',
-    description: 'Name that tune!',
-    icon: Music,
-    cost: 5,
-    reward: '20-100 MP',
-    category: 'puzzle' as const,
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'redcarpet' as const,
-    title: 'Red Carpet Ranker',
-    description: 'Vote on best looks',
-    icon: Crown,
-    cost: 5,
-    reward: '20-100 MP',
-    category: 'rewards' as const,
-    image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'signature' as const,
-    title: 'Signature Step',
-    description: 'Hit the Gold Zone!',
-    icon: Target,
-    cost: 5,
-    reward: '15-90 MP',
-    category: 'rewards' as const,
-    image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'script' as const,
-    title: 'Script Doctor',
-    description: 'Make superhit choices',
-    icon: FileText,
-    cost: 5,
-    reward: '25-100 MP',
-    category: 'rewards' as const,
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 'directors' as const,
-    title: "Director's Cut",
-    description: 'Spin for prizes!',
-    icon: Film,
-    cost: 5,
-    reward: '5-100 MP',
-    category: 'rewards' as const,
-    image: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=400&auto=format&fit=crop&q=80',
-  },
+  { id: 'paparazzi' as const, titleKey: 'game.paparazzi', descKey: 'game.paparazzi.desc', icon: Camera, cost: 5, reward: '20-100 MP', category: 'action' as const, image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&auto=format&fit=crop&q=80' },
+  { id: 'casting' as const, titleKey: 'game.casting', descKey: 'game.casting.desc', icon: Shuffle, cost: 5, reward: '20-100 MP', category: 'puzzle' as const, image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&auto=format&fit=crop&q=80' },
+  { id: 'dialogue' as const, titleKey: 'game.dialogue', descKey: 'game.dialogue.desc', icon: MessageSquare, cost: 5, reward: '50 MP', category: 'puzzle' as const, image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80' },
+  { id: 'boxoffice' as const, titleKey: 'game.boxoffice', descKey: 'game.boxoffice.desc', icon: Ticket, cost: 5, reward: '10-100 MP', category: 'action' as const, image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&auto=format&fit=crop&q=80' },
+  { id: 'mystery' as const, titleKey: 'game.mystery', descKey: 'game.mystery.desc', icon: Eye, cost: 5, reward: '10-100 MP', category: 'puzzle' as const, image: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&auto=format&fit=crop&q=80' },
+  { id: 'heardle' as const, titleKey: 'game.heardle', descKey: 'game.heardle.desc', icon: Music, cost: 5, reward: '20-100 MP', category: 'puzzle' as const, image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80' },
+  { id: 'redcarpet' as const, titleKey: 'game.redcarpet', descKey: 'game.redcarpet.desc', icon: Crown, cost: 5, reward: '20-100 MP', category: 'rewards' as const, image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&auto=format&fit=crop&q=80' },
+  { id: 'signature' as const, titleKey: 'game.signature', descKey: 'game.signature.desc', icon: Target, cost: 5, reward: '15-90 MP', category: 'rewards' as const, image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&auto=format&fit=crop&q=80' },
+  { id: 'script' as const, titleKey: 'game.script', descKey: 'game.script.desc', icon: FileText, cost: 5, reward: '25-100 MP', category: 'rewards' as const, image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&auto=format&fit=crop&q=80' },
+  { id: 'directors' as const, titleKey: 'game.directors', descKey: 'game.directors.desc', icon: Film, cost: 5, reward: '5-100 MP', category: 'rewards' as const, image: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=400&auto=format&fit=crop&q=80' },
 ];
 
 export function Games() {
@@ -178,7 +88,7 @@ export function Games() {
 
   const getGameTitle = () => {
     const game = games.find(g => g.id === activeGame);
-    return game?.title || '';
+    return game ? t(game.titleKey) : '';
   };
 
   return (
@@ -221,8 +131,8 @@ export function Games() {
             }}
           >
             <GameCard
-              title={game.title}
-              description={game.description}
+              title={t(game.titleKey)}
+              description={t(game.descKey)}
               icon={game.icon}
               cost={game.cost}
               reward={game.reward}
