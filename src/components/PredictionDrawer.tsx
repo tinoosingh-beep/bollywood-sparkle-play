@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { X, TrendingUp, TrendingDown, Sparkles } from 'lucide-react';
 import { Drawer, DrawerContent, DrawerClose } from '@/components/ui/drawer';
 import { useBalance } from '@/contexts/BalanceContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Slider } from '@/components/ui/slider';
 
 interface PredictionDrawerProps {
@@ -28,11 +29,10 @@ export function PredictionDrawer({
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasConfirmed, setHasConfirmed] = useState(false);
   const { balance, deductPoints, addPoints, triggerFloatingPoints } = useBalance();
+  const { t } = useLanguage();
 
-  // Calculate potential payout with 1.85x multiplier
   const potentialPayout = Math.round(stake * 1.85);
 
-  // Trigger pulse animation when stake changes
   useEffect(() => {
     setIsAnimating(true);
     const timer = setTimeout(() => setIsAnimating(false), 300);
@@ -47,7 +47,6 @@ export function PredictionDrawer({
       onPredictionConfirmed?.(options[selectedOption]);
       const rect = event.currentTarget.getBoundingClientRect();
       
-      // Simulate win (demo - 50% chance)
       setTimeout(() => {
         if (Math.random() > 0.5) {
           addPoints(potentialPayout);
@@ -55,7 +54,6 @@ export function PredictionDrawer({
         }
         setTimeout(() => {
           onClose();
-          // Reset state after close
           setTimeout(() => {
             setSelectedOption(null);
             setStake(50);
@@ -69,7 +67,6 @@ export function PredictionDrawer({
   const handleOpenChange = (open: boolean) => {
     if (!open) {
       onClose();
-      // Reset state after close
       setTimeout(() => {
         setSelectedOption(null);
         setStake(50);
@@ -78,7 +75,6 @@ export function PredictionDrawer({
     }
   };
 
-  // Determine button styling based on option text
   const getOptionStyle = (index: number, optionText: string) => {
     const isPositive = ['SUPERHIT', 'YES', 'CONFIRMED', 'HOLLYWOOD FIRST'].includes(optionText.toUpperCase());
     const isSelected = selectedOption === index;
@@ -98,7 +94,6 @@ export function PredictionDrawer({
     <Drawer open={isOpen} onOpenChange={handleOpenChange}>
       <DrawerContent className="prediction-drawer h-[60vh] border-t-2 border-gold bg-transparent">
         <div className="prediction-drawer-inner h-full flex flex-col">
-          {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-primary/20">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-primary/20">
@@ -116,17 +111,14 @@ export function PredictionDrawer({
             </DrawerClose>
           </div>
 
-          {/* Content */}
           <div className="flex-1 p-5 space-y-6 overflow-y-auto">
-            {/* Price Indicator */}
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Market Price</span>
+              <span className="text-muted-foreground">{t('predict.marketPrice')}</span>
               <span className="text-gold font-bold">{Math.round(initialPrice * 100)}¢</span>
             </div>
 
-            {/* Segmented Control */}
             <div className="space-y-3">
-              <p className="text-sm text-muted-foreground font-medium">Your Prediction</p>
+              <p className="text-sm text-muted-foreground font-medium">{t('predict.yourPrediction')}</p>
               <div className={`grid gap-3 ${options.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 {options.map((option, index) => {
                   const Icon = getOptionIcon(option);
@@ -151,10 +143,9 @@ export function PredictionDrawer({
               </div>
             </div>
 
-            {/* Trading Slider */}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-muted-foreground font-medium">Stake Amount</p>
+                <p className="text-sm text-muted-foreground font-medium">{t('predict.stakeAmount')}</p>
                 <div className={`transition-all duration-300 ${isAnimating ? 'scale-125' : 'scale-100'}`}>
                   <span className={`text-2xl font-bold text-gold ${isAnimating ? 'animate-pulse' : ''}`}>
                     {stake}
@@ -175,34 +166,32 @@ export function PredictionDrawer({
                 />
                 <div className="flex justify-between text-xs text-muted-foreground">
                   <span>10 MP</span>
-                  <span>Balance: {balance} MP</span>
+                  <span>{t('predict.balance')} {balance} MP</span>
                   <span>{Math.min(500, balance)} MP</span>
                 </div>
               </div>
             </div>
 
-            {/* Live Payout Calculation */}
             <div className="payout-box p-4 rounded-xl">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-sm text-muted-foreground">Potential Payout</p>
-                  <p className="text-xs text-muted-foreground/70">1.85x multiplier</p>
+                  <p className="text-sm text-muted-foreground">{t('predict.potentialPayout')}</p>
+                  <p className="text-xs text-muted-foreground/70">{t('predict.multiplier')}</p>
                 </div>
                 <div className="text-right">
                   <p className={`text-3xl font-display font-bold text-gold transition-all duration-300 ${isAnimating ? 'scale-110' : 'scale-100'}`}>
                     {potentialPayout}
                   </p>
-                  <p className="text-xs text-gold/70">Masala Points</p>
+                  <p className="text-xs text-gold/70">{t('predict.masalaPoints')}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Action Button */}
           <div className="p-4 border-t border-primary/20">
             {hasConfirmed ? (
               <div className="confirm-btn-success py-4 rounded-xl text-center">
-                <p className="font-bold text-primary-foreground">Prediction Confirmed! 🎬</p>
+                <p className="font-bold text-primary-foreground">{t('predict.confirmed')}</p>
               </div>
             ) : (
               <button
@@ -214,7 +203,7 @@ export function PredictionDrawer({
                     : 'confirm-btn-disabled'
                 }`}
               >
-                {stake > balance ? 'Insufficient Balance' : 'Confirm Prediction'}
+                {stake > balance ? t('predict.insufficientBalance') : t('predict.confirm')}
               </button>
             )}
           </div>

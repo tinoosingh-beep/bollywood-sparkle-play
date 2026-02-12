@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { Lock, Gift, Plus, Zap, Film } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useScriptSlots, type ReelRarity, type ReelReward } from '@/contexts/ScriptSlotsContext';
 import { useBalance } from '@/contexts/BalanceContext';
 import { ReelOpeningModal } from './ReelOpeningModal';
@@ -36,6 +37,7 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
   const { addPoints, deductPoints, triggerFloatingPoints } = useBalance();
   const [modalOpen, setModalOpen] = useState(false);
   const [currentReward, setCurrentReward] = useState<ReelReward | null>(null);
+  const { t } = useLanguage();
 
   const handleOpen = (slotId: number) => {
     const reward = openSlot(slotId);
@@ -76,7 +78,7 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
         }}
       >
         <p className="text-xs font-display font-semibold uppercase tracking-wider text-center mb-3" style={{ color: 'hsla(45, 100%, 70%, 0.85)' }}>
-          Daily Rewards
+          {t('home.dailyRewards')}
         </p>
         <div className="grid grid-cols-4 gap-2">
           {slots.map((slot, i) => (
@@ -202,6 +204,7 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
       >
         <Film className="w-4 h-4 text-gold/60 drop-shadow-[0_0_5px_hsla(45,100%,55%,0.4)]" />
         <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
+          {/* Keep English for the slot label as it's short */}
           Earn Script
         </span>
       </motion.button>

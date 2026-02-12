@@ -6,10 +6,12 @@ import { VideoPreviewCard } from '@/components/VideoPreviewCard';
 import { newsContent } from '@/data/newsContent';
 import { reviewContent } from '@/data/reviewContent';
 import { videoContent } from '@/data/videoContent';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useMemo } from 'react';
 
 export function Home() {
   const [trophies] = useState(420);
+  const { t } = useLanguage();
 
   // Interleave review cards every 3 stories, video cards every 5 stories
   const feedItems = useMemo(() => {
@@ -18,12 +20,10 @@ export function Home() {
     let videoIndex = 0;
     newsContent.forEach((story, i) => {
       items.push({ type: 'news', data: story, key: `news-${story.id}` });
-      // Insert a review card after every 3rd story
       if ((i + 1) % 3 === 0 && reviewIndex < reviewContent.length) {
         items.push({ type: 'review', data: reviewContent[reviewIndex], key: `review-${reviewContent[reviewIndex].id}` });
         reviewIndex++;
       }
-      // Insert a video card after every 5th story
       if ((i + 1) % 5 === 0 && videoIndex < videoContent.length) {
         items.push({ type: 'video', data: videoContent[videoIndex], key: `video-${videoContent[videoIndex].id}` });
         videoIndex++;
@@ -42,7 +42,7 @@ export function Home() {
       }} />
 
       <div id="news-feed">
-        <h2 className="headline-display text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>Today's News</h2>
+        <h2 className="headline-display text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>{t('home.todaysNews')}</h2>
         <div className="space-y-4">
           {feedItems.map((item, index) => (
             <div key={item.key} style={{ animationDelay: `${Math.min(index * 0.05, 0.5)}s` }}>

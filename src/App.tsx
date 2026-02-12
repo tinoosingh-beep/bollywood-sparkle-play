@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BalanceProvider } from '@/contexts/BalanceContext';
 import { ScriptSlotsProvider } from '@/contexts/ScriptSlotsContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import { BottomNav } from '@/components/BottomNav';
 import { FloatingPoints } from '@/components/FloatingPoints';
 import { Home } from '@/pages/Home';
@@ -61,13 +62,15 @@ function AppContent() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BalanceProvider>
-        <ScriptSlotsProvider>
-          <Toaster />
-          <Sonner />
-          <AppContent />
-        </ScriptSlotsProvider>
-      </BalanceProvider>
+      <LanguageProvider>
+        <BalanceProvider>
+          <ScriptSlotsProvider>
+            <Toaster />
+            <Sonner />
+            <AppContent />
+          </ScriptSlotsProvider>
+        </BalanceProvider>
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
