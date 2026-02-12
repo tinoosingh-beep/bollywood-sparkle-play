@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, Timer, Zap, Share2, CheckCircle } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, Timer, Zap, Share2, CheckCircle, ExternalLink, Ticket } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Progress } from '@/components/ui/progress';
 import { PredictionDrawer } from '@/components/PredictionDrawer';
@@ -263,33 +263,72 @@ export function VideoPreviewCard({ video }: VideoPreviewCardProps) {
 
         {/* Action Bar */}
         {!cinematicMode && (
-          <div className="flex items-center gap-2 p-3" style={{ background: 'hsla(0,0%,0%,0.9)' }}>
-            <button
-              onClick={() => setShowPrediction(true)}
-              className={`flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
-                hasPredicted ? 'video-btn-predicted' : 'btn-gold'
-              }`}
-              style={!hasPredicted ? { fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.06em' } : { fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem' }}
-            >
-              {hasPredicted ? (
-                <>
-                  <CheckCircle className="w-4 h-4" />
-                  Predicted: {predictedOption}
-                </>
-              ) : (
-                <>
-                  <Zap className="w-4 h-4" />
-                  Predict Opening Day
-                </>
-              )}
-            </button>
-            <button
-              onClick={handleShare}
-              className="video-control-btn p-3"
-              aria-label="Share to WhatsApp"
-            >
-              <Share2 className="w-4 h-4" />
-            </button>
+          <div className="flex flex-col gap-2 p-3" style={{ background: 'hsla(0,0%,0%,0.9)' }}>
+            {/* Watch & Tickets row */}
+            <div className="flex items-center gap-2">
+              <a
+                href={video.watchLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(0 0% 20%), hsl(0 0% 15%))',
+                  color: 'white',
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: '0.85rem',
+                  letterSpacing: '0.06em',
+                  border: '1px solid hsla(0,0%,100%,0.15)',
+                }}
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Watch Trailer
+              </a>
+              <a
+                href={video.ticketLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(340 85% 55%), hsl(350 80% 50%))',
+                  color: 'white',
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: '0.85rem',
+                  letterSpacing: '0.06em',
+                }}
+              >
+                <Ticket className="w-3.5 h-3.5" />
+                Buy Tickets
+              </a>
+            </div>
+            {/* Predict & Share row */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowPrediction(true)}
+                className={`flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
+                  hasPredicted ? 'video-btn-predicted' : 'btn-gold'
+                }`}
+                style={!hasPredicted ? { fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.06em' } : { fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem' }}
+              >
+                {hasPredicted ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" />
+                    Predicted: {predictedOption}
+                  </>
+                ) : (
+                  <>
+                    <Zap className="w-4 h-4" />
+                    Predict Opening Day
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleShare}
+                className="video-control-btn p-3"
+                aria-label="Share to WhatsApp"
+              >
+                <Share2 className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
       </article>
