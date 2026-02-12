@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   Gamepad2, 
   Camera, 
@@ -146,6 +147,7 @@ const games = [
 
 export function Games() {
   const [activeGame, setActiveGame] = useState<GameType>(null);
+  const { t } = useLanguage();
 
   const renderGame = () => {
     switch (activeGame) {
@@ -192,9 +194,9 @@ export function Games() {
             <Gamepad2 className="w-8 h-8" />
           </div>
         </motion.div>
-        <h2 className="font-display text-3xl font-bold text-gradient-gold">Game Zone</h2>
-        <p className="text-muted-foreground mt-2">Retro Cinema • Modern Neon</p>
-        <p className="text-xs text-neon-pink mt-1">10 games • 5 MP to play</p>
+        <h2 className="font-display text-3xl font-bold text-gradient-gold">{t('games.title')}</h2>
+        <p className="text-muted-foreground mt-2">{t('games.subtitle')}</p>
+        <p className="text-xs text-neon-pink mt-1">{t('games.count')}</p>
       </div>
 
       {/* 2-Column Grid */}

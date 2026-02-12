@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { useBalance } from '@/contexts/BalanceContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Confetti } from '@/components/Confetti';
 import { toast } from 'sonner';
+import { reviewContentHi } from '@/data/reviewContent.hi';
 import type { ReviewItem } from '@/data/reviewContent';
 
 const PLATFORM_COLORS: Record<string, string> = {
@@ -34,11 +36,12 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 function SentimentBar({ label, percentage }: { label: string; percentage: number }) {
+  const { t } = useLanguage();
   const barColor = percentage >= 80 ? 'hsl(142, 70%, 45%)' : percentage >= 60 ? 'hsl(45, 100%, 50%)' : 'hsl(17, 100%, 50%)';
   return (
     <div className="space-y-1">
       <div className="flex justify-between items-center text-[10px]">
-        <span className="text-muted-foreground">Community</span>
+        <span className="text-muted-foreground">{t('review.community')}</span>
         <span className="font-semibold" style={{ color: barColor }}>{percentage}% say "{label}"</span>
       </div>
       <div className="w-full h-1.5 rounded-full" style={{ background: 'hsl(var(--muted))' }}>
@@ -61,6 +64,11 @@ export function ReviewCard({ review }: ReviewCardProps) {
   const [paisaVasoolScore, setPaisaVasoolScore] = useState([50]);
   const [showConfetti, setShowConfetti] = useState(false);
   const { addPoints, triggerFloatingPoints } = useBalance();
+  const { lang, t } = useLanguage();
+
+  const hi = lang === 'hi' ? reviewContentHi[review.id] : null;
+  const logLine = hi?.logLine || review.logLine;
+  const sentimentLabel = hi?.communitySentimentLabel || review.communitySentiment.label;
 
   const handleSubmitReview = () => {
     setShowConfetti(true);
@@ -81,20 +89,17 @@ export function ReviewCard({ review }: ReviewCardProps) {
         className="glass-card overflow-hidden animate-slide-up"
         style={{ borderColor: 'hsla(280, 60%, 50%, 0.4)', background: 'linear-gradient(135deg, hsla(280, 40%, 98%, 0.95), hsla(45, 20%, 98%, 0.9))' }}
       >
-        {/* Header badge */}
         <div className="px-4 py-2 flex items-center gap-2" style={{ background: 'hsla(280, 50%, 50%, 0.08)' }}>
           <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'hsl(280, 60%, 55%)' }}>
-            🎬 Critic's Corner
+            {t('review.criticCorner')}
           </span>
         </div>
 
         <div className="flex p-4 gap-3">
-          {/* Portrait poster */}
           <div className="w-[100px] flex-shrink-0 rounded-xl overflow-hidden shadow-lg" style={{ aspectRatio: '2/3' }}>
             <img src={review.posterImage} alt={`${review.title} poster`} className="w-full h-full object-cover" />
           </div>
 
-          {/* Info side */}
           <div className="flex-1 flex flex-col justify-between min-w-0 gap-2">
             <div>
               <div className="flex items-start justify-between gap-2">
@@ -126,14 +131,13 @@ export function ReviewCard({ review }: ReviewCardProps) {
                 <StarRating rating={review.starRating} />
               </div>
 
-              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5 line-clamp-2">{review.logLine}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5 line-clamp-2">{logLine}</p>
             </div>
 
-            <SentimentBar label={review.communitySentiment.label} percentage={review.communitySentiment.percentage} />
+            <SentimentBar label={sentimentLabel} percentage={review.communitySentiment.percentage} />
           </div>
         </div>
 
-        {/* Action buttons */}
         <div className="px-4 pb-4 flex gap-2">
           {!hasReviewed ? (
             <Button
@@ -142,25 +146,24 @@ export function ReviewCard({ review }: ReviewCardProps) {
               style={{
                 background: 'linear-gradient(135deg, hsl(280 60% 55%), hsl(300 50% 50%))',
                 color: 'white',
-                fontFamily: "'Bebas Neue', sans-serif",
+                fontFamily: lang === 'hi' ? "'Noto Sans Devanagari', sans-serif" : "'Bebas Neue', sans-serif",
                 fontSize: '1rem',
-                letterSpacing: '0.06em',
+                letterSpacing: lang === 'hi' ? '0.02em' : '0.06em',
                 boxShadow: '0 4px 20px hsla(280, 60%, 55%, 0.4)',
               }}
             >
               <PenLine className="w-4 h-4" />
-              RATE THIS (+25 MP)
+              {t('review.rateThis')}
             </Button>
           ) : (
             <div className="flex-1 rounded-xl py-3 flex items-center justify-center gap-2 bg-accent/20 border border-accent/40">
               <CheckCircle className="w-4 h-4 text-accent" />
-              <span className="text-accent font-medium text-sm">Verdict Submitted</span>
+              <span className="text-accent font-medium text-sm">{t('review.verdictSubmitted')}</span>
             </div>
           )}
         </div>
       </article>
 
-      {/* Review Modal */}
       <AnimatePresence>
         {showReviewModal && (
           <>
@@ -181,12 +184,12 @@ export function ReviewCard({ review }: ReviewCardProps) {
               <div className="p-5 space-y-5">
                 <div className="w-10 h-1 rounded-full bg-muted mx-auto" />
                 <h3 className="font-display text-lg font-bold text-foreground text-center">
-                  Rate "{review.title}"
+                  {t('review.rate')} "{review.title}"
                 </h3>
 
-                <SliderRow label="🎬 Action" value={actionScore} onChange={setActionScore} />
-                <SliderRow label="🎭 Drama" value={dramaScore} onChange={setDramaScore} />
-                <SliderRow label="💰 Paisa Vasool" value={paisaVasoolScore} onChange={setPaisaVasoolScore} />
+                <SliderRow label={t('review.action')} value={actionScore} onChange={setActionScore} />
+                <SliderRow label={t('review.drama')} value={dramaScore} onChange={setDramaScore} />
+                <SliderRow label={t('review.paisaVasool')} value={paisaVasoolScore} onChange={setPaisaVasoolScore} />
 
                 <Button
                   onClick={handleSubmitReview}
@@ -194,13 +197,13 @@ export function ReviewCard({ review }: ReviewCardProps) {
                   style={{
                     background: 'linear-gradient(135deg, hsl(280 60% 55%), hsl(300 50% 50%))',
                     color: 'white',
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: lang === 'hi' ? "'Noto Sans Devanagari', sans-serif" : "'Bebas Neue', sans-serif",
                     fontSize: '1.1rem',
-                    letterSpacing: '0.08em',
+                    letterSpacing: lang === 'hi' ? '0.02em' : '0.08em',
                     boxShadow: '0 4px 25px hsla(280, 60%, 55%, 0.5)',
                   }}
                 >
-                  SUBMIT VERDICT (+25 MP)
+                  {t('review.submitVerdict')}
                 </Button>
               </div>
             </motion.div>

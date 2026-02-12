@@ -1,4 +1,5 @@
 import { Crown, Medal, Award, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const leaderboardData = [
   { rank: 1, name: 'MumbaiMaven', points: 12450, streak: 15 },
@@ -10,6 +11,7 @@ const leaderboardData = [
 ];
 
 export function Leaderboard() {
+  const { t } = useLanguage();
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
@@ -26,8 +28,8 @@ export function Leaderboard() {
   return (
     <div className="space-y-6 animate-slide-up">
       <div className="text-center">
-        <h2 className="font-display text-3xl font-bold text-gradient-gold">The A-List</h2>
-        <p className="text-muted-foreground mt-2">Top Bollywood Predictors</p>
+        <h2 className="font-display text-3xl font-bold text-gradient-gold">{t('leaderboard.title')}</h2>
+        <p className="text-muted-foreground mt-2">{t('leaderboard.subtitle')}</p>
       </div>
 
       <div className="space-y-3">
@@ -48,7 +50,7 @@ export function Leaderboard() {
               </p>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <TrendingUp className="w-3 h-3" />
-                <span>{player.streak} day streak</span>
+                <span>{player.streak} {t('leaderboard.dayStreak')}</span>
               </div>
             </div>
 
@@ -63,10 +65,10 @@ export function Leaderboard() {
       </div>
 
       <div className="glass-card-gold p-5 text-center">
-        <p className="text-muted-foreground text-sm mb-2">Your Rank</p>
+        <p className="text-muted-foreground text-sm mb-2">{t('leaderboard.yourRank')}</p>
         <p className="text-4xl font-display font-bold text-gold">#6</p>
         <p className="text-muted-foreground text-sm mt-2">
-          8,400 MP to reach #5
+          8,400 {t('leaderboard.toReach')} #5
         </p>
       </div>
     </div>

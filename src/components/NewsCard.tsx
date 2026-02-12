@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { CheckCircle, Zap, Clock, Swords } from 'lucide-react';
 import { useBalance } from '@/contexts/BalanceContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useScriptSlots, STORY_TIME_REDUCTION } from '@/contexts/ScriptSlotsContext';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PredictionDrawer } from '@/components/PredictionDrawer';
 import { Confetti } from '@/components/Confetti';
 import { toast } from 'sonner';
+import { newsContentHi } from '@/data/newsContent.hi';
 import type { NewsStory } from '@/data/newsContent';
 
 interface NewsCardProps {
@@ -24,7 +26,14 @@ export function NewsCard({ story }: NewsCardProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const { addPoints, triggerFloatingPoints } = useBalance();
   const { fillEmptySlot, slots, reduceSlotTime } = useScriptSlots();
+  const { lang, t } = useLanguage();
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const hi = lang === 'hi' ? newsContentHi[story.id] : null;
+  const headline = hi?.headline || story.headline;
+  const summary = hi?.summary || story.summary;
+  const quizQuestion = hi?.quizQuestion || story.quizQuestion;
+  const predictionMarketQuestion = hi?.predictionMarketQuestion || story.predictionMarketQuestion;
 
   const quizOptions = story.quizOptions || [story.correctAnswer, 'Option A', 'Option B', 'Option C'];
 
@@ -55,14 +64,12 @@ export function NewsCard({ story }: NewsCardProps) {
       addPoints(50);
       triggerFloatingPoints(50, window.innerWidth / 2, window.innerHeight / 2);
 
-      // Fill an empty script slot
       const rarity = fillEmptySlot();
       if (rarity) {
         toast.success(`Correct! +50 MP & a ${rarity.charAt(0).toUpperCase() + rarity.slice(1)} Film Reel earned! 🎬`, {
           className: 'bg-gold/20 border-gold text-gold',
         });
       } else {
-        // No empty slot — reduce time on a locked slot instead
         const lockedSlot = slots.find(s => s.type === 'locked');
         if (lockedSlot) {
           reduceSlotTime(lockedSlot.id, STORY_TIME_REDUCTION);
@@ -95,7 +102,7 @@ export function NewsCard({ story }: NewsCardProps) {
         <div className="relative h-48 overflow-hidden">
           <img
             src={story.image}
-            alt={story.headline}
+            alt={headline}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
@@ -111,13 +118,13 @@ export function NewsCard({ story }: NewsCardProps) {
             }}
           >
             <Clock className="w-3 h-3" />
-            2 min read
+            {t('news.minRead')}
           </span>
         </div>
         
         <div className="p-4 space-y-3">
           <h3 className="font-display text-lg font-semibold leading-tight text-foreground">
-            {story.headline}
+            {headline}
           </h3>
 
           {isExpanded && (
@@ -136,32 +143,32 @@ export function NewsCard({ story }: NewsCardProps) {
               style={{
                 background: 'hsl(var(--gold))',
                 color: 'hsl(0 0% 5%)',
-                fontFamily: "'Bebas Neue', sans-serif",
+                fontFamily: lang === 'hi' ? "'Noto Sans Devanagari', sans-serif" : "'Bebas Neue', sans-serif",
                 fontSize: '1.15rem',
                 fontWeight: 700,
-                letterSpacing: '0.08em',
+                letterSpacing: lang === 'hi' ? '0.02em' : '0.08em',
                 boxShadow: '0 4px 20px hsla(45, 100%, 50%, 0.4)',
               }}
             >
               <Swords className="w-5 h-5" />
-              READ THE STORY
+              {t('news.readStory')}
             </Button>
           )}
 
           {isExpanded && (
             <div ref={contentRef} className="space-y-4 animate-slide-up">
-              <p className="text-muted-foreground text-sm leading-relaxed">{story.summary}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{summary}</p>
 
               {!verified ? (
                 <div className="p-4 rounded-xl bg-muted/30 border border-gold/20 space-y-3">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-gold" />
-                    <span className="text-sm font-medium text-gold">Spotlight Quiz • +50 MP</span>
+                    <span className="text-sm font-medium text-gold">{t('news.spotlightQuiz')}</span>
                   </div>
-                  <p className="text-foreground font-medium">{story.quizQuestion}</p>
+                  <p className="text-foreground font-medium">{quizQuestion}</p>
                   <Select value={quizAnswer} onValueChange={handleQuizSubmit}>
                     <SelectTrigger className="w-full bg-card border-muted focus:border-gold">
-                      <SelectValue placeholder="Select your answer..." />
+                      <SelectValue placeholder={t('news.selectAnswer')} />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border z-50">
                       {quizOptions.map((option, index) => (
@@ -175,7 +182,7 @@ export function NewsCard({ story }: NewsCardProps) {
               ) : (
                 <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-gold" />
-                  <span className="text-gold font-medium">Verified! +50 MP earned</span>
+                  <span className="text-gold font-medium">{t('news.verified')}</span>
                 </div>
               )}
             </div>
@@ -189,7 +196,7 @@ export function NewsCard({ story }: NewsCardProps) {
                 className="flex-1 btn-glass rounded-xl py-5 flex items-center justify-center gap-2"
               >
                 <CheckCircle className="w-4 h-4" />
-                Verify to Earn
+                {t('news.verifyToEarn')}
               </Button>
             )}
             <Button
@@ -199,12 +206,12 @@ export function NewsCard({ story }: NewsCardProps) {
               {hasPredicted ? (
                 <>
                   <CheckCircle className="w-4 h-4" />
-                  Predicted: {predictedOption}
+                  {t('news.predicted')} {predictedOption}
                 </>
               ) : (
                 <>
                   <Zap className="w-4 h-4" />
-                  Predict Now
+                  {t('news.predictNow')}
                 </>
               )}
             </Button>
@@ -215,8 +222,8 @@ export function NewsCard({ story }: NewsCardProps) {
       <PredictionDrawer
         isOpen={showPrediction}
         onClose={() => setShowPrediction(false)}
-        title={story.headline}
-        shortTitle={story.predictionMarketQuestion}
+        title={headline}
+        shortTitle={predictionMarketQuestion}
         options={story.predictionMarketOptions}
         initialPrice={story.initialYesPrice}
         onPredictionConfirmed={(option) => {

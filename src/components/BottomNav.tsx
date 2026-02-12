@@ -1,21 +1,24 @@
 import { Home, TrendingUp, Gamepad2, ShoppingBag, Users, Presentation } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BottomNavProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
 }
 
-const navItems = [
-  { id: 'shop', label: 'Games', icon: Gamepad2, badge: 3 },
-  { id: 'collection', label: 'Collection', icon: TrendingUp, badge: 0 },
-  { id: 'home', label: 'Home', icon: Home, badge: 0 },
-  { id: 'markets', label: 'Markets', icon: Gamepad2, badge: 1 },
-  { id: 'pitch', label: 'Pitch', icon: Presentation, badge: 0 },
-  { id: 'social', label: 'Social', icon: Users, badge: 5 },
-];
-
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
+  const { t } = useLanguage();
+
+  const navItems = [
+    { id: 'shop', labelKey: 'nav.games', icon: Gamepad2, badge: 3 },
+    { id: 'collection', labelKey: 'nav.collection', icon: TrendingUp, badge: 0 },
+    { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
+    { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
+    { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
+    { id: 'social', labelKey: 'nav.social', icon: Users, badge: 5 },
+  ];
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 px-3 pb-3">
       <div
@@ -52,7 +55,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               )}
               <Icon className={`w-5 h-5 ${isActive ? 'text-gold' : 'text-white/50'}`} />
               <span className={`text-[10px] ${isActive ? 'text-gold font-semibold' : 'text-white/50'}`}>
-                {item.label}
+                {t(item.labelKey)}
               </span>
             </motion.button>
           );
