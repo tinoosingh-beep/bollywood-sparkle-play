@@ -5,6 +5,8 @@ export interface VideoItem {
   thumbnail: string;
   videoUrl: string; // placeholder - real videos would go here
   duration: number; // seconds
+  watchLink: string;
+  ticketLink: string;
   predictionMarketQuestion: string;
   predictionMarketOptions: string[];
   initialYesPrice: number;
@@ -20,6 +22,8 @@ export const videoContent: VideoItem[] = [
     thumbnail: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80',
     videoUrl: '',
     duration: 45,
+    watchLink: 'https://www.youtube.com/results?search_query=Pathaan+2+trailer',
+    ticketLink: 'https://in.bookmyshow.com/',
     predictionMarketQuestion: "Will Pathaan 2 cross 500 Cr opening weekend?",
     predictionMarketOptions: ['SUPERHIT', 'FLOP'],
     initialYesPrice: 0.72,
@@ -33,6 +37,8 @@ export const videoContent: VideoItem[] = [
     thumbnail: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=600&auto=format&fit=crop&q=80',
     videoUrl: '',
     duration: 60,
+    watchLink: 'https://www.youtube.com/results?search_query=Krrish+4+trailer',
+    ticketLink: 'https://in.bookmyshow.com/',
     predictionMarketQuestion: "Will Krrish 4 revive the superhero genre in Bollywood?",
     predictionMarketOptions: ['Yes', 'No'],
     initialYesPrice: 0.55,
@@ -46,6 +52,8 @@ export const videoContent: VideoItem[] = [
     thumbnail: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=80',
     videoUrl: '',
     duration: 50,
+    watchLink: 'https://www.youtube.com/results?search_query=Animal+Park+trailer',
+    ticketLink: 'https://in.bookmyshow.com/',
     predictionMarketQuestion: "Will Animal Park cross 1000 Cr worldwide?",
     predictionMarketOptions: ['SUPERHIT', 'FLOP'],
     initialYesPrice: 0.65,
