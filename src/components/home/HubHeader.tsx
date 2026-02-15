@@ -30,7 +30,7 @@ export function HubHeader({ trophies }: HubHeaderProps) {
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
           <Sparkles className="w-4 h-4 text-white drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
-          <span className="text-xs font-extrabold text-white tracking-wide drop-shadow-[0_0_4px_hsla(0,0%,0%,0.5)]">BollyPass</span>
+          <span className="text-xs font-extrabold text-white tracking-wide drop-shadow-[0_0_4px_hsla(0,0%,0%,0.5)]">BollyBet</span>
           <span
             className="ml-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
             style={{ background: 'hsla(0, 0%, 100%, 0.25)', boxShadow: 'inset 0 1px 2px hsla(0,0%,0%,0.2)' }}
