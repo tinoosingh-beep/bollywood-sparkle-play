@@ -59,6 +59,8 @@ export function NewsCard({ story }: NewsCardProps) {
   const quizOptions = story.quizOptions || [story.correctAnswer, 'Option A', 'Option B', 'Option C'];
 
   const meta = useMemo(() => getAmbientMeta(story), [story]);
+  const isBet = story.type === 'bet';
+  const isVibe = story.type === 'vibe';
 
   // Scroll progress tracker
   useEffect(() => {
@@ -120,8 +122,20 @@ export function NewsCard({ story }: NewsCardProps) {
           <img src={story.image} alt={headline} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
           <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">
-            #{story.id}
+            {story.category || `#${story.id}`}
           </span>
+          {isVibe && story.vibeScore && (
+            <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1"
+              style={{ background: `hsla(${story.vibeScore * 12}, 80%, 50%, 0.9)`, color: 'white', backdropFilter: 'blur(8px)' }}>
+              🔥 Vibe {story.vibeScore}/10
+            </span>
+          )}
+          {isBet && story.expiryDate && (
+            <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold flex items-center gap-1"
+              style={{ background: 'hsla(0,0%,0%,0.7)', color: 'hsl(45, 100%, 55%)', backdropFilter: 'blur(8px)' }}>
+              <Clock className="w-3 h-3" />Expires {new Date(story.expiryDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}
+            </span>
+          )}
 
           {/* Top-right badges cluster */}
           <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
@@ -267,6 +281,19 @@ export function NewsCard({ story }: NewsCardProps) {
               style={{ color: meta.sentimentRising ? 'hsl(142, 80%, 45%)' : 'hsl(210, 70%, 50%)' }}>
               {meta.sentimentRising ? 'Rising' : 'Cooling'}
             </span>
+          </div>
+
+          {/* Tags for vibe items */}
+          {isVibe && story.tags && story.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {story.tags.map((tag, i) => (
+                <span key={i} className="px-2 py-0.5 rounded-full text-[9px] font-medium"
+                  style={{ background: 'hsl(var(--muted))', color: 'hsl(var(--muted-foreground))' }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
           </div>
         </div>
       </article>

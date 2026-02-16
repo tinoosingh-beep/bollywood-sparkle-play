@@ -13,18 +13,28 @@ export function Home() {
   const [trophies] = useState(420);
   const { t } = useLanguage();
 
-  // Interleave review cards every 3 stories, video cards every 5 stories
+  // Sort: vibe items by vibeScore (desc), bet items by expiry urgency (soonest first), then interleave
   const feedItems = useMemo(() => {
+    const sorted = [...newsContent].sort((a, b) => {
+      // Vibe items with higher scores go first
+      if (a.type === 'vibe' && b.type === 'vibe') return (b.vibeScore || 0) - (a.vibeScore || 0);
+      if (a.type === 'vibe' && b.type !== 'vibe') return -1;
+      if (a.type !== 'vibe' && b.type === 'vibe') return 1;
+      // Bet items: sooner expiry = higher urgency
+      const aExp = a.expiryDate ? new Date(a.expiryDate).getTime() : Infinity;
+      const bExp = b.expiryDate ? new Date(b.expiryDate).getTime() : Infinity;
+      return aExp - bExp;
+    });
     const items: { type: 'news' | 'review' | 'video'; data: any; key: string }[] = [];
     let reviewIndex = 0;
     let videoIndex = 0;
-    newsContent.forEach((story, i) => {
+    sorted.forEach((story, i) => {
       items.push({ type: 'news', data: story, key: `news-${story.id}` });
-      if ((i + 1) % 3 === 0 && reviewIndex < reviewContent.length) {
+      if ((i + 1) % 5 === 0 && reviewIndex < reviewContent.length) {
         items.push({ type: 'review', data: reviewContent[reviewIndex], key: `review-${reviewContent[reviewIndex].id}` });
         reviewIndex++;
       }
-      if ((i + 1) % 5 === 0 && videoIndex < videoContent.length) {
+      if ((i + 1) % 8 === 0 && videoIndex < videoContent.length) {
         items.push({ type: 'video', data: videoContent[videoIndex], key: `video-${videoContent[videoIndex].id}` });
         videoIndex++;
       }
