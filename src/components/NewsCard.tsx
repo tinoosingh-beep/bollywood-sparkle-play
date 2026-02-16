@@ -294,7 +294,6 @@ export function NewsCard({ story }: NewsCardProps) {
               ))}
             </div>
           )}
-          </div>
         </div>
       </article>
 
