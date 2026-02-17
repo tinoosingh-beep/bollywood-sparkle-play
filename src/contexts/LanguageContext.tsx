@@ -21,7 +21,7 @@ const translations: Record<string, Record<Language, string>> = {
   'nav.home': { en: 'Home', hi: 'होम' },
   'nav.markets': { en: 'Markets', hi: 'बाज़ार' },
   'nav.pitch': { en: 'Pitch', hi: 'पिच' },
-  'nav.social': { en: 'Social', hi: 'सोशल' },
+  'nav.social': { en: 'Leaders', hi: 'लीडर्स' },
 
   // Home
   'home.todaysNews': { en: "Today's News", hi: 'आज की खबरें' },
@@ -110,11 +110,13 @@ const translations: Record<string, Record<Language, string>> = {
   'markets.personalLife': { en: 'Personal Life', hi: 'निजी ज़िन्दगी' },
 
   // Leaderboard
-  'leaderboard.title': { en: 'The A-List', hi: 'ए-लिस्ट' },
-  'leaderboard.subtitle': { en: 'Top Bollywood Predictors', hi: 'टॉप बॉलीवुड प्रेडिक्टर्स' },
-  'leaderboard.dayStreak': { en: 'day streak', hi: 'दिन की स्ट्रीक' },
+  'leaderboard.title': { en: 'Leaderboards', hi: 'लीडरबोर्ड' },
+  'leaderboard.subtitle': { en: "See who's on top", hi: 'देखो कौन है सबसे ऊपर' },
   'leaderboard.yourRank': { en: 'Your Rank', hi: 'आपकी रैंक' },
-  'leaderboard.toReach': { en: 'MP to reach', hi: 'MP पहुँचने के लिए' },
+  'leaderboard.topVisitors': { en: 'Top Visitors', hi: 'टॉप विज़िटर्स' },
+  'leaderboard.pointLegends': { en: 'Point Legends', hi: 'पॉइंट लेजेंड्स' },
+  'leaderboard.predictionKings': { en: 'Prediction Kings', hi: 'प्रेडिक्शन किंग्स' },
+  'leaderboard.superActive': { en: 'Super Active', hi: 'सुपर एक्टिव' },
 
   // Collection
   'collection.title': { en: 'Your Collection', hi: 'आपका संग्रह' },
