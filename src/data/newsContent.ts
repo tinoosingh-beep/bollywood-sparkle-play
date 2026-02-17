@@ -5,6 +5,7 @@ export interface NewsStory {
   image: string;
   category: string;
   type: 'bet' | 'vibe';
+  has_market?: boolean;
   vibeScore?: number;
   tags?: string[];
   expiryDate?: string;
