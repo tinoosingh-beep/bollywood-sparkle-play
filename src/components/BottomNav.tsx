@@ -1,4 +1,4 @@
-import { Home, TrendingUp, Gamepad2, ShoppingBag, Users, Presentation } from 'lucide-react';
+import { Home, Sparkles, Gamepad2, ShoppingBag, Users, Presentation } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -12,7 +12,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
 
   const navItems = [
     { id: 'shop', labelKey: 'nav.games', icon: Gamepad2, badge: 3 },
-    { id: 'collection', labelKey: 'nav.collection', icon: TrendingUp, badge: 0 },
+    { id: 'collection', labelKey: 'nav.collection', icon: Sparkles, badge: 0 },
     { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
     { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
     { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
