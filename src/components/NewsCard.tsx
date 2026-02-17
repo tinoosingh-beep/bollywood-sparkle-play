@@ -22,7 +22,7 @@ function getAmbientMeta(story: NewsStory) {
 
   const isTrending = story.initialYesPrice >= 0.6;
   const trendingGlow = isTrending ? (story.initialYesPrice >= 0.7 ? 'gold' : 'indigo') : null;
-  const isMarketActive = true; // all stories have markets
+  const isMarketActive = story.has_market ?? story.type === 'bet';
   const yesPrice = Math.round(story.initialYesPrice * 100);
   const isAI = headline.includes('ai') || headline.includes('vfx') || summary.includes('artificial intelligence') || summary.includes('vfx');
   const aiRatio = isAI ? Math.round(30 + Math.random() * 45) : 0;
@@ -256,10 +256,12 @@ export function NewsCard({ story }: NewsCardProps) {
                 <CheckCircle className="w-4 h-4" />{t('news.verifyToEarn')}
               </Button>
             )}
-            <Button onClick={() => setShowPrediction(true)}
-              className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} rounded-xl py-5 flex items-center justify-center gap-2 ${hasPredicted ? 'bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30' : 'btn-gold'}`}>
-              {hasPredicted ? (<><CheckCircle className="w-4 h-4" />{t('news.predicted')} {predictedOption}</>) : (<><Zap className="w-4 h-4" />{t('news.predictNow')}</>)}
-            </Button>
+            {meta.isMarketActive && (
+              <Button onClick={() => setShowPrediction(true)}
+                className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} rounded-xl py-5 flex items-center justify-center gap-2 ${hasPredicted ? 'bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30' : 'btn-gold'}`}>
+                {hasPredicted ? (<><CheckCircle className="w-4 h-4" />{t('news.predicted')} {predictedOption}</>) : (<><Zap className="w-4 h-4" />{t('news.predictNow')}</>)}
+              </Button>
+            )}
           </div>
 
           {/* Sentiment Spark micro-widget */}
@@ -297,10 +299,12 @@ export function NewsCard({ story }: NewsCardProps) {
         </div>
       </article>
 
-      <PredictionDrawer isOpen={showPrediction} onClose={() => setShowPrediction(false)}
-        title={headline} shortTitle={predictionMarketQuestion} options={story.predictionMarketOptions}
-        initialPrice={story.initialYesPrice}
-        onPredictionConfirmed={(option) => { setHasPredicted(true); setPredictedOption(option); }} />
+      {meta.isMarketActive && (
+        <PredictionDrawer isOpen={showPrediction} onClose={() => setShowPrediction(false)}
+          title={headline} shortTitle={predictionMarketQuestion} options={story.predictionMarketOptions}
+          initialPrice={story.initialYesPrice}
+          onPredictionConfirmed={(option) => { setHasPredicted(true); setPredictedOption(option); }} />
+      )}
     </>
   );
 }
