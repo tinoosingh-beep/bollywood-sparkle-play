@@ -1,54 +1,64 @@
+export type FashionCategory = 'Red Carpet' | 'Airport Style' | 'Ethnic Fusion';
+
 export interface FashionFaceoff {
   id: number;
   title: string;
+  description: string;
   optionA: { label: string; image: string };
   optionB: { label: string; image: string };
   isTrending: boolean;
-  /** Pre-seeded vote percentage for option A (0-100) */
   seedVoteA: number;
+  category: FashionCategory;
 }
 
+// Curated Unsplash fashion images by category
+const rc = (i: number) => `https://images.unsplash.com/photo-${['1518611012118-696072aa579a','1529139574466-a303027c1d8b','1558618666-fcd25c85f82e','1583391733956-3750e0ff4e8b','1469334031218-e382a71b716b','1515886657613-9f3515b0c78f','1610030469983-98e550d6193c','1509631179647-0177331693ae','1544005313-94ddf0286df2','1490481651871-ab68de25d43d'][i % 10]}?w=400&h=500&fit=crop`;
+
 export const fashionFaceoffs: FashionFaceoff[] = [
-  {
-    id: 1,
-    title: "Janhvi Kapoor's Cannes Glam vs. Airport Chic",
-    optionA: {
-      label: 'Cannes Glam',
-      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=500&fit=crop',
-    },
-    optionB: {
-      label: 'Airport Chic',
-      image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=500&fit=crop',
-    },
-    isTrending: true,
-    seedVoteA: 62,
-  },
-  {
-    id: 2,
-    title: "Alia Bhatt's Sabyasachi Saree vs. Western Couture",
-    optionA: {
-      label: 'Sabyasachi Saree',
-      image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&h=500&fit=crop',
-    },
-    optionB: {
-      label: 'Western Couture',
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=500&fit=crop',
-    },
-    isTrending: true,
-    seedVoteA: 55,
-  },
-  {
-    id: 3,
-    title: "Ananya Panday's Streetwear vs. Traditional Lehengas",
-    optionA: {
-      label: 'Streetwear',
-      image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop',
-    },
-    optionB: {
-      label: 'Traditional Lehengas',
-      image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=500&fit=crop',
-    },
-    isTrending: false,
-    seedVoteA: 41,
-  },
+  // ── Original 3 ──
+  { id: 1, title: "Janhvi Kapoor's Cannes Glam vs. Airport Chic", description: "Two iconic Janhvi moments — haute couture red carpet or effortless travel style?", optionA: { label: 'Cannes Glam', image: rc(0) }, optionB: { label: 'Airport Chic', image: rc(4) }, isTrending: true, seedVoteA: 62, category: 'Red Carpet' },
+  { id: 2, title: "Alia Bhatt's Sabyasachi Saree vs. Western Couture", description: "Traditional Indian elegance or global runway power — what defines Alia's style?", optionA: { label: 'Sabyasachi Saree', image: rc(3) }, optionB: { label: 'Western Couture', image: rc(2) }, isTrending: true, seedVoteA: 55, category: 'Ethnic Fusion' },
+  { id: 3, title: "Ananya Panday's Streetwear vs. Traditional Lehengas", description: "Gen-Z streetwear darling or desi princess — which Ananya do you vibe with?", optionA: { label: 'Streetwear', image: rc(5) }, optionB: { label: 'Traditional Lehengas', image: rc(6) }, isTrending: false, seedVoteA: 41, category: 'Airport Style' },
+
+  // ── 40 New Stories ──
+  { id: 4, title: "Kareena's 'Quiet Luxury' Watch", description: "Casual sweatpants with a ₹12L watch or full couture from head to toe?", optionA: { label: 'Sweatpants + ₹12L Watch', image: rc(7) }, optionB: { label: 'Full Couture Look', image: rc(1) }, isTrending: true, seedVoteA: 58, category: 'Airport Style' },
+  { id: 5, title: "Suhana Khan's Recycled Saree", description: "Vintage meets modern — a purple heritage drape or futuristic metallic gown?", optionA: { label: 'Vintage Border Purple Saree', image: rc(3) }, optionB: { label: 'Modern Metallic Gown', image: rc(2) }, isTrending: false, seedVoteA: 47, category: 'Red Carpet' },
+  { id: 6, title: "The 'Wrong Shoe' Trend", description: "Fashion's boldest rule-break — chunky sneakers with silk or classic stilettos?", optionA: { label: 'Saree + Chunky Sneakers', image: rc(5) }, optionB: { label: 'Saree + Classic Stilettos', image: rc(6) }, isTrending: true, seedVoteA: 39, category: 'Ethnic Fusion' },
+  { id: 7, title: "Ananya's Paris Fashion Week", description: "Oversized leather rebellion or shimmering mini glamour on the Parisian streets?", optionA: { label: 'Oversized Leather Jacket', image: rc(1) }, optionB: { label: 'Shimmering Mini Skirt', image: rc(8) }, isTrending: true, seedVoteA: 52, category: 'Red Carpet' },
+  { id: 8, title: "Deepika's Yellow Lohri Suit", description: "Sabyasachi sunshine yellow or regal emerald green for the Lohri festivities?", optionA: { label: 'Bright Sabyasachi Yellow', image: rc(9) }, optionB: { label: 'Emerald Green Anarkali', image: rc(6) }, isTrending: false, seedVoteA: 63, category: 'Ethnic Fusion' },
+  { id: 9, title: "Alia's Airport Athleisure", description: "Baggy cargo comfort or sleek monochrome minimalism for the jet-set look?", optionA: { label: 'Baggy Cargo Pants', image: rc(5) }, optionB: { label: 'Sleek Monochrome Leggings', image: rc(7) }, isTrending: false, seedVoteA: 44, category: 'Airport Style' },
+  { id: 10, title: "Ranveer's Neon Suit Era", description: "Electric pink maximalism or classic black restraint — Ranveer's style duality.", optionA: { label: 'Electric Pink Power Suit', image: rc(8) }, optionB: { label: 'Classic Black Tuxedo', image: rc(1) }, isTrending: true, seedVoteA: 67, category: 'Red Carpet' },
+  { id: 11, title: "Sara Ali Khan's R-Day White", description: "Simple patriotic elegance or a bold tricolor fusion statement jacket?", optionA: { label: 'Simple White Salwar Kameez', image: rc(3) }, optionB: { label: 'Tricolor Fusion Jacket', image: rc(5) }, isTrending: false, seedVoteA: 56, category: 'Ethnic Fusion' },
+  { id: 12, title: "Kiara's Velvet Winter Gala", description: "Deep burgundy richness or midnight blue sophistication for the winter gala?", optionA: { label: 'Deep Burgundy Velvet', image: rc(9) }, optionB: { label: 'Midnight Blue Satin', image: rc(2) }, isTrending: false, seedVoteA: 51, category: 'Red Carpet' },
+  { id: 13, title: "Nita Ambani's Silver Saree", description: "Hand-woven artisanal silver or a diamond-studded couture spectacle?", optionA: { label: 'Hand-woven Silver Saree', image: rc(3) }, optionB: { label: 'Diamond-studded Gown', image: rc(0) }, isTrending: true, seedVoteA: 45, category: 'Red Carpet' },
+  { id: 14, title: "Shraddha's Minimalism", description: "Pastel pink softness or sharp white power dressing — Shraddha's dual charm.", optionA: { label: 'Pastel Pink Organza', image: rc(6) }, optionB: { label: 'Sharp White Pantsuit', image: rc(7) }, isTrending: false, seedVoteA: 53, category: 'Airport Style' },
+  { id: 15, title: "Masaba's Quirky Prints", description: "Neon floral maximalism or abstract geometric artistry — Masaba style wars.", optionA: { label: 'Neon Floral Saree', image: rc(9) }, optionB: { label: 'Abstract Geometric Kaftan', image: rc(8) }, isTrending: true, seedVoteA: 49, category: 'Ethnic Fusion' },
+  { id: 16, title: "The Pre-Draped Saree Revolution", description: "5-minute modern convenience or the timeless elegance of a 9-yard drape?", optionA: { label: '5-Min Ready-to-Wear', image: rc(3) }, optionB: { label: 'Traditional 9-Yard Drape', image: rc(6) }, isTrending: false, seedVoteA: 61, category: 'Ethnic Fusion' },
+  { id: 17, title: "Janhvi Kapoor's Red Carpet", description: "Sculptural rose gold architecture or classic red mermaid tail drama?", optionA: { label: 'Rose Gold Structured Gown', image: rc(0) }, optionB: { label: 'Classic Red Mermaid Tail', image: rc(1) }, isTrending: true, seedVoteA: 57, category: 'Red Carpet' },
+  { id: 18, title: "Kriti Sanon's Sculptural Fit", description: "3D floral avant-garde or sleek metallic wrap — Kriti's fashion evolution.", optionA: { label: '3D Floral Bustier', image: rc(8) }, optionB: { label: 'Sleek Metallic Wrap Dress', image: rc(2) }, isTrending: false, seedVoteA: 46, category: 'Red Carpet' },
+  { id: 19, title: "The 'Mocha Mousse' Color Trend", description: "Pantone's earthy brown monochrome or a rebellious pop of cherry red?", optionA: { label: 'Earthy Brown Monochrome', image: rc(7) }, optionB: { label: 'Bright Pop of Cherry Red', image: rc(9) }, isTrending: true, seedVoteA: 42, category: 'Airport Style' },
+  { id: 20, title: "Triptii Dimri's Ethnic Glow", description: "Heavy mirror-work extravaganza or delicate Lucknawi chikankari grace?", optionA: { label: 'Heavy Mirror-work Lehenga', image: rc(6) }, optionB: { label: 'Delicate Chikankari Suit', image: rc(3) }, isTrending: false, seedVoteA: 38, category: 'Ethnic Fusion' },
+  { id: 21, title: "Shanaya's Power Dressing", description: "Beige oversized authority or fitted corset femininity — boardroom to party.", optionA: { label: 'Beige Oversized Blazer', image: rc(7) }, optionB: { label: 'Fitted Corset Top', image: rc(1) }, isTrending: false, seedVoteA: 55, category: 'Airport Style' },
+  { id: 22, title: "Mouni Roy's Milan Look", description: "Puffed-shoulder drama or asymmetrical wrap elegance from Milan Fashion Week?", optionA: { label: 'Puffed Shoulder Blouse', image: rc(8) }, optionB: { label: 'Asymmetrical Wrap Skirt', image: rc(2) }, isTrending: false, seedVoteA: 48, category: 'Red Carpet' },
+  { id: 23, title: "Genelia's Royal Mehendi", description: "Fresh mehendi green tissue or regal royal blue silk for the festive season?", optionA: { label: 'Mehendi Green Tissue Suit', image: rc(9) }, optionB: { label: 'Royal Blue Silk', image: rc(6) }, isTrending: false, seedVoteA: 52, category: 'Ethnic Fusion' },
+  { id: 24, title: "Katrina's Minimalist Wedding", description: "Simple floral veil subtlety or heavy zardosi border tradition for D-day?", optionA: { label: 'Simple Floral Veil', image: rc(3) }, optionB: { label: 'Heavy Zardosi Border', image: rc(0) }, isTrending: true, seedVoteA: 64, category: 'Ethnic Fusion' },
+  { id: 25, title: "Sabyasachi Heritage vs. Modern", description: "The eternal debate — traditional red bridal or white pearl embroidery revolution?", optionA: { label: 'Traditional Red Bridal', image: rc(6) }, optionB: { label: 'White Pearl Embroidery', image: rc(3) }, isTrending: true, seedVoteA: 59, category: 'Ethnic Fusion' },
+  { id: 26, title: "Vicky Kaushal's Bandhgala", description: "Textured white kurta simplicity or saffron silk Nehru jacket patriotism?", optionA: { label: 'Textured White Kurta', image: rc(7) }, optionB: { label: 'Saffron Silk Nehru Jacket', image: rc(9) }, isTrending: false, seedVoteA: 43, category: 'Ethnic Fusion' },
+  { id: 27, title: "Rashmika's Indo-Western", description: "Denim jacket casually draped over saree or lehenga with a modern crop top?", optionA: { label: 'Denim Jacket over Saree', image: rc(5) }, optionB: { label: 'Lehenga with Crop Top', image: rc(6) }, isTrending: false, seedVoteA: 50, category: 'Ethnic Fusion' },
+  { id: 28, title: "The Mob Wife Aesthetic", description: "Heavy faux fur coat drama or leopard print midi sophistication?", optionA: { label: 'Heavy Faux Fur Coat', image: rc(1) }, optionB: { label: 'Leopard Print Midi', image: rc(8) }, isTrending: true, seedVoteA: 54, category: 'Airport Style' },
+  { id: 29, title: "Sonam Kapoor's Experimental", description: "Oversized bow gown theatrics or structured cape suit precision?", optionA: { label: 'Oversized Bow Gown', image: rc(0) }, optionB: { label: 'Structured Cape Suit', image: rc(2) }, isTrending: true, seedVoteA: 60, category: 'Red Carpet' },
+  { id: 30, title: "Priyanka's Global Street Style", description: "Polka dot Balmain chic or all-leather trench coat power on NYC streets?", optionA: { label: 'Polka Dot Balmain', image: rc(1) }, optionB: { label: 'All-Leather Trench Coat', image: rc(7) }, isTrending: true, seedVoteA: 48, category: 'Airport Style' },
+  { id: 31, title: "The Mermaid Core Trend", description: "Sequin scales fantasy gown or pearl-encrusted bodice ocean glamour?", optionA: { label: 'Sequin Scales Gown', image: rc(2) }, optionB: { label: 'Pearl-encrusted Bodice', image: rc(0) }, isTrending: false, seedVoteA: 53, category: 'Red Carpet' },
+  { id: 32, title: "Mira Rajput's Sustainable Pick", description: "Handloom cotton conscious fashion or upcycled designer gown creativity?", optionA: { label: 'Handloom Cotton Set', image: rc(3) }, optionB: { label: 'Upcycled Designer Gown', image: rc(8) }, isTrending: false, seedVoteA: 57, category: 'Airport Style' },
+  { id: 33, title: "Khushi Kapoor's Gen-Z Vibe", description: "Low-rise baggy jeans nostalgia or shimmery baby-doll dress Y2K glam?", optionA: { label: 'Low-rise Baggy Jeans', image: rc(5) }, optionB: { label: 'Shimmery Baby-doll Dress', image: rc(8) }, isTrending: true, seedVoteA: 44, category: 'Airport Style' },
+  { id: 34, title: "The Metallic Purple Wave", description: "Shimmering purple saree royalty or purple sequin jumpsuit party energy?", optionA: { label: 'Shimmering Purple Saree', image: rc(6) }, optionB: { label: 'Purple Sequin Jumpsuit', image: rc(2) }, isTrending: false, seedVoteA: 51, category: 'Red Carpet' },
+  { id: 35, title: "Wedding Guest Etiquette", description: "Pastel floral lehenga grace or dark jewel-toned anarkali sophistication?", optionA: { label: 'Pastel Floral Lehenga', image: rc(6) }, optionB: { label: 'Dark Jewel-toned Anarkali', image: rc(9) }, isTrending: false, seedVoteA: 46, category: 'Ethnic Fusion' },
+  { id: 36, title: "Malaika's Gold Glamour", description: "Metallic gold bralette boldness or silver sequin kaftan relaxed luxury?", optionA: { label: 'Metallic Gold Bralette', image: rc(0) }, optionB: { label: 'Silver Sequin Kaftan', image: rc(2) }, isTrending: true, seedVoteA: 58, category: 'Red Carpet' },
+  { id: 37, title: "Tamannaah's Leopard Luxe", description: "Chiffon leopard corset wildness or strappy satin dress understated allure?", optionA: { label: 'Chiffon Leopard Corset', image: rc(8) }, optionB: { label: 'Strappy Satin Dress', image: rc(1) }, isTrending: false, seedVoteA: 40, category: 'Red Carpet' },
+  { id: 38, title: "Disha Patani's Shimmer Night", description: "Silver sequin shift dress sparkle or black bodycon gown timeless allure?", optionA: { label: 'Silver Sequin Shift Dress', image: rc(2) }, optionB: { label: 'Black Bodycon Gown', image: rc(1) }, isTrending: false, seedVoteA: 49, category: 'Red Carpet' },
+  { id: 39, title: "The Indo-Western Jumpsuit", description: "Embroidered silk jumpsuit fusion or palazzo-crop top set effortless glam?", optionA: { label: 'Embroidered Silk Jumpsuit', image: rc(8) }, optionB: { label: 'Palazzo-Crop Top Set', image: rc(5) }, isTrending: false, seedVoteA: 55, category: 'Ethnic Fusion' },
+  { id: 40, title: "Kajol's Silk Sophistication", description: "White silk with bright border classic or solid black tulle saree drama?", optionA: { label: 'White Silk + Bright Border', image: rc(3) }, optionB: { label: 'Solid Black Tulle Saree', image: rc(9) }, isTrending: false, seedVoteA: 52, category: 'Ethnic Fusion' },
+  { id: 41, title: "The 'Commuter Chic' Look", description: "Running shoes with lehenga rebellion or boots with saree street-style fusion?", optionA: { label: 'Running Shoes with Lehenga', image: rc(5) }, optionB: { label: 'Boots with Saree', image: rc(6) }, isTrending: true, seedVoteA: 37, category: 'Airport Style' },
+  { id: 42, title: "Amit Aggarwal's Future Glam", description: "Metallic structured cape futurism or neon wired bodice avant-garde art?", optionA: { label: 'Metallic Structured Cape', image: rc(2) }, optionB: { label: 'Neon Wired Bodice', image: rc(8) }, isTrending: true, seedVoteA: 50, category: 'Red Carpet' },
+  { id: 43, title: "The 'Quiet Luxury' Makeup", description: "Clean girl dewy minimalism or bold red lip with winged liner drama?", optionA: { label: 'Clean Girl Dewy Look', image: rc(7) }, optionB: { label: 'Bold Red Lip + Winged Liner', image: rc(0) }, isTrending: false, seedVoteA: 56, category: 'Red Carpet' },
 ];

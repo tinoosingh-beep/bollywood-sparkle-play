@@ -35,8 +35,11 @@ export function FashionFaceoffCard({ faceoff }: Props) {
 
       {/* Title */}
       <div className="px-5 pt-5 pb-3">
-        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Fashion Face-off</span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Fashion Face-off · {faceoff.category}</span>
         <h3 className="font-display text-lg font-bold leading-tight text-foreground mt-1">{faceoff.title}</h3>
+        {faceoff.description && (
+          <p className="text-xs text-muted-foreground mt-1 leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>{faceoff.description}</p>
+        )}
       </div>
 
       {/* Side-by-side images */}
