@@ -17,7 +17,7 @@ const translations: Record<string, Record<Language, string>> = {
   
   // Nav
   'nav.games': { en: 'Games', hi: 'खेल' },
-  'nav.collection': { en: 'Collection', hi: 'संग्रह' },
+  'nav.collection': { en: 'Fashion', hi: 'फैशन' },
   'nav.home': { en: 'Home', hi: 'होम' },
   'nav.markets': { en: 'Markets', hi: 'बाज़ार' },
   'nav.pitch': { en: 'Pitch', hi: 'पिच' },
