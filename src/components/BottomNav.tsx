@@ -46,7 +46,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           return (
             <motion.button
               key={item.id}
-              onClick={() => onTabChange(item.id)}
+              onClick={() => { onTabChange(item.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="relative flex flex-col items-center gap-0.5 p-2 rounded-xl transition-colors duration-200 flex-1 max-w-16"
               whileTap={{ scale: 1.15 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
