@@ -68,7 +68,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               >
                 <Icon
                   className="w-5 h-5"
-                  style={{ color: isActive ? color : '#9CA3AF' }}
+                  style={{ color: isActive ? color : '#4B5563' }}
                 />
               </motion.div>
               {isActive && (
@@ -81,7 +81,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               )}
               <span
                 className="text-[10px] font-medium"
-                style={{ color: isActive ? color : '#6B7280' }}
+                style={{ color: isActive ? color : '#374151' }}
               >
                 {t(item.labelKey)}
               </span>
