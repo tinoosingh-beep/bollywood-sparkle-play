@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Sparkles, Users, Gamepad2, TrendingUp, Target, Rocket, BarChart3, Zap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Users, Gamepad2, TrendingUp, Target, Rocket, BarChart3, Zap, X } from 'lucide-react';
 
 
 
@@ -271,7 +271,7 @@ const slides = [
   },
 ];
 
-export function PitchDeck() {
+export function PitchDeck({ onExit }: { onExit?: () => void }) {
   const [current, setCurrent] = useState(0);
   const total = slides.length;
 
@@ -289,6 +289,16 @@ export function PitchDeck() {
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'linear-gradient(180deg, hsl(40, 75%, 92%), hsl(35, 60%, 87%))' }}>
+      {/* Exit Button */}
+      {onExit && (
+        <button
+          onClick={onExit}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full backdrop-blur-md transition-colors hover:bg-black/10"
+          style={{ background: 'hsla(0, 0%, 100%, 0.6)', border: '1px solid hsla(45, 30%, 85%, 0.8)' }}
+        >
+          <X className="w-5 h-5" style={{ color: 'hsl(var(--foreground))' }} />
+        </button>
+      )}
       {/* Slide */}
       <div className="flex-1 relative overflow-hidden">
         <AnimatePresence mode="wait">

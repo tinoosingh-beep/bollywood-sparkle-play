@@ -37,7 +37,7 @@ function AppContent() {
       case 'social':
         return <Leaderboard />;
       case 'pitch':
-        return <PitchDeck />;
+        return <PitchDeck onExit={() => setActiveTab('home')} />;
       default:
         return <Home />;
     }
