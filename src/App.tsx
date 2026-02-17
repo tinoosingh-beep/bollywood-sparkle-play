@@ -9,7 +9,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { BottomNav } from '@/components/BottomNav';
 import { FloatingPoints } from '@/components/FloatingPoints';
 import { Home } from '@/pages/Home';
-import { Markets } from '@/pages/Markets';
+import { TopStories } from '@/pages/TopStories';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
 import { Collection } from '@/pages/Collection';
@@ -26,8 +26,8 @@ function AppContent() {
     switch (activeTab) {
       case 'home':
         return <Home />;
-      case 'markets':
-        return <Markets />;
+      case 'topstories':
+        return <TopStories />;
       case 'collection':
         return <Collection />;
       case 'games':
