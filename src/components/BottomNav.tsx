@@ -25,7 +25,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
     { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
     { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
     { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
-    { id: 'social', labelKey: 'nav.social', icon: Users, badge: 5 },
+    { id: 'social', labelKey: 'nav.social', icon: Users, badge: 0 },
   ];
 
   return (
