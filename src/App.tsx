@@ -15,6 +15,7 @@ import { Leaderboard } from '@/components/Leaderboard';
 import { Collection } from '@/pages/Collection';
 import { SplashScreen } from '@/components/SplashScreen';
 import { PitchDeck } from '@/pages/PitchDeck';
+import { CalendarPage } from '@/pages/Calendar';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,8 @@ function AppContent() {
       case 'leaderboard':
       case 'social':
         return <Leaderboard />;
+      case 'calendar':
+        return <CalendarPage />;
       case 'pitch':
         return <PitchDeck onExit={() => setActiveTab('home')} />;
       default:

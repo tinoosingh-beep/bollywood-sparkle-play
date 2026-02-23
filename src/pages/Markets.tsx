@@ -5,7 +5,7 @@ import { NaishaMetricCard } from '@/components/markets/NaishaMetricCard';
 import { MassMovieRallyCard } from '@/components/markets/MassMovieRallyCard';
 import { FlashMarketBanner } from '@/components/markets/FlashMarketBanner';
 import { LiveTradersCounter } from '@/components/markets/LiveTradersCounter';
-import { TradingDrawer, MarketSearch, CategoryTabs, MarketDetailPopup, PredictionCalendar } from '@/components/markets';
+import { TradingDrawer, MarketSearch, CategoryTabs, MarketDetailPopup } from '@/components/markets';
 import { newsContent } from '@/data/newsContent';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { newsContentHi } from '@/data/newsContent.hi';
@@ -161,8 +161,7 @@ export function Markets() {
         </div>
       )}
 
-      {/* 365-Day Prediction Calendar */}
-      <PredictionCalendar />
+
 
       {/* Detail Popup */}
       <MarketDetailPopup
