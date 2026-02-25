@@ -22,7 +22,7 @@ function getAmbientMeta(story: NewsStory) {
 
   const isTrending = story.initialYesPrice >= 0.6;
   const trendingGlow = isTrending ? (story.initialYesPrice >= 0.7 ? 'gold' : 'indigo') : null;
-  const isMarketActive = story.has_market ?? story.type === 'bet';
+  const isMarketActive = story.has_market === true;
   const yesPrice = Math.round(story.initialYesPrice * 100);
   const isAI = headline.includes('ai') || headline.includes('vfx') || summary.includes('artificial intelligence') || summary.includes('vfx');
   const aiRatio = isAI ? Math.round(30 + Math.random() * 45) : 0;
