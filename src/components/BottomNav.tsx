@@ -33,11 +33,11 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 px-3 pb-3">
       <div
-        className="px-1 py-1.5 flex justify-around rounded-2xl backdrop-blur-md"
+        className="px-1 py-1.5 flex justify-around rounded-2xl backdrop-blur-xl"
         style={{
-          background: 'rgba(255, 255, 255, 0.82)',
-          borderTop: '1px solid rgba(0, 0, 0, 0.06)',
-          boxShadow: '0 -4px 24px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.04)',
+          background: 'hsla(270, 20%, 10%, 0.9)',
+          borderTop: '1px solid hsla(270, 30%, 25%, 0.5)',
+          boxShadow: '0 -4px 30px hsla(270, 40%, 5%, 0.5), 0 0 40px hsla(280, 60%, 40%, 0.08)',
         }}
       >
         {navItems.map((item) => {
@@ -70,7 +70,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               >
                 <Icon
                   className="w-5 h-5"
-                  style={{ color: isActive ? color : '#4B5563' }}
+                  style={{ color: isActive ? color : 'hsla(270, 10%, 60%, 1)' }}
                 />
               </motion.div>
               {isActive && (
@@ -83,7 +83,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               )}
               <span
                 className="text-[10px] font-medium"
-                style={{ color: isActive ? color : '#374151' }}
+                style={{ color: isActive ? color : 'hsla(270, 10%, 55%, 1)' }}
               >
                 {t(item.labelKey)}
               </span>

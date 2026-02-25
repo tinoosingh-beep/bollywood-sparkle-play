@@ -36,7 +36,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           exit={{ opacity: 0, scale: 1.15 }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center"
-          style={{ background: 'linear-gradient(145deg, hsl(220 20% 12%), hsl(250 25% 16%), hsl(220 18% 10%))' }}
+          style={{ background: 'linear-gradient(145deg, hsl(270 25% 8%), hsl(280 30% 12%), hsl(260 20% 6%))' }}
         >
           {/* Pulsing glow */}
           <motion.div
@@ -79,7 +79,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
             <div className="text-center">
               <h1
-                className="headline-display text-2xl tracking-widest"
+                className="font-display-serif text-3xl tracking-widest"
                 style={{ color: 'hsla(0, 0%, 100%, 0.92)' }}
               >
                 BOLLYBET

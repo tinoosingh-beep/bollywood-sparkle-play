@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { SparkleEffect } from '@/components/SparkleEffect';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   Gamepad2, 
@@ -104,21 +105,24 @@ export function Games() {
             <Gamepad2 className="w-8 h-8" />
           </div>
         </motion.div>
-        <h2 className="font-display text-3xl font-bold text-gradient-gold">{t('games.title')}</h2>
+        <SparkleEffect count={5}>
+          <h2 className="font-display-serif text-3xl font-bold text-gradient-gold">{t('games.title')}</h2>
+        </SparkleEffect>
         <p className="text-muted-foreground mt-2">{t('games.subtitle')}</p>
         <p className="text-xs text-neon-pink mt-1">{t('games.count')}</p>
       </div>
 
-      {/* 2-Column Grid */}
+      {/* 2-Column Grid with theatrical fan-out */}
       <motion.div 
         className="grid grid-cols-2 gap-3"
         initial="hidden"
         animate="visible"
+        style={{ perspective: 800 }}
         variants={{
           hidden: { opacity: 0 },
           visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.05 }
+            transition: { staggerChildren: 0.07, delayChildren: 0.15 }
           }
         }}
       >
@@ -126,9 +130,13 @@ export function Games() {
           <motion.div
             key={game.id}
             variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              hidden: { opacity: 0, y: 40, rotateX: -12, scale: 0.9 },
+              visible: { 
+                opacity: 1, y: 0, rotateX: 0, scale: 1,
+                transition: { type: 'spring' as const, stiffness: 260, damping: 20 }
+              }
             }}
+            style={{ transformOrigin: 'center bottom' }}
           >
             <GameCard
               title={t(game.titleKey)}

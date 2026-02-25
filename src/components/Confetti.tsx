@@ -6,6 +6,7 @@ interface ConfettiPiece {
   color: string;
   delay: number;
   rotation: number;
+  size: number;
 }
 
 interface ConfettiProps {
@@ -13,12 +14,15 @@ interface ConfettiProps {
   onComplete?: () => void;
 }
 
+// Exclusively gold and silver glitters
 const colors = [
-  'hsl(43, 56%, 52%)', // gold
-  'hsl(350, 82%, 34%)', // crimson
-  'hsl(43, 70%, 60%)', // gold-glow
-  'hsl(270, 40%, 50%)', // purple
-  'hsl(45, 100%, 60%)', // bright gold
+  'hsl(45, 100%, 55%)',   // bright gold
+  'hsl(43, 80%, 65%)',    // light gold
+  'hsl(50, 90%, 70%)',    // pale gold
+  'hsl(0, 0%, 82%)',      // silver
+  'hsl(0, 0%, 90%)',      // bright silver
+  'hsl(45, 100%, 45%)',   // deep gold
+  'hsl(0, 0%, 75%)',      // matte silver
 ];
 
 export function Confetti({ isActive, onComplete }: ConfettiProps) {
@@ -26,19 +30,20 @@ export function Confetti({ isActive, onComplete }: ConfettiProps) {
 
   useEffect(() => {
     if (isActive) {
-      const newPieces: ConfettiPiece[] = Array.from({ length: 50 }, (_, i) => ({
+      const newPieces: ConfettiPiece[] = Array.from({ length: 60 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         color: colors[Math.floor(Math.random() * colors.length)],
-        delay: Math.random() * 0.3,
+        delay: Math.random() * 0.5,
         rotation: Math.random() * 360,
+        size: Math.random() * 6 + 3,
       }));
       setPieces(newPieces);
 
       const timer = setTimeout(() => {
         setPieces([]);
         onComplete?.();
-      }, 2000);
+      }, 2500);
 
       return () => clearTimeout(timer);
     }
@@ -51,14 +56,17 @@ export function Confetti({ isActive, onComplete }: ConfettiProps) {
       {pieces.map((piece) => (
         <div
           key={piece.id}
-          className="absolute w-3 h-3 animate-confetti-fall"
+          className="absolute animate-confetti-fall will-change-transform"
           style={{
             left: `${piece.x}%`,
             top: '-20px',
+            width: piece.size,
+            height: piece.size,
             backgroundColor: piece.color,
             animationDelay: `${piece.delay}s`,
             transform: `rotate(${piece.rotation}deg)`,
-            borderRadius: Math.random() > 0.5 ? '50%' : '0%',
+            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+            boxShadow: `0 0 ${piece.size}px ${piece.color}`,
           }}
         />
       ))}
