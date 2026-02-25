@@ -60,7 +60,7 @@ export function GameCard({
       onClick={onClick}
       whileHover={{ scale: 1.04, y: -6 }}
       whileTap={{ scale: 0.97 }}
-      className="w-full text-left rounded-2xl overflow-hidden glass-card"
+      className="w-full text-left rounded-2xl overflow-hidden glass-card group"
       style={{ padding: 0 }}
     >
       {/* Icon Tile */}

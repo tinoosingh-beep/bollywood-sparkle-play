@@ -89,6 +89,7 @@ export default {
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
+        'display-serif': ['Playfair Display', 'serif'],
         mono: ['Roboto Mono', 'monospace'],
       },
       borderRadius: {
