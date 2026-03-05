@@ -22,10 +22,8 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
 
   const navItems = [
     { id: 'shop', labelKey: 'nav.games', icon: Gamepad2, badge: 3 },
-    { id: 'collection', labelKey: 'nav.collection', icon: Sparkles, badge: 0 },
     { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
     { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
-    { id: 'calendar', labelKey: 'nav.calendar', icon: CalendarDays, badge: 0 },
     { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
     { id: 'social', labelKey: 'nav.social', icon: Users, badge: 0 },
   ];
