@@ -161,7 +161,8 @@ export function Markets() {
         </div>
       )}
 
-
+      {/* Prediction Calendar */}
+      <PredictionCalendar />
 
       {/* Detail Popup */}
       <MarketDetailPopup
