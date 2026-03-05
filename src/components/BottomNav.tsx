@@ -1,4 +1,4 @@
-import { Home, Sparkles, Gamepad2, Users, Presentation, CalendarDays } from 'lucide-react';
+import { Home, Gamepad2, Users, Presentation } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -9,10 +9,8 @@ interface BottomNavProps {
 
 const NAV_COLORS: Record<string, string> = {
   shop: '#8B5CF6',
-  collection: '#FF1493',
   home: '#00BFFF',
   markets: '#00C853',
-  calendar: '#FF6B35',
   pitch: '#FF8C00',
   social: '#FFD700',
 };
@@ -22,10 +20,8 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
 
   const navItems = [
     { id: 'shop', labelKey: 'nav.games', icon: Gamepad2, badge: 3 },
-    { id: 'collection', labelKey: 'nav.collection', icon: Sparkles, badge: 0 },
     { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
     { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
-    { id: 'calendar', labelKey: 'nav.calendar', icon: CalendarDays, badge: 0 },
     { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
     { id: 'social', labelKey: 'nav.social', icon: Users, badge: 0 },
   ];

@@ -12,10 +12,8 @@ import { Home } from '@/pages/Home';
 import { Markets } from '@/pages/Markets';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
-import { Collection } from '@/pages/Collection';
 import { SplashScreen } from '@/components/SplashScreen';
 import { PitchDeck } from '@/pages/PitchDeck';
-import { CalendarPage } from '@/pages/Calendar';
 
 const queryClient = new QueryClient();
 
@@ -29,16 +27,12 @@ function AppContent() {
         return <Home />;
       case 'markets':
         return <Markets />;
-      case 'collection':
-        return <Collection />;
       case 'games':
       case 'shop':
         return <Games />;
       case 'leaderboard':
       case 'social':
         return <Leaderboard />;
-      case 'calendar':
-        return <CalendarPage />;
       case 'pitch':
         return <PitchDeck onExit={() => setActiveTab('home')} />;
       default:
