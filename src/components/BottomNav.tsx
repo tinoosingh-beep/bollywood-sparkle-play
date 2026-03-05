@@ -9,10 +9,8 @@ interface BottomNavProps {
 
 const NAV_COLORS: Record<string, string> = {
   shop: '#8B5CF6',
-  collection: '#FF1493',
   home: '#00BFFF',
   markets: '#00C853',
-  calendar: '#FF6B35',
   pitch: '#FF8C00',
   social: '#FFD700',
 };
