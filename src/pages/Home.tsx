@@ -3,11 +3,14 @@ import { ScriptSlots } from '@/components/home/ScriptSlots';
 import { NewsCard } from '@/components/NewsCard';
 import { ReviewCard } from '@/components/ReviewCard';
 import { VideoPreviewCard } from '@/components/VideoPreviewCard';
+import { FashionFaceoffCard } from '@/components/fashion/FashionFaceoffCard';
 import { newsContent } from '@/data/newsContent';
 import { reviewContent } from '@/data/reviewContent';
 import { videoContent } from '@/data/videoContent';
+import { fashionFaceoffs, type FashionCategory } from '@/data/fashionContent';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useMemo } from 'react';
+import { Sparkles } from 'lucide-react';
 
 export function Home() {
   const [trophies] = useState(420);
