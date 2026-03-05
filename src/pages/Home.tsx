@@ -12,9 +12,17 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useMemo } from 'react';
 import { Sparkles } from 'lucide-react';
 
+const FASHION_FILTERS: ('All' | FashionCategory)[] = ['All', 'Red Carpet', 'Airport Style', 'Ethnic Fusion'];
+
 export function Home() {
   const [trophies] = useState(420);
   const { t } = useLanguage();
+  const [fashionFilter, setFashionFilter] = useState<'All' | FashionCategory>('All');
+
+  const filteredFashion = useMemo(() =>
+    fashionFilter === 'All' ? fashionFaceoffs : fashionFaceoffs.filter(f => f.category === fashionFilter),
+    [fashionFilter]
+  );
 
   // Sort: vibe items by vibeScore (desc), bet items by expiry urgency (soonest first), then interleave
   const feedItems = useMemo(() => {
