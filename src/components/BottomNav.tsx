@@ -1,4 +1,4 @@
-import { Home, Sparkles, Gamepad2, Users, Presentation, CalendarDays } from 'lucide-react';
+import { Home, Gamepad2, Users, Presentation } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
