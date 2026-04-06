@@ -72,9 +72,9 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
       <div
         className="px-2 py-1.5 rounded-xl"
         style={{
-          background: 'linear-gradient(145deg, hsla(250, 15%, 96%, 0.95), hsla(250, 10%, 93%, 0.9))',
-          border: '1px solid hsla(45, 80%, 65%, 0.3)',
-          boxShadow: '0 2px 10px hsla(250, 20%, 60%, 0.15)',
+          background: 'linear-gradient(145deg, hsla(260, 30%, 18%, 0.95), hsla(260, 25%, 14%, 0.95))',
+          border: '1px solid hsla(45, 80%, 50%, 0.3)',
+          boxShadow: '0 2px 10px hsla(260, 30%, 10%, 0.4)',
         }}
       >
         <p className="text-xs font-display font-bold uppercase tracking-wider text-center mb-1" style={{ color: 'hsl(45, 85%, 42%)' }}>
