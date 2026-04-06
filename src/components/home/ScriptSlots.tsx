@@ -70,17 +70,17 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
   return (
     <>
       <div
-        className="px-3 py-3 rounded-2xl"
+        className="px-2.5 py-2 rounded-xl"
         style={{
-          background: 'linear-gradient(145deg, hsla(250, 25%, 18%, 0.95), hsla(250, 30%, 14%, 0.9))',
-          border: '1px solid hsla(45, 100%, 55%, 0.25)',
-          boxShadow: '0 6px 24px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.2)',
+          background: 'linear-gradient(145deg, hsla(250, 20%, 92%, 0.95), hsla(250, 15%, 88%, 0.9))',
+          border: '1px solid hsla(45, 80%, 65%, 0.3)',
+          boxShadow: '0 2px 10px hsla(250, 20%, 60%, 0.15)',
         }}
       >
-        <p className="text-xs font-display font-semibold uppercase tracking-wider text-center mb-3" style={{ color: 'hsla(45, 100%, 70%, 0.85)' }}>
+        <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-center mb-2" style={{ color: 'hsla(250, 30%, 40%, 0.85)' }}>
           {t('home.dailyRewards')}
         </p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5">
           {slots.map((slot, i) => (
             <motion.div
               key={slot.id}
