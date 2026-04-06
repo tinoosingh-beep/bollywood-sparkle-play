@@ -199,15 +199,14 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
     <div className="relative">
       <motion.button
         onClick={handleClick}
-        className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
-        style={{ borderColor: 'hsla(45, 100%, 55%, 0.35)' }}
-        whileTap={{ scale: 0.95 }}
-        whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
+        className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0.5 border-2 border-dashed"
+        style={{ borderColor: 'hsla(250, 20%, 70%, 0.4)' }}
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ borderColor: 'hsla(45, 80%, 55%, 0.6)' }}
       >
-        <Film className="w-4 h-4 text-gold/60 drop-shadow-[0_0_5px_hsla(45,100%,55%,0.4)]" />
-        <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
-          {/* Keep English for the slot label as it's short */}
-          Earn Script
+        <Plus className="w-3.5 h-3.5 text-muted-foreground" />
+        <span className="text-[7px] font-semibold text-muted-foreground leading-tight text-center">
+          Earn
         </span>
       </motion.button>
       {showTooltip && (
