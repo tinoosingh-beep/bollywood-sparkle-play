@@ -174,12 +174,12 @@ function LockedSlot({
       }}
       whileTap={{ scale: 0.9 }}
     >
-      <Lock className="w-3 h-3 text-muted-foreground" />
-      <span className="text-[7px] font-mono font-bold text-foreground leading-tight">
+      <Lock className="w-3.5 h-3.5 text-muted-foreground" />
+      <span className="text-[10px] font-mono font-bold text-foreground leading-tight">
         {formatTime(time)}
       </span>
-      <span className="flex items-center gap-0.5 text-[7px] font-semibold" style={{ color: 'hsl(45, 90%, 45%)' }}>
-        <Zap className="w-2 h-2" />
+      <span className="flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: 'hsl(45, 90%, 45%)' }}>
+        <Zap className="w-2.5 h-2.5" />
         {cost}
       </span>
     </motion.button>
