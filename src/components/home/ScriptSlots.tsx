@@ -204,8 +204,8 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
         whileTap={{ scale: 0.9 }}
         whileHover={{ borderColor: 'hsla(45, 80%, 55%, 0.6)' }}
       >
-        <Plus className="w-3.5 h-3.5 text-muted-foreground" />
-        <span className="text-[7px] font-semibold text-muted-foreground leading-tight text-center">
+        <Plus className="w-4 h-4 text-muted-foreground" />
+        <span className="text-[10px] font-semibold text-muted-foreground leading-tight text-center">
           Earn
         </span>
       </motion.button>
