@@ -120,32 +120,34 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
   return (
     <motion.button
       onClick={onOpen}
-      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
-      whileTap={{ scale: 0.95 }}
+      className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0.5 relative overflow-hidden"
+      whileTap={{ scale: 0.9 }}
       animate={{
         boxShadow: [
-          `0 0 20px ${RARITY_GLOW[r]}`,
-          `0 0 35px ${RARITY_GLOW[r]}`,
-          `0 0 20px ${RARITY_GLOW[r]}`,
+          `0 0 12px ${RARITY_GLOW[r]}`,
+          `0 0 22px ${RARITY_GLOW[r]}`,
+          `0 0 12px ${RARITY_GLOW[r]}`,
         ],
-        scale: [1, 1.03, 1],
+        scale: [1, 1.05, 1],
       }}
       transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-      style={r !== 'common' ? {
+      style={{
         background: r === 'rare'
-          ? 'linear-gradient(135deg, hsl(210 100% 60%), hsl(220 100% 55%))'
-          : 'linear-gradient(135deg, hsl(280 100% 60%), hsl(300 100% 55%))',
-      } : undefined}
+          ? 'linear-gradient(135deg, hsl(210 100% 65%), hsl(220 100% 58%))'
+          : r === 'epic'
+          ? 'linear-gradient(135deg, hsl(280 100% 65%), hsl(300 100% 58%))'
+          : 'linear-gradient(135deg, hsl(45 100% 55%), hsl(35 90% 50%))',
+      }}
     >
       <div
         className="absolute inset-0 animate-shimmer"
         style={{
-          background: 'linear-gradient(90deg, transparent 30%, hsla(0,0%,100%,0.4) 50%, transparent 70%)',
+          background: 'linear-gradient(90deg, transparent 30%, hsla(0,0%,100%,0.35) 50%, transparent 70%)',
           backgroundSize: '200% 100%',
         }}
       />
-      <Gift className="w-4.5 h-4.5 text-primary-foreground relative z-10 drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
-      <span className="text-[9px] font-bold text-primary-foreground relative z-10 drop-shadow-[0_0_4px_hsla(45,100%,80%,0.6)]">OPEN</span>
+      <Gift className="w-4 h-4 text-white relative z-10 drop-shadow-[0_0_4px_hsla(0,0%,100%,0.6)]" />
+      <span className="text-[7px] font-bold text-white relative z-10">OPEN</span>
     </motion.button>
   );
 }
