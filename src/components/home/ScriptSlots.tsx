@@ -70,17 +70,17 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
   return (
     <>
       <div
-        className="px-3 py-3 rounded-2xl"
+        className="px-2.5 py-2 rounded-xl"
         style={{
-          background: 'linear-gradient(145deg, hsla(250, 25%, 18%, 0.95), hsla(250, 30%, 14%, 0.9))',
-          border: '1px solid hsla(45, 100%, 55%, 0.25)',
-          boxShadow: '0 6px 24px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.2)',
+          background: 'linear-gradient(145deg, hsla(250, 20%, 92%, 0.95), hsla(250, 15%, 88%, 0.9))',
+          border: '1px solid hsla(45, 80%, 65%, 0.3)',
+          boxShadow: '0 2px 10px hsla(250, 20%, 60%, 0.15)',
         }}
       >
-        <p className="text-xs font-display font-semibold uppercase tracking-wider text-center mb-3" style={{ color: 'hsla(45, 100%, 70%, 0.85)' }}>
+        <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-center mb-2" style={{ color: 'hsla(250, 30%, 40%, 0.85)' }}>
           {t('home.dailyRewards')}
         </p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5">
           {slots.map((slot, i) => (
             <motion.div
               key={slot.id}
@@ -120,32 +120,34 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
   return (
     <motion.button
       onClick={onOpen}
-      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 relative overflow-hidden btn-gold"
-      whileTap={{ scale: 0.95 }}
+      className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0.5 relative overflow-hidden"
+      whileTap={{ scale: 0.9 }}
       animate={{
         boxShadow: [
-          `0 0 20px ${RARITY_GLOW[r]}`,
-          `0 0 35px ${RARITY_GLOW[r]}`,
-          `0 0 20px ${RARITY_GLOW[r]}`,
+          `0 0 12px ${RARITY_GLOW[r]}`,
+          `0 0 22px ${RARITY_GLOW[r]}`,
+          `0 0 12px ${RARITY_GLOW[r]}`,
         ],
-        scale: [1, 1.03, 1],
+        scale: [1, 1.05, 1],
       }}
       transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-      style={r !== 'common' ? {
+      style={{
         background: r === 'rare'
-          ? 'linear-gradient(135deg, hsl(210 100% 60%), hsl(220 100% 55%))'
-          : 'linear-gradient(135deg, hsl(280 100% 60%), hsl(300 100% 55%))',
-      } : undefined}
+          ? 'linear-gradient(135deg, hsl(210 100% 65%), hsl(220 100% 58%))'
+          : r === 'epic'
+          ? 'linear-gradient(135deg, hsl(280 100% 65%), hsl(300 100% 58%))'
+          : 'linear-gradient(135deg, hsl(45 100% 55%), hsl(35 90% 50%))',
+      }}
     >
       <div
         className="absolute inset-0 animate-shimmer"
         style={{
-          background: 'linear-gradient(90deg, transparent 30%, hsla(0,0%,100%,0.4) 50%, transparent 70%)',
+          background: 'linear-gradient(90deg, transparent 30%, hsla(0,0%,100%,0.35) 50%, transparent 70%)',
           backgroundSize: '200% 100%',
         }}
       />
-      <Gift className="w-4.5 h-4.5 text-primary-foreground relative z-10 drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
-      <span className="text-[9px] font-bold text-primary-foreground relative z-10 drop-shadow-[0_0_4px_hsla(45,100%,80%,0.6)]">OPEN</span>
+      <Gift className="w-4 h-4 text-white relative z-10 drop-shadow-[0_0_4px_hsla(0,0%,100%,0.6)]" />
+      <span className="text-[7px] font-bold text-white relative z-10">OPEN</span>
     </motion.button>
   );
 }
@@ -164,21 +166,21 @@ function LockedSlot({
   return (
     <motion.button
       onClick={onSpeedUp}
-      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-0.5"
+      className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0"
       style={{
-        background: 'linear-gradient(145deg, hsl(250 25% 22%), hsl(250 30% 16%))',
-        boxShadow: `0 4px 16px hsla(250, 30%, 8%, 0.6), inset 0 1px 4px hsla(250, 20%, 30%, 0.3)`,
-        border: `1px solid ${RARITY_BORDER[rarity]}`,
+        background: 'linear-gradient(145deg, hsla(250, 20%, 85%, 0.9), hsla(250, 15%, 78%, 0.9))',
+        boxShadow: `0 2px 8px hsla(250, 20%, 50%, 0.2)`,
+        border: `2px solid ${RARITY_BORDER[rarity]}`,
       }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.9 }}
     >
-      <Lock className="w-3.5 h-3.5 text-muted-foreground drop-shadow-[0_0_4px_hsla(250,60%,70%,0.5)]" />
-      <span className="text-[9px] font-mono font-bold" style={{ color: 'hsl(0 0% 95%)' }}>
+      <Lock className="w-3 h-3 text-muted-foreground" />
+      <span className="text-[7px] font-mono font-bold text-foreground leading-tight">
         {formatTime(time)}
       </span>
-      <span className="flex items-center gap-0.5 text-[8px] font-semibold" style={{ color: 'hsl(45, 100%, 55%)' }}>
-        <Zap className="w-2.5 h-2.5" />
-        {cost} MP
+      <span className="flex items-center gap-0.5 text-[7px] font-semibold" style={{ color: 'hsl(45, 90%, 45%)' }}>
+        <Zap className="w-2 h-2" />
+        {cost}
       </span>
     </motion.button>
   );
@@ -197,15 +199,14 @@ function EmptySlot({ onTap }: { onTap?: () => void }) {
     <div className="relative">
       <motion.button
         onClick={handleClick}
-        className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-1 border-2 border-dashed"
-        style={{ borderColor: 'hsla(45, 100%, 55%, 0.35)' }}
-        whileTap={{ scale: 0.95 }}
-        whileHover={{ borderColor: 'hsla(45, 100%, 55%, 0.7)' }}
+        className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0.5 border-2 border-dashed"
+        style={{ borderColor: 'hsla(250, 20%, 70%, 0.4)' }}
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ borderColor: 'hsla(45, 80%, 55%, 0.6)' }}
       >
-        <Film className="w-4 h-4 text-gold/60 drop-shadow-[0_0_5px_hsla(45,100%,55%,0.4)]" />
-        <span className="text-[8px] font-semibold text-gold/50 leading-tight text-center">
-          {/* Keep English for the slot label as it's short */}
-          Earn Script
+        <Plus className="w-3.5 h-3.5 text-muted-foreground" />
+        <span className="text-[7px] font-semibold text-muted-foreground leading-tight text-center">
+          Earn
         </span>
       </motion.button>
       {showTooltip && (
