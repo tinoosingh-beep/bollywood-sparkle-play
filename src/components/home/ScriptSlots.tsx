@@ -146,8 +146,8 @@ function ReadySlot({ rarity, onOpen }: { rarity?: ReelRarity; onOpen: () => void
           backgroundSize: '200% 100%',
         }}
       />
-      <Gift className="w-4 h-4 text-white relative z-10 drop-shadow-[0_0_4px_hsla(0,0%,100%,0.6)]" />
-      <span className="text-[7px] font-bold text-white relative z-10">OPEN</span>
+      <Gift className="w-5 h-5 text-white relative z-10 drop-shadow-[0_0_4px_hsla(0,0%,100%,0.6)]" />
+      <span className="text-[10px] font-bold text-white relative z-10">OPEN</span>
     </motion.button>
   );
 }
