@@ -166,21 +166,21 @@ function LockedSlot({
   return (
     <motion.button
       onClick={onSpeedUp}
-      className="w-full aspect-[1.4/1] rounded-2xl flex flex-col items-center justify-center gap-0.5"
+      className="w-full aspect-square rounded-full flex flex-col items-center justify-center gap-0"
       style={{
-        background: 'linear-gradient(145deg, hsl(250 25% 22%), hsl(250 30% 16%))',
-        boxShadow: `0 4px 16px hsla(250, 30%, 8%, 0.6), inset 0 1px 4px hsla(250, 20%, 30%, 0.3)`,
-        border: `1px solid ${RARITY_BORDER[rarity]}`,
+        background: 'linear-gradient(145deg, hsla(250, 20%, 85%, 0.9), hsla(250, 15%, 78%, 0.9))',
+        boxShadow: `0 2px 8px hsla(250, 20%, 50%, 0.2)`,
+        border: `2px solid ${RARITY_BORDER[rarity]}`,
       }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.9 }}
     >
-      <Lock className="w-3.5 h-3.5 text-muted-foreground drop-shadow-[0_0_4px_hsla(250,60%,70%,0.5)]" />
-      <span className="text-[9px] font-mono font-bold" style={{ color: 'hsl(0 0% 95%)' }}>
+      <Lock className="w-3 h-3 text-muted-foreground" />
+      <span className="text-[7px] font-mono font-bold text-foreground leading-tight">
         {formatTime(time)}
       </span>
-      <span className="flex items-center gap-0.5 text-[8px] font-semibold" style={{ color: 'hsl(45, 100%, 55%)' }}>
-        <Zap className="w-2.5 h-2.5" />
-        {cost} MP
+      <span className="flex items-center gap-0.5 text-[7px] font-semibold" style={{ color: 'hsl(45, 90%, 45%)' }}>
+        <Zap className="w-2 h-2" />
+        {cost}
       </span>
     </motion.button>
   );
