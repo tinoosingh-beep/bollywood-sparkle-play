@@ -45,11 +45,13 @@ export function PredictionCalendar() {
   const monthName = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
   // Get days for current month view
+  const currentMonthIndex = currentMonth.getMonth();
+  const currentYear = currentMonth.getFullYear();
   const monthDays = useMemo(() => {
     return calendar.filter(d => {
-      return d.date.getMonth() === currentMonth.getMonth() && d.date.getFullYear() === currentMonth.getFullYear();
+      return d.date.getMonth() === currentMonthIndex && d.date.getFullYear() === currentYear;
     });
-  }, [calendar, monthOffset]);
+  }, [calendar, currentMonthIndex, currentYear]);
 
   const selectedDay = calendar[selectedDayIndex];
 
@@ -64,6 +66,7 @@ export function PredictionCalendar() {
 
   const handleDayClick = (day: DayPredictions) => {
     const idx = calendar.findIndex(d => d.date.getTime() === day.date.getTime());
+    if (idx === -1) return;
     setSelectedDayIndex(idx);
     setExpandedDay(idx);
   };

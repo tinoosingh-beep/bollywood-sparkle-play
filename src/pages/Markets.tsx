@@ -10,12 +10,24 @@ import { newsContent } from '@/data/newsContent';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { newsContentHi } from '@/data/newsContent.hi';
 
+interface MarketItem {
+  id: number;
+  name: string;
+  category: string;
+  yesPrice: number;
+  noPrice: number;
+  change24h: number;
+  volume: number;
+  endTime: number;
+  liveTraders: number;
+}
+
 export function Markets() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedPopupMarket, setSelectedPopupMarket] = useState<any>(null);
+  const [selectedPopupMarket, setSelectedPopupMarket] = useState<MarketItem | null>(null);
   const [selectedMarket, setSelectedMarket] = useState<{
     name: string;
     side: 'yes' | 'no';

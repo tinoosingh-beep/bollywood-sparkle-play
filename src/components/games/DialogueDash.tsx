@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useBalance } from '@/contexts/BalanceContext';
@@ -53,7 +53,7 @@ export function DialogueDash({ onClose }: DialogueDashProps) {
     setUserArrangement(prev => prev.filter((_, i) => i !== index));
   };
 
-  const checkAnswer = () => {
+  const checkAnswer = useCallback(() => {
     const answer = userArrangement.join('');
     const win = answer === currentDialogue;
     setIsWin(win);
@@ -67,13 +67,13 @@ export function DialogueDash({ onClose }: DialogueDashProps) {
         triggerFloatingPoints(50, rect.left + rect.width / 2, rect.top);
       }
     }
-  };
+  }, [userArrangement, currentDialogue, addPoints, triggerFloatingPoints]);
 
   useEffect(() => {
     if (isPlaying && scrambledLetters.length === 0 && userArrangement.length > 0) {
       checkAnswer();
     }
-  }, [scrambledLetters, userArrangement, isPlaying]);
+  }, [scrambledLetters, userArrangement, isPlaying, checkAnswer]);
 
   return (
     <div ref={gameRef} className="space-y-4">

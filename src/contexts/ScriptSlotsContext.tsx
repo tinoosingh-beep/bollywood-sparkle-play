@@ -119,6 +119,8 @@ const initialSlots: ScriptSlot[] = [
 export function ScriptSlotsProvider({ children }: { children: React.ReactNode }) {
   const [slots, setSlots] = useState<ScriptSlot[]>(initialSlots);
   const [powerUps, setPowerUps] = useState<PowerUp[]>([]);
+  const slotsRef = React.useRef(slots);
+  slotsRef.current = slots;
 
   // Countdown timer
   useEffect(() => {
@@ -138,7 +140,7 @@ export function ScriptSlotsProvider({ children }: { children: React.ReactNode })
   }, []);
 
   const fillEmptySlot = useCallback((): ReelRarity | null => {
-    const emptyIndex = slots.findIndex(s => s.type === 'empty');
+    const emptyIndex = slotsRef.current.findIndex(s => s.type === 'empty');
     if (emptyIndex === -1) return null;
     const rarity = rollRarity();
     setSlots(prev =>
@@ -149,14 +151,14 @@ export function ScriptSlotsProvider({ children }: { children: React.ReactNode })
       )
     );
     return rarity;
-  }, [slots]);
+  }, []);
 
   const getSpeedUpCost = useCallback((slotId: number): number => {
-    const slot = slots.find(s => s.id === slotId);
+    const slot = slotsRef.current.find(s => s.id === slotId);
     if (!slot || slot.type !== 'locked' || !slot.unlockTime) return 0;
     const hoursRemaining = Math.ceil(slot.unlockTime / 3600);
     return hoursRemaining * SPEED_UP_COST_PER_HOUR;
-  }, [slots]);
+  }, []);
 
   const speedUpSlot = useCallback((slotId: number): { cost: number; success: boolean } => {
     const cost = getSpeedUpCost(slotId);
@@ -185,7 +187,7 @@ export function ScriptSlotsProvider({ children }: { children: React.ReactNode })
   }, []);
 
   const openSlot = useCallback((slotId: number): ReelReward | null => {
-    const slot = slots.find(s => s.id === slotId);
+    const slot = slotsRef.current.find(s => s.id === slotId);
     if (!slot || slot.type !== 'ready' || !slot.rarity) return null;
     const reward = generateReward(slot.rarity);
     if (reward.powerUp) {
@@ -196,7 +198,7 @@ export function ScriptSlotsProvider({ children }: { children: React.ReactNode })
       prev.map(s => (s.id === slotId ? { ...s, type: 'empty' as const, rarity: undefined, unlockTime: undefined } : s))
     );
     return reward;
-  }, [slots]);
+  }, []);
 
   return (
     <ScriptSlotsContext.Provider

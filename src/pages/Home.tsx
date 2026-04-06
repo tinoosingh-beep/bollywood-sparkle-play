@@ -36,7 +36,7 @@ export function Home() {
       const bExp = b.expiryDate ? new Date(b.expiryDate).getTime() : Infinity;
       return aExp - bExp;
     });
-    const items: { type: 'news' | 'review' | 'video'; data: any; key: string }[] = [];
+    const items: { type: 'news' | 'review' | 'video'; data: unknown; key: string }[] = [];
     let reviewIndex = 0;
     let videoIndex = 0;
     sorted.forEach((story, i) => {

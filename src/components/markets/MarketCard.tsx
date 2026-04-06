@@ -85,7 +85,7 @@ export function MarketCard({
   const isClosingSoon = remaining < 15 * 60 * 1000;
 
   const sparklineData = useMemo(() =>
-    Array.from({ length: 20 }, () => 10 + Math.random() * 30), [id]);
+    Array.from({ length: 20 }, () => 10 + Math.random() * 30), []);
 
   const formatVolume = (vol: number) => {
     if (vol >= 1000000) return `${(vol / 1000000).toFixed(1)}M`;

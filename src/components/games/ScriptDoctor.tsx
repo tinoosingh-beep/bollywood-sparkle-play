@@ -162,7 +162,7 @@ export function ScriptDoctor({ onClose }: ScriptDoctorProps) {
         }
       }
     }
-  }, [phase]);
+  }, [phase, correctRedlines, totalWeakLines, wrongRedlines, reception, addPoints, triggerFloatingPoints]);
 
   const selectedLine = lines.find(l => l.id === selectedLineId);
 

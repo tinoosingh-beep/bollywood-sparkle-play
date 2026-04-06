@@ -14,6 +14,8 @@ interface Obstacle {
   y: number;
 }
 
+let obstacleIdCounter = 0;
+
 export function PaparazziChase({ onClose }: PaparazziChaseProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -61,7 +63,7 @@ export function PaparazziChase({ onClose }: PaparazziChaseProps) {
       // Spawn obstacles
       if (Math.random() < 0.3) {
         setObstacles(prev => [...prev, {
-          id: Date.now(),
+          id: ++obstacleIdCounter,
           x: Math.random() * 80 + 10,
           y: 0
         }]);

@@ -55,20 +55,21 @@ export function BollyHeardle({ onClose }: BollyHeardleProps) {
 
   const handleGuess = (songTitle: string) => {
     if (!currentSong) return;
-    
+
     setGuess(songTitle);
     setShowDropdown(false);
-    setAttempts(prev => prev + 1);
+    const newAttempts = attempts + 1;
+    setAttempts(newAttempts);
 
     const win = songTitle === currentSong.title;
-    
-    if (win || attempts >= 2) {
+
+    if (win || newAttempts >= 3) {
       setIsWin(win);
       setGameComplete(true);
       setIsPlaying(false);
 
       if (win) {
-        const reward = attempts === 0 ? 100 : attempts === 1 ? 50 : 20;
+        const reward = newAttempts === 1 ? 100 : newAttempts === 2 ? 50 : 20;
         addPoints(reward);
         if (gameRef.current) {
           const rect = gameRef.current.getBoundingClientRect();
@@ -170,7 +171,7 @@ export function BollyHeardle({ onClose }: BollyHeardleProps) {
             <p className="text-muted-foreground">Song: {currentSong?.title}</p>
             {isWin && (
               <p className="text-gold font-bold mt-2">
-                +{attempts === 1 ? 100 : attempts === 2 ? 50 : 20} MP
+                +{attempts <= 1 ? 100 : attempts === 2 ? 50 : 20} MP
               </p>
             )}
           </div>

@@ -64,7 +64,8 @@ export function CastingShuffle({ onClose }: CastingShuffleProps) {
 
     if (flippedCards.length === 1) {
       setMoves(prev => prev + 1);
-      const firstCard = cards.find(c => c.id === flippedCards[0]);
+      const firstCardId = flippedCards[0];
+      const firstCard = cards.find(c => c.id === firstCardId);
       const secondCard = cards.find(c => c.id === cardId);
 
       if (firstCard && secondCard && firstCard.emoji === secondCard.emoji) {
@@ -78,10 +79,12 @@ export function CastingShuffle({ onClose }: CastingShuffleProps) {
           setFlippedCards([]);
         }, 500);
       } else {
+        // Capture both card IDs to avoid stale closure over flippedCards
+        const idsToFlip = [firstCardId, cardId];
         setTimeout(() => {
           setCards(prev =>
             prev.map(c =>
-              flippedCards.includes(c.id) || c.id === cardId
+              idsToFlip.includes(c.id)
                 ? { ...c, isFlipped: false }
                 : c
             )

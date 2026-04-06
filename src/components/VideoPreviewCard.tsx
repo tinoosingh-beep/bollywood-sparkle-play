@@ -98,23 +98,26 @@ export function VideoPreviewCard({ video }: VideoPreviewCardProps) {
     }
   }, [watchTime, rewardClaimed, addPoints, triggerFloatingPoints]);
 
+  const resetControlsTimeout = useCallback(() => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+    controlsTimeoutRef.current = setTimeout(() => {
+      setIsPlaying(current => {
+        if (current) setShowControls(false);
+        return current;
+      });
+    }, 3000);
+  }, []);
+
   const togglePlay = useCallback(() => {
     setIsPlaying(p => !p);
     resetControlsTimeout();
-  }, []);
+  }, [resetControlsTimeout]);
 
   const toggleMute = useCallback(() => {
     setIsMuted(m => !m);
     resetControlsTimeout();
-  }, []);
-
-  const resetControlsTimeout = () => {
-    setShowControls(true);
-    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
-    controlsTimeoutRef.current = setTimeout(() => {
-      if (isPlaying) setShowControls(false);
-    }, 3000);
-  };
+  }, [resetControlsTimeout]);
 
   const handlePollVote = (index: number) => {
     setPollVote(index);
