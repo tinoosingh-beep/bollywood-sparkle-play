@@ -18,6 +18,7 @@ import { Charts } from '@/pages/Charts';
 
 const queryClient = new QueryClient();
 
+
 function AppContent() {
   const [activeTab, setActiveTab] = useState('home');
   const [splashDone, setSplashDone] = useState(false);
