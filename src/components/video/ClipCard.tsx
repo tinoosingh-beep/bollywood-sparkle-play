@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX, Timer, Share2, Tv, Scissors, Sparkles } from 'lucide-react';
+import { AddToListButton } from '@/components/AddToListButton';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useBalance } from '@/contexts/BalanceContext';
 import { toast } from 'sonner';
@@ -151,6 +152,7 @@ export function ClipCard({ video }: ClipCardProps) {
 
       {/* Action bar */}
       <div className="flex items-center gap-2 p-4" style={{ background: 'linear-gradient(180deg, hsl(190, 40%, 6%), hsl(200, 30%, 4%))' }}>
+        <AddToListButton item={{ id: `clip-${video.id}`, title: video.movieName, type: 'movie', thumbnail: video.thumbnail }} variant="cyan" className="flex-shrink-0" />
         {video.streamingLink && (
           <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all hover:brightness-110" style={{ background: 'linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(180, 80%, 35%))', color: 'hsl(200, 40%, 5%)', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.1em', boxShadow: '0 4px 16px hsla(180,100%,45%,0.25)' }}>
             <Tv className="w-4 h-4" /> Watch on {video.streamingService}

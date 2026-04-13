@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX, Timer, Share2, Star, Tv, Quote } from 'lucide-react';
+import { AddToListButton } from '@/components/AddToListButton';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useBalance } from '@/contexts/BalanceContext';
 import { toast } from 'sonner';
@@ -184,6 +185,7 @@ export function VideoReviewCard({ video }: VideoReviewCardProps) {
 
         {/* Bottom actions */}
         <div className="flex items-center gap-2 pt-1">
+          <AddToListButton item={{ id: `vreview-${video.id}`, title: video.movieName, type: 'movie', thumbnail: video.thumbnail }} variant="gold" className="flex-shrink-0" />
           {video.streamingLink && (
             <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all hover:brightness-110" style={{ background: 'hsla(45,100%,50%,0.08)', border: '1px solid hsla(45,100%,50%,0.25)', color: 'hsl(var(--gold))', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.08em' }}>
               <Tv className="w-3.5 h-3.5" /> Watch on {video.streamingService}

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX, Timer, Zap, Share2, CheckCircle, ExternalLink, Ticket, CalendarDays, Clapperboard } from 'lucide-react';
+import { AddToListButton } from '@/components/AddToListButton';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Progress } from '@/components/ui/progress';
 import { PredictionDrawer } from '@/components/PredictionDrawer';
@@ -200,6 +201,7 @@ export function TrailerPreviewCard({ video }: TrailerPreviewCardProps) {
             )}
           </div>
           <div className="flex items-center gap-2">
+            <AddToListButton item={{ id: `trailer-${video.id}`, title: video.movieName, type: 'movie', thumbnail: video.thumbnail }} variant="crimson" className="flex-shrink-0" />
             <button onClick={() => setShowPrediction(true)} className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all" style={{ background: hasPredicted ? 'hsla(340,85%,50%,0.1)' : 'linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-glow)))', color: hasPredicted ? 'hsl(var(--crimson-glow))' : 'hsl(var(--primary-foreground))', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.06em', border: hasPredicted ? '1px solid hsla(340,85%,50%,0.3)' : 'none', boxShadow: hasPredicted ? 'none' : '0 4px 16px hsla(45,100%,50%,0.3)' }}>
               {hasPredicted ? <><CheckCircle className="w-4 h-4" /> Predicted {predictedOption}</> : <><Zap className="w-4 h-4" /> Predict Opening</>}
             </button>
