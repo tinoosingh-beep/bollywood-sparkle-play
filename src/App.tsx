@@ -14,7 +14,7 @@ import { Markets } from '@/pages/Markets';
 import { Games } from '@/pages/Games';
 import { Leaderboard } from '@/components/Leaderboard';
 import { SplashScreen } from '@/components/SplashScreen';
-import { PitchDeck } from '@/pages/PitchDeck';
+import { Charts } from '@/pages/Charts';
 
 const queryClient = new QueryClient();
 
@@ -34,8 +34,8 @@ function AppContent() {
       case 'leaderboard':
       case 'social':
         return <Leaderboard />;
-      case 'pitch':
-        return <PitchDeck onExit={() => setActiveTab('home')} />;
+      case 'charts':
+        return <Charts />;
       default:
         return <Home />;
     }
