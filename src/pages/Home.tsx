@@ -2,7 +2,7 @@ import { HubHeader } from '@/components/home/HubHeader';
 import { ScriptSlots } from '@/components/home/ScriptSlots';
 import { NewsCard } from '@/components/NewsCard';
 import { ReviewCard } from '@/components/ReviewCard';
-import { VideoPreviewCard } from '@/components/VideoPreviewCard';
+import { TrailerPreviewCard, ClipCard, VideoReviewCard } from '@/components/video';
 import { FashionFaceoffCard } from '@/components/fashion/FashionFaceoffCard';
 import { newsContent } from '@/data/newsContent';
 import { reviewContent } from '@/data/reviewContent';
@@ -72,7 +72,13 @@ export function Home() {
               ) : item.type === 'review' ? (
                 <ReviewCard review={item.data} />
               ) : (
-                <VideoPreviewCard video={item.data} />
+              {item.data.cardType === 'trailer' ? (
+                  <TrailerPreviewCard video={item.data} />
+                ) : item.data.cardType === 'clip' ? (
+                  <ClipCard video={item.data} />
+                ) : (
+                  <VideoReviewCard video={item.data} />
+                )}
               )}
             </div>
           ))}
