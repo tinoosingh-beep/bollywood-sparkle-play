@@ -11,7 +11,7 @@ import { fashionFaceoffs, type FashionCategory } from '@/data/fashionContent';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useYouTubeTrending } from '@/hooks/useYouTubeTrending';
 import { useState, useMemo } from 'react';
-import { Sparkles, TrendingUp, Loader2 } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const FASHION_FILTERS: ('All' | FashionCategory)[] = ['All', 'Red Carpet', 'Airport Style', 'Ethnic Fusion'];
 
@@ -26,21 +26,20 @@ export function Home() {
     [fashionFilter]
   );
 
-  // Sort: vibe items by vibeScore (desc), bet items by expiry urgency (soonest first), then interleave
+  // Interleave news, reviews, local videos, and YouTube trending
   const feedItems = useMemo(() => {
     const sorted = [...newsContent].sort((a, b) => {
-      // Vibe items with higher scores go first
       if (a.type === 'vibe' && b.type === 'vibe') return (b.vibeScore || 0) - (a.vibeScore || 0);
       if (a.type === 'vibe' && b.type !== 'vibe') return -1;
       if (a.type !== 'vibe' && b.type === 'vibe') return 1;
-      // Bet items: sooner expiry = higher urgency
       const aExp = a.expiryDate ? new Date(a.expiryDate).getTime() : Infinity;
       const bExp = b.expiryDate ? new Date(b.expiryDate).getTime() : Infinity;
       return aExp - bExp;
     });
-    const items: { type: 'news' | 'review' | 'video'; data: any; key: string }[] = [];
+    const items: { type: 'news' | 'review' | 'video' | 'youtube'; data: any; key: string }[] = [];
     let reviewIndex = 0;
     let videoIndex = 0;
+    let ytIndex = 0;
     sorted.forEach((story, i) => {
       items.push({ type: 'news', data: story, key: `news-${story.id}` });
       if ((i + 1) % 5 === 0 && reviewIndex < reviewContent.length) {
@@ -51,9 +50,14 @@ export function Home() {
         items.push({ type: 'video', data: videoContent[videoIndex], key: `video-${videoContent[videoIndex].id}` });
         videoIndex++;
       }
+      // Insert a YouTube trending card every 3 news items
+      if ((i + 1) % 3 === 0 && trendingVideos && ytIndex < trendingVideos.length) {
+        items.push({ type: 'youtube', data: trendingVideos[ytIndex], key: `yt-${trendingVideos[ytIndex].id}` });
+        ytIndex++;
+      }
     });
     return items;
-  }, []);
+  }, [trendingVideos]);
 
   return (
     <div className="flex flex-col gap-5 animate-slide-up">
@@ -64,39 +68,7 @@ export function Home() {
         feed?.scrollIntoView({ behavior: 'smooth' });
       }} />
 
-      {/* YouTube Trending Section */}
-      <div className="mt-2">
-        <div className="flex items-center gap-2 mb-3">
-          <TrendingUp className="w-5 h-5" style={{ color: 'hsl(0, 80%, 55%)' }} />
-          <h2
-            className="text-2xl font-bold uppercase tracking-[0.12em]"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              background: 'linear-gradient(135deg, hsl(0, 80%, 55%), hsl(15, 90%, 50%))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Trending on YouTube
-          </h2>
-        </div>
-        <p className="text-xs text-muted-foreground mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-          Top entertainment videos trending in India right now.
-        </p>
-        {trendingLoading ? (
-          <div className="flex items-center justify-center py-10">
-            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-          </div>
-        ) : trendingVideos && trendingVideos.length > 0 ? (
-          <div className="space-y-4">
-            {trendingVideos.map((video, i) => (
-              <YouTubeTrendingCard key={video.id} video={video} rank={i + 1} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-xs text-muted-foreground text-center py-6">No trending videos available right now.</p>
-        )}
-      </div>
+
 
       <div id="news-feed">
         <h2 className="font-display-serif text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>{t('home.todaysNews')}</h2>
@@ -111,6 +83,8 @@ export function Home() {
                 <TrailerPreviewCard video={item.data} />
               ) : item.data.cardType === 'clip' ? (
                 <ClipCard video={item.data} />
+              ) : item.type === 'youtube' ? (
+                <YouTubeTrendingCard video={item.data} />
               ) : (
                 <VideoReviewCard video={item.data} />
               )}
