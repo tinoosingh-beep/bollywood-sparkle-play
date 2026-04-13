@@ -2,15 +2,16 @@ import { HubHeader } from '@/components/home/HubHeader';
 import { ScriptSlots } from '@/components/home/ScriptSlots';
 import { NewsCard } from '@/components/NewsCard';
 import { ReviewCard } from '@/components/ReviewCard';
-import { TrailerPreviewCard, ClipCard, VideoReviewCard } from '@/components/video';
+import { TrailerPreviewCard, ClipCard, VideoReviewCard, YouTubeTrendingCard } from '@/components/video';
 import { FashionFaceoffCard } from '@/components/fashion/FashionFaceoffCard';
 import { newsContent } from '@/data/newsContent';
 import { reviewContent } from '@/data/reviewContent';
 import { videoContent } from '@/data/videoContent';
 import { fashionFaceoffs, type FashionCategory } from '@/data/fashionContent';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useYouTubeTrending } from '@/hooks/useYouTubeTrending';
 import { useState, useMemo } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, TrendingUp, Loader2 } from 'lucide-react';
 
 const FASHION_FILTERS: ('All' | FashionCategory)[] = ['All', 'Red Carpet', 'Airport Style', 'Ethnic Fusion'];
 
@@ -18,6 +19,7 @@ export function Home() {
   const [trophies] = useState(420);
   const { t } = useLanguage();
   const [fashionFilter, setFashionFilter] = useState<'All' | FashionCategory>('All');
+  const { data: trendingVideos, isLoading: trendingLoading } = useYouTubeTrending();
 
   const filteredFashion = useMemo(() =>
     fashionFilter === 'All' ? fashionFaceoffs : fashionFaceoffs.filter(f => f.category === fashionFilter),
@@ -61,6 +63,40 @@ export function Home() {
         const feed = document.getElementById('news-feed');
         feed?.scrollIntoView({ behavior: 'smooth' });
       }} />
+
+      {/* YouTube Trending Section */}
+      <div className="mt-2">
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp className="w-5 h-5" style={{ color: 'hsl(0, 80%, 55%)' }} />
+          <h2
+            className="text-2xl font-bold uppercase tracking-[0.12em]"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              background: 'linear-gradient(135deg, hsl(0, 80%, 55%), hsl(15, 90%, 50%))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Trending on YouTube
+          </h2>
+        </div>
+        <p className="text-xs text-muted-foreground mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          Top entertainment videos trending in India right now.
+        </p>
+        {trendingLoading ? (
+          <div className="flex items-center justify-center py-10">
+            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : trendingVideos && trendingVideos.length > 0 ? (
+          <div className="space-y-4">
+            {trendingVideos.map((video, i) => (
+              <YouTubeTrendingCard key={video.id} video={video} rank={i + 1} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground text-center py-6">No trending videos available right now.</p>
+        )}
+      </div>
 
       <div id="news-feed">
         <h2 className="font-display-serif text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>{t('home.todaysNews')}</h2>
