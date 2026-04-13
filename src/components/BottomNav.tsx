@@ -1,4 +1,4 @@
-import { Home, Gamepad2, Users, Presentation } from 'lucide-react';
+import { Home, Gamepad2, Users, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -11,7 +11,7 @@ const NAV_COLORS: Record<string, string> = {
   shop: '#8B5CF6',
   home: '#00BFFF',
   markets: '#00C853',
-  pitch: '#FF8C00',
+  charts: '#FF8C00',
   social: '#FFD700',
 };
 
@@ -22,7 +22,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
     { id: 'shop', labelKey: 'nav.games', icon: Gamepad2, badge: 3 },
     { id: 'home', labelKey: 'nav.home', icon: Home, badge: 0 },
     { id: 'markets', labelKey: 'nav.markets', icon: Gamepad2, badge: 1 },
-    { id: 'pitch', labelKey: 'nav.pitch', icon: Presentation, badge: 0 },
+    { id: 'charts', labelKey: 'nav.charts', icon: BarChart3, badge: 0 },
     { id: 'social', labelKey: 'nav.social', icon: Users, badge: 0 },
   ];
 
