@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Star, Bookmark, PenLine, CheckCircle } from 'lucide-react';
+import { AddToListButton } from '@/components/AddToListButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -139,6 +140,11 @@ export function ReviewCard({ review }: ReviewCardProps) {
         </div>
 
         <div className="px-4 pb-4 flex gap-2">
+          <AddToListButton
+            item={{ id: `review-${review.id}`, title: review.title, type: 'movie', thumbnail: review.posterImage }}
+            variant="default"
+            className="flex-shrink-0"
+          />
           {!hasReviewed ? (
             <Button
               onClick={() => setShowReviewModal(true)}

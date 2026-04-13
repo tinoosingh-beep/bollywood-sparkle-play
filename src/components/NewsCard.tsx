@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { CheckCircle, Zap, Clock, Swords, TrendingUp, TrendingDown, Bot, Radio, ShieldCheck } from 'lucide-react';
+import { AddToListButton } from '@/components/AddToListButton';
 import { useBalance } from '@/contexts/BalanceContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScriptSlots, STORY_TIME_REDUCTION } from '@/contexts/ScriptSlotsContext';
@@ -249,7 +250,12 @@ export function NewsCard({ story }: NewsCardProps) {
           )}
 
           {/* Action buttons */}
-          <div className="flex gap-3">
+          <div className="flex gap-2 flex-wrap">
+            <AddToListButton
+              item={{ id: `news-${story.id}`, title: headline, type: 'movie', thumbnail: story.image }}
+              variant="default"
+              className="flex-shrink-0"
+            />
             {!verified && !isExpanded && (
               <Button onClick={() => setIsExpanded(true)} variant="outline"
                 className="flex-1 btn-glass rounded-xl py-5 flex items-center justify-center gap-2">

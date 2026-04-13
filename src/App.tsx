@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BalanceProvider } from '@/contexts/BalanceContext';
 import { ScriptSlotsProvider } from '@/contexts/ScriptSlotsContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { MyListProvider } from '@/contexts/MyListContext';
 import { BottomNav } from '@/components/BottomNav';
 import { FloatingPoints } from '@/components/FloatingPoints';
 import { Home } from '@/pages/Home';
@@ -62,9 +63,11 @@ const App = () => (
       <LanguageProvider>
         <BalanceProvider>
           <ScriptSlotsProvider>
-            <Toaster />
-            <Sonner />
-            <AppContent />
+            <MyListProvider>
+              <Toaster />
+              <Sonner />
+              <AppContent />
+            </MyListProvider>
           </ScriptSlotsProvider>
         </BalanceProvider>
       </LanguageProvider>
