@@ -35,20 +35,13 @@ export function MyListProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addItem = useCallback((item: Omit<MyListItem, 'addedAt'>) => {
-    persist(prev => {
-      const exists = prev.find(i => i.id === item.id);
-      if (exists) return prev;
-      const updated = [...prev, { ...item, addedAt: Date.now() }];
-      try { localStorage.setItem('bollybet-mylist', JSON.stringify(updated)); } catch {}
-      return updated;
-    });
     setItems(prev => {
       if (prev.find(i => i.id === item.id)) return prev;
       const updated = [...prev, { ...item, addedAt: Date.now() }];
       try { localStorage.setItem('bollybet-mylist', JSON.stringify(updated)); } catch {}
+      toast.success(`Added "${item.title}" to My List 🎬`);
       return updated;
     });
-    toast.success(`Added "${item.title}" to My List 🎬`);
   }, []);
 
   const removeItem = useCallback((id: string) => {
