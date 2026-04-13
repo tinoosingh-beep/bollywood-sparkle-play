@@ -71,14 +71,12 @@ export function Home() {
                 <NewsCard story={item.data} />
               ) : item.type === 'review' ? (
                 <ReviewCard review={item.data} />
+              ) : item.data.cardType === 'trailer' ? (
+                <TrailerPreviewCard video={item.data} />
+              ) : item.data.cardType === 'clip' ? (
+                <ClipCard video={item.data} />
               ) : (
-              {item.data.cardType === 'trailer' ? (
-                  <TrailerPreviewCard video={item.data} />
-                ) : item.data.cardType === 'clip' ? (
-                  <ClipCard video={item.data} />
-                ) : (
-                  <VideoReviewCard video={item.data} />
-                )}
+                <VideoReviewCard video={item.data} />
               )}
             </div>
           ))}
