@@ -2,15 +2,16 @@ import { HubHeader } from '@/components/home/HubHeader';
 import { ScriptSlots } from '@/components/home/ScriptSlots';
 import { NewsCard } from '@/components/NewsCard';
 import { ReviewCard } from '@/components/ReviewCard';
-import { TrailerPreviewCard, ClipCard, VideoReviewCard } from '@/components/video';
+import { TrailerPreviewCard, ClipCard, VideoReviewCard, YouTubeTrendingCard } from '@/components/video';
 import { FashionFaceoffCard } from '@/components/fashion/FashionFaceoffCard';
 import { newsContent } from '@/data/newsContent';
 import { reviewContent } from '@/data/reviewContent';
 import { videoContent } from '@/data/videoContent';
 import { fashionFaceoffs, type FashionCategory } from '@/data/fashionContent';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useYouTubeTrending } from '@/hooks/useYouTubeTrending';
 import { useState, useMemo } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, TrendingUp, Loader2 } from 'lucide-react';
 
 const FASHION_FILTERS: ('All' | FashionCategory)[] = ['All', 'Red Carpet', 'Airport Style', 'Ethnic Fusion'];
 
