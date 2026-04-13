@@ -19,6 +19,7 @@ export function Home() {
   const [trophies] = useState(420);
   const { t } = useLanguage();
   const [fashionFilter, setFashionFilter] = useState<'All' | FashionCategory>('All');
+  const { data: trendingVideos, isLoading: trendingLoading } = useYouTubeTrending();
 
   const filteredFashion = useMemo(() =>
     fashionFilter === 'All' ? fashionFaceoffs : fashionFaceoffs.filter(f => f.category === fashionFilter),
