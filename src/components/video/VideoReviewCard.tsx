@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Pause, Volume2, VolumeX, Timer, Share2, Star, Tv, MessageSquare } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Timer, Share2, Star, Tv, Quote } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Progress } from '@/components/ui/progress';
 import { useBalance } from '@/contexts/BalanceContext';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,7 +29,7 @@ export function VideoReviewCard({ video }: VideoReviewCardProps) {
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <Star key={i} className="w-3.5 h-3.5" fill={i < Math.floor(rating) ? 'hsl(45, 100%, 50%)' : i < rating ? 'hsl(45, 100%, 50%)' : 'transparent'} stroke={i < rating ? 'hsl(45, 100%, 50%)' : 'hsl(var(--muted-foreground))'} />
+      <Star key={i} className="w-4 h-4" fill={i < Math.floor(rating) ? 'hsl(45, 100%, 50%)' : i < rating ? 'hsl(45, 100%, 50%)' : 'transparent'} stroke={i < rating ? 'hsl(45, 100%, 50%)' : 'hsl(var(--muted-foreground))'} />
     ));
   };
 
@@ -87,24 +86,33 @@ export function VideoReviewCard({ video }: VideoReviewCardProps) {
   const durationLabel = video.duration >= 60 ? `${Math.floor(video.duration / 60)} min` : `${video.duration}s`;
 
   return (
-    <article ref={cardRef} className="overflow-hidden rounded-2xl" style={{ background: 'hsl(var(--card))' }} onClick={resetControlsTimeout}>
-      {/* Header with reviewer info */}
-      <div className="flex items-center gap-3 px-4 py-3" style={{ background: 'linear-gradient(135deg, hsl(var(--deep-purple)), hsla(0,0%,0%,0.9))' }}>
+    <article
+      ref={cardRef}
+      className="overflow-hidden rounded-2xl relative"
+      style={{
+        border: '2px solid hsl(var(--gold))',
+        boxShadow: '0 0 20px hsla(45, 100%, 50%, 0.15), 0 8px 32px hsla(0, 0%, 0%, 0.5)',
+        background: 'linear-gradient(180deg, hsl(35, 25%, 8%) 0%, hsl(30, 20%, 5%) 100%)',
+      }}
+      onClick={resetControlsTimeout}
+    >
+      {/* Reviewer header — warm editorial feel */}
+      <div className="flex items-center gap-3 px-4 py-3" style={{ background: 'linear-gradient(135deg, hsl(35, 30%, 10%), hsl(30, 25%, 6%))', borderBottom: '1px solid hsla(45, 100%, 50%, 0.15)' }}>
         {video.reviewerAvatar && (
-          <img src={video.reviewerAvatar} alt={video.reviewerName} className="w-8 h-8 rounded-full object-cover border-2" style={{ borderColor: 'hsl(var(--gold))' }} />
+          <img src={video.reviewerAvatar} alt={video.reviewerName} className="w-10 h-10 rounded-full object-cover" style={{ border: '2px solid hsl(var(--gold))', boxShadow: '0 0 8px hsla(45,100%,50%,0.3)' }} />
         )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-foreground">{video.reviewerName}</span>
-            <MessageSquare className="w-3 h-3 text-muted-foreground" />
+            <span className="text-sm font-bold" style={{ color: 'hsl(var(--gold))', fontFamily: "'DM Sans', sans-serif" }}>{video.reviewerName}</span>
           </div>
-          <span className="text-[10px] uppercase tracking-widest text-muted-foreground" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+          <span className="text-[11px] uppercase tracking-widest" style={{ color: 'hsla(45, 100%, 70%, 0.6)', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.15em' }}>
             Video Review · {durationLabel}
           </span>
         </div>
         {video.rating && (
-          <div className="flex items-center gap-0.5">
-            {renderStars(video.rating)}
+          <div className="flex flex-col items-end gap-0.5">
+            <div className="flex items-center gap-0.5">{renderStars(video.rating)}</div>
+            <span className="text-xs font-bold" style={{ color: 'hsl(var(--gold))', fontFamily: "'Roboto Mono', monospace" }}>{video.rating}/5</span>
           </div>
         )}
       </div>
@@ -112,69 +120,77 @@ export function VideoReviewCard({ video }: VideoReviewCardProps) {
       {/* Video area — 16:9 */}
       <div className="relative">
         <AspectRatio ratio={16 / 9} className="bg-black">
-          <img src={video.thumbnail} alt={`${video.movieName} review`} className="w-full h-full object-cover" style={{ filter: isPlaying ? 'brightness(0.85)' : 'brightness(0.5)' }} />
+          <img src={video.thumbnail} alt={`${video.movieName} review`} className="w-full h-full object-cover" style={{ filter: isPlaying ? 'brightness(0.85) sepia(0.1)' : 'brightness(0.4) sepia(0.15)' }} />
           <AnimatePresence>
             {showControls && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 flex flex-col justify-between p-4" style={{ background: 'linear-gradient(0deg, hsla(0,0%,0%,0.8) 0%, transparent 40%, transparent 70%, hsla(0,0%,0%,0.4) 100%)' }}>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 flex flex-col justify-between p-4" style={{ background: 'linear-gradient(0deg, hsla(35,25%,5%,0.9) 0%, transparent 35%, transparent 75%, hsla(0,0%,0%,0.4) 100%)' }}>
                 <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'hsla(0,0%,0%,0.5)' }}>
+                  <div className="px-3 py-1 rounded-full" style={{ background: 'hsla(45,100%,50%,0.15)', border: '1px solid hsla(45,100%,50%,0.3)' }}>
+                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'hsl(var(--gold))', fontFamily: "'Bebas Neue', sans-serif" }}>Review</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'hsla(0,0%,0%,0.6)', border: '1px solid hsla(45,100%,50%,0.2)' }}>
                     <Timer className="w-3.5 h-3.5" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--gold))' }} />
                     <span className="text-xs font-bold" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--gold))', fontFamily: "'Roboto Mono', monospace" }}>
                       {rewardClaimed ? '✓ +75 MP' : `${remainingForReward}s → +75 MP`}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-white/60">
-                    {Math.floor(watchTime / 60)}:{String(watchTime % 60).padStart(2, '0')}
-                  </span>
                 </div>
                 <div className="flex items-center justify-center">
-                  <button onClick={(e) => { e.stopPropagation(); setIsPlaying(p => !p); resetControlsTimeout(); }} className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: 'hsla(0,0%,100%,0.15)', backdropFilter: 'blur(8px)' }}>
+                  <button onClick={(e) => { e.stopPropagation(); setIsPlaying(p => !p); resetControlsTimeout(); }} className="rounded-full flex items-center justify-center" style={{ width: '64px', height: '64px', background: 'hsla(45, 100%, 50%, 0.15)', border: '2px solid hsla(45, 100%, 50%, 0.4)', backdropFilter: 'blur(8px)' }}>
                     {isPlaying ? <Pause className="w-7 h-7 text-white" /> : <Play className="w-7 h-7 text-white ml-0.5" />}
                   </button>
                 </div>
                 <div>
-                  <p className="font-bold text-lg text-white" style={{ textShadow: '0 2px 8px hsla(0,0%,0%,0.8)' }}>{video.movieName}</p>
-                  <p className="text-xs text-white/70">{video.title}</p>
+                  <p className="text-lg font-bold text-white" style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 8px hsla(0,0%,0%,0.8)' }}>{video.movieName}</p>
+                  <p className="text-xs text-white/70 mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>{video.title}</p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </AspectRatio>
-        <Progress value={progress} className="h-1 rounded-none" style={{ background: 'hsla(0,0%,100%,0.2)' }} />
+        {/* Gold progress bar */}
+        <div className="h-1 relative" style={{ background: 'hsla(45,100%,50%,0.1)' }}>
+          <div className="h-full transition-all" style={{ width: `${progress}%`, background: 'linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-glow)))' }} />
+        </div>
       </div>
 
-      {/* Review snippet + poll + actions */}
-      <div className="p-3 space-y-3" style={{ background: 'hsla(0,0%,0%,0.9)' }}>
+      {/* Review content area */}
+      <div className="p-4 space-y-3" style={{ background: 'linear-gradient(180deg, hsl(35, 25%, 8%), hsl(30, 20%, 5%))' }}>
+        {/* Review snippet with quote styling */}
         {video.reviewSnippet && (
-          <p className="text-xs text-muted-foreground leading-relaxed italic" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            "{video.reviewSnippet}"
-          </p>
+          <div className="relative pl-4" style={{ borderLeft: '3px solid hsl(var(--gold))' }}>
+            <Quote className="absolute -left-1 -top-1 w-5 h-5" style={{ color: 'hsla(45,100%,50%,0.3)' }} />
+            <p className="text-sm leading-relaxed italic" style={{ color: 'hsla(45, 100%, 90%, 0.8)', fontFamily: "'Playfair Display', serif" }}>
+              "{video.reviewSnippet}"
+            </p>
+          </div>
         )}
 
         {/* Inline poll */}
         {pollVote === null ? (
-          <div className="space-y-2">
-            <p className="text-xs font-bold text-center" style={{ color: 'hsl(var(--gold))' }}>{video.pollQuestion}</p>
+          <div className="space-y-2 pt-1">
+            <p className="text-xs font-bold text-center uppercase tracking-wider" style={{ color: 'hsl(var(--gold))', fontFamily: "'Bebas Neue', sans-serif" }}>{video.pollQuestion}</p>
             <div className="grid grid-cols-2 gap-2">
               {video.pollOptions.map((opt, i) => (
-                <button key={i} onClick={(e) => { e.stopPropagation(); handlePollVote(i); }} className="py-2.5 rounded-xl text-xs font-bold border transition-all hover:scale-[1.02]" style={{ borderColor: 'hsl(var(--border))', color: 'hsl(var(--foreground))', fontFamily: "'Bebas Neue', sans-serif", fontSize: '0.9rem', letterSpacing: '0.05em' }}>
+                <button key={i} onClick={(e) => { e.stopPropagation(); handlePollVote(i); }} className="py-2.5 rounded-xl text-xs font-bold transition-all hover:brightness-110" style={{ background: i === 0 ? 'hsla(45,100%,50%,0.1)' : 'hsla(0,0%,100%,0.05)', color: i === 0 ? 'hsl(var(--gold))' : 'hsl(var(--foreground))', fontFamily: "'Bebas Neue', sans-serif", fontSize: '0.95rem', letterSpacing: '0.05em', border: `1px solid ${i === 0 ? 'hsla(45,100%,50%,0.3)' : 'hsla(0,0%,100%,0.1)'}` }}>
                   {opt}
                 </button>
               ))}
             </div>
           </div>
         ) : (
-          <p className="text-xs text-center text-muted-foreground">Voted: {video.pollOptions[pollVote]}</p>
+          <p className="text-xs text-center py-1" style={{ color: 'hsla(45,100%,70%,0.6)' }}>Voted: {video.pollOptions[pollVote]}</p>
         )}
 
-        <div className="flex items-center gap-2">
+        {/* Bottom actions */}
+        <div className="flex items-center gap-2 pt-1">
           {video.streamingLink && (
-            <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5" style={{ background: 'hsl(var(--muted))', color: 'hsl(var(--foreground))', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.06em', border: '1px solid hsl(var(--border))' }}>
+            <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all hover:brightness-110" style={{ background: 'hsla(45,100%,50%,0.08)', border: '1px solid hsla(45,100%,50%,0.25)', color: 'hsl(var(--gold))', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.08em' }}>
               <Tv className="w-3.5 h-3.5" /> Watch on {video.streamingService}
             </a>
           )}
-          <button onClick={handleShare} className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'hsl(var(--muted))' }}>
-            <Share2 className="w-4 h-4 text-muted-foreground" />
+          <button onClick={handleShare} className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'hsla(45,100%,50%,0.08)', border: '1px solid hsla(45,100%,50%,0.25)' }}>
+            <Share2 className="w-4 h-4" style={{ color: 'hsl(var(--gold))' }} />
           </button>
         </div>
       </div>

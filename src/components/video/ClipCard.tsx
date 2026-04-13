@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Pause, Volume2, VolumeX, Timer, Share2, Tv, Film } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Timer, Share2, Tv, Scissors, Sparkles } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Progress } from '@/components/ui/progress';
 import { useBalance } from '@/contexts/BalanceContext';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -73,47 +72,70 @@ export function ClipCard({ video }: ClipCardProps) {
   };
 
   return (
-    <article ref={cardRef} className="overflow-hidden rounded-2xl" style={{ background: 'hsl(var(--card))' }} onClick={resetControlsTimeout}>
-      {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: 'linear-gradient(135deg, hsl(var(--deep-purple)), hsla(0,0%,0%,0.9))' }}>
-        <Film className="w-3.5 h-3.5" style={{ color: 'hsl(var(--accent))' }} />
-        <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'hsl(var(--accent))', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.15em' }}>
-          🎞️ Clip
-        </span>
-        {video.episodeInfo && (
-          <span className="ml-auto text-[10px] text-muted-foreground">{video.episodeInfo}</span>
-        )}
+    <article
+      ref={cardRef}
+      className="overflow-hidden rounded-2xl relative"
+      style={{
+        border: '2px solid hsl(var(--neon-cyan))',
+        boxShadow: '0 0 20px hsla(180, 100%, 45%, 0.2), 0 8px 32px hsla(0, 0%, 0%, 0.5)',
+        background: 'linear-gradient(180deg, hsl(190, 40%, 6%) 0%, hsl(200, 30%, 4%) 100%)',
+      }}
+      onClick={resetControlsTimeout}
+    >
+      {/* Header — cyan/teal accent */}
+      <div className="flex items-center justify-between px-4 py-3" style={{ background: 'linear-gradient(135deg, hsl(180, 50%, 8%), hsl(190, 40%, 5%))' }}>
+        <div className="flex items-center gap-2">
+          <Scissors className="w-4 h-4" style={{ color: 'hsl(var(--neon-cyan))' }} />
+          <span
+            className="text-sm font-bold uppercase tracking-widest"
+            style={{
+              color: 'hsl(var(--neon-cyan))',
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: '0.2em',
+              textShadow: '0 0 12px hsla(180, 100%, 45%, 0.4)',
+            }}
+          >
+            Scene Clip
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          {video.episodeInfo && (
+            <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ color: 'hsl(var(--neon-cyan))', background: 'hsla(180,100%,45%,0.1)', border: '1px solid hsla(180,100%,45%,0.2)' }}>
+              {video.episodeInfo}
+            </span>
+          )}
+          <span className="text-[10px] font-mono" style={{ color: 'hsla(180, 100%, 80%, 0.6)' }}>
+            {Math.floor(watchTime / 60)}:{String(watchTime % 60).padStart(2, '0')}
+          </span>
+        </div>
       </div>
 
-      {/* Video area — 16:9 for clips */}
+      {/* Video area — wide 16:9 for clips */}
       <div className="relative">
         <AspectRatio ratio={16 / 9} className="bg-black">
-          <img src={video.thumbnail} alt={`${video.movieName} clip`} className="w-full h-full object-cover" style={{ filter: isPlaying ? 'brightness(0.85)' : 'brightness(0.55)' }} />
+          <img src={video.thumbnail} alt={`${video.movieName} clip`} className="w-full h-full object-cover" style={{ filter: isPlaying ? 'brightness(0.9)' : 'brightness(0.45)' }} />
           <AnimatePresence>
             {showControls && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 flex flex-col justify-between p-4" style={{ background: 'linear-gradient(0deg, hsla(0,0%,0%,0.7) 0%, transparent 50%, hsla(0,0%,0%,0.4) 100%)' }}>
-                <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'hsla(0,0%,0%,0.5)' }}>
-                    <Timer className="w-3.5 h-3.5" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--gold))' }} />
-                    <span className="text-xs font-bold" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--gold))', fontFamily: "'Roboto Mono', monospace" }}>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 flex flex-col justify-between p-4" style={{ background: 'linear-gradient(0deg, hsla(190,40%,4%,0.85) 0%, transparent 40%, transparent 70%, hsla(0,0%,0%,0.4) 100%)' }}>
+                <div className="flex justify-end">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'hsla(0,0%,0%,0.6)', border: '1px solid hsla(180,100%,45%,0.3)' }}>
+                    <Timer className="w-3.5 h-3.5" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--neon-cyan))' }} />
+                    <span className="text-xs font-bold" style={{ color: rewardClaimed ? 'hsl(150, 70%, 50%)' : 'hsl(var(--neon-cyan))', fontFamily: "'Roboto Mono', monospace" }}>
                       {rewardClaimed ? '✓ +30 MP' : `${remainingForReward}s → +30 MP`}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-white/60">
-                    {Math.floor(watchTime / 60)}:{String(watchTime % 60).padStart(2, '0')}
-                  </span>
                 </div>
                 <div className="flex items-center justify-center">
-                  <button onClick={(e) => { e.stopPropagation(); setIsPlaying(p => !p); resetControlsTimeout(); }} className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: 'hsla(0,0%,100%,0.15)', backdropFilter: 'blur(8px)' }}>
+                  <button onClick={(e) => { e.stopPropagation(); setIsPlaying(p => !p); resetControlsTimeout(); }} className="rounded-full flex items-center justify-center" style={{ width: '64px', height: '64px', background: 'hsla(180, 100%, 45%, 0.15)', border: '2px solid hsla(180, 100%, 45%, 0.4)', backdropFilter: 'blur(8px)' }}>
                     {isPlaying ? <Pause className="w-7 h-7 text-white" /> : <Play className="w-7 h-7 text-white ml-0.5" />}
                   </button>
                 </div>
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="font-bold text-base text-white" style={{ textShadow: '0 2px 8px hsla(0,0%,0%,0.8)' }}>{video.movieName}</p>
-                    <p className="text-xs text-white/70">{video.title}</p>
+                    <p className="text-lg font-bold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif", textShadow: '0 2px 8px hsla(0,0%,0%,0.8)' }}>{video.movieName}</p>
+                    <p className="text-xs mt-0.5" style={{ color: 'hsla(180, 100%, 80%, 0.7)', fontFamily: "'DM Sans', sans-serif" }}>{video.title}</p>
                   </div>
-                  <button onClick={(e) => { e.stopPropagation(); setIsMuted(m => !m); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'hsla(0,0%,0%,0.4)' }}>
+                  <button onClick={(e) => { e.stopPropagation(); setIsMuted(m => !m); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'hsla(180,100%,45%,0.15)', border: '1px solid hsla(180,100%,45%,0.3)' }}>
                     {isMuted ? <VolumeX className="w-4 h-4 text-white" /> : <Volume2 className="w-4 h-4 text-white" />}
                   </button>
                 </div>
@@ -121,18 +143,21 @@ export function ClipCard({ video }: ClipCardProps) {
             )}
           </AnimatePresence>
         </AspectRatio>
-        <Progress value={progress} className="h-1 rounded-none" style={{ background: 'hsla(0,0%,100%,0.2)' }} />
+        {/* Cyan progress bar */}
+        <div className="h-1 relative" style={{ background: 'hsla(180,100%,45%,0.1)' }}>
+          <div className="h-full transition-all" style={{ width: `${progress}%`, background: 'linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(180, 80%, 60%))' }} />
+        </div>
       </div>
 
       {/* Action bar */}
-      <div className="flex items-center gap-2 p-3" style={{ background: 'hsla(0,0%,0%,0.9)' }}>
+      <div className="flex items-center gap-2 p-4" style={{ background: 'linear-gradient(180deg, hsl(190, 40%, 6%), hsl(200, 30%, 4%))' }}>
         {video.streamingLink && (
-          <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2" style={{ background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(280, 60%, 45%))', color: 'white', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.08em' }}>
+          <a href={video.streamingLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all hover:brightness-110" style={{ background: 'linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(180, 80%, 35%))', color: 'hsl(200, 40%, 5%)', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.1em', boxShadow: '0 4px 16px hsla(180,100%,45%,0.25)' }}>
             <Tv className="w-4 h-4" /> Watch on {video.streamingService}
           </a>
         )}
-        <button onClick={handleShare} className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'hsl(var(--muted))' }}>
-          <Share2 className="w-4 h-4 text-muted-foreground" />
+        <button onClick={handleShare} className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'hsla(180,100%,45%,0.1)', border: '1px solid hsla(180,100%,45%,0.3)' }}>
+          <Share2 className="w-4 h-4" style={{ color: 'hsl(var(--neon-cyan))' }} />
         </button>
       </div>
     </article>
