@@ -64,6 +64,40 @@ export function Home() {
         feed?.scrollIntoView({ behavior: 'smooth' });
       }} />
 
+      {/* YouTube Trending Section */}
+      <div className="mt-2">
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp className="w-5 h-5" style={{ color: 'hsl(0, 80%, 55%)' }} />
+          <h2
+            className="text-2xl font-bold uppercase tracking-[0.12em]"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              background: 'linear-gradient(135deg, hsl(0, 80%, 55%), hsl(15, 90%, 50%))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Trending on YouTube
+          </h2>
+        </div>
+        <p className="text-xs text-muted-foreground mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          Top entertainment videos trending in India right now.
+        </p>
+        {trendingLoading ? (
+          <div className="flex items-center justify-center py-10">
+            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : trendingVideos && trendingVideos.length > 0 ? (
+          <div className="space-y-4">
+            {trendingVideos.map((video, i) => (
+              <YouTubeTrendingCard key={video.id} video={video} rank={i + 1} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground text-center py-6">No trending videos available right now.</p>
+        )}
+      </div>
+
       <div id="news-feed">
         <h2 className="font-display-serif text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>{t('home.todaysNews')}</h2>
         <div className="space-y-4">
