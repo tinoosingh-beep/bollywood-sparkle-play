@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { CheckCircle, Zap, Clock, Swords, TrendingUp, TrendingDown, Bot, Radio, ShieldCheck } from 'lucide-react';
-import { AddToListButton } from '@/components/AddToListButton';
+
 import { useBalance } from '@/contexts/BalanceContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScriptSlots, STORY_TIME_REDUCTION } from '@/contexts/ScriptSlotsContext';
