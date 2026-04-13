@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 import { TrendingUp, Target, MessageCircle, Sparkles } from 'lucide-react';
+import { SpotifyChartsSection } from '@/components/charts/SpotifyChartsSection';
 
 const PREDICTION_MARKET_DATA = [
   { name: 'Box Office', value: 35, fill: 'hsl(var(--crimson))' },
@@ -86,6 +87,9 @@ export function Charts() {
           Story type distribution across prediction markets &amp; social feeds
         </p>
       </div>
+
+      {/* Spotify Charts */}
+      <SpotifyChartsSection />
 
       {/* 1. Prediction Market Pie */}
       <div className="rounded-2xl border border-border/40 bg-card/60 backdrop-blur-sm p-4">
