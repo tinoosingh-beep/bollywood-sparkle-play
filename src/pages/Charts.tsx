@@ -7,6 +7,7 @@ import { IndieCharts } from '@/components/charts/IndieCharts';
 import { RegionalCharts } from '@/components/charts/RegionalCharts';
 import { TrendingAudioCharts } from '@/components/charts/TrendingAudioCharts';
 import { GlobalImpactCharts } from '@/components/charts/GlobalImpactCharts';
+import { OTTCharts } from '@/components/charts/OTTCharts';
 
 
 const PREDICTION_MARKET_DATA = [
@@ -104,6 +105,8 @@ export function Charts() {
       <TrendingAudioCharts />
       <GlobalImpactCharts />
 
+      {/* OTT Charts */}
+      <OTTCharts />
       {/* 1. Prediction Market Pie */}
       <div className="rounded-2xl border border-border/40 bg-card/60 backdrop-blur-sm p-4">
         <SectionHeader icon={Target} title="Prediction Market Stories" subtitle="Quantifiable outcomes that drive betting volume" />
