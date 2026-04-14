@@ -12,7 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useYouTubeTrending } from '@/hooks/useYouTubeTrending';
 import { useState, useMemo } from 'react';
 import { Sparkles } from 'lucide-react';
-import { SpotifyChartsSection } from '@/components/charts/SpotifyChartsSection';
+
 
 const FASHION_FILTERS: ('All' | FashionCategory)[] = ['All', 'Red Carpet', 'Airport Style', 'Ethnic Fusion'];
 
@@ -71,7 +71,7 @@ export function Home() {
 
 
 
-      <SpotifyChartsSection />
+      
 
       <div id="news-feed">
         <h2 className="font-display-serif text-xl font-bold mb-3" style={{ color: 'hsl(var(--crimson))' }}>{t('home.todaysNews')}</h2>
