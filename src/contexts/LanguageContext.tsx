@@ -35,8 +35,7 @@ const translations: Record<string, Record<Language, string>> = {
   'news.minRead': { en: '2 min read', hi: '2 मिनट पढ़ें' },
   'news.spotlightQuiz': { en: 'Spotlight Quiz • +50 MP', hi: 'स्पॉटलाइट क्विज़ • +50 MP' },
   'news.selectAnswer': { en: 'Select your answer...', hi: 'अपना जवाब चुनो...' },
-  'news.verified': { en: 'Verified! +50 MP earned', hi: 'सत्यापित! +50 MP अर्जित' },
-  'news.verifyToEarn': { en: 'Verify to Earn', hi: 'कमाने के लिए सत्यापित करो' },
+  'news.quizCorrect': { en: '+50 MP earned!', hi: '+50 MP अर्जित!' },
   'news.predictNow': { en: 'Predict Now', hi: 'अभी भविष्यवाणी करो' },
   'news.predicted': { en: 'Predicted:', hi: 'भविष्यवाणी:' },
 
