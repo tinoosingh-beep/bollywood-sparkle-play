@@ -225,7 +225,7 @@ export function NewsCard({ story }: NewsCardProps) {
               ) : (
                 <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-gold" />
-                  <span className="text-gold font-medium">{t('news.verified')}</span>
+                  <span className="text-gold font-medium">{t('news.quizCorrect')}</span>
                 </div>
               )}
             </div>
