@@ -225,7 +225,7 @@ export function NewsCard({ story }: NewsCardProps) {
               ) : (
                 <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-gold" />
-                  <span className="text-gold font-medium">{t('news.verified')}</span>
+                  <span className="text-gold font-medium">{t('news.quizCorrect')}</span>
                 </div>
               )}
             </div>
@@ -251,12 +251,6 @@ export function NewsCard({ story }: NewsCardProps) {
 
           {/* Action buttons */}
           <div className="flex gap-2 flex-wrap">
-            {!verified && !isExpanded && (
-              <Button onClick={() => setIsExpanded(true)} variant="outline"
-                className="flex-1 btn-glass rounded-xl py-5 flex items-center justify-center gap-2">
-                <CheckCircle className="w-4 h-4" />{t('news.verifyToEarn')}
-              </Button>
-            )}
             {meta.isMarketActive && (
               <Button onClick={() => setShowPrediction(true)}
                 className={`${!verified && !isExpanded ? 'flex-1' : 'w-full'} rounded-xl py-5 flex items-center justify-center gap-2 ${hasPredicted ? 'bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30' : 'btn-gold'}`}>
