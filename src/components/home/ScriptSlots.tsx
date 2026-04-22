@@ -50,12 +50,28 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
     }
   };
 
+  const handleSwipe = (_event: MouseEvent | TouchEvent | PointerEvent, info: { offset: { x: number } }) => {
+    if (info.offset.x > 44) {
+      setIsExpanded(true);
+      return;
+    }
+
+    if (info.offset.x < -44) {
+      setIsExpanded(false);
+    }
+  };
+
   return (
     <>
       <div className="relative self-start">
         <motion.button
           type="button"
           onClick={() => setIsExpanded((prev) => !prev)}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          dragMomentum={false}
+          onDragEnd={handleSwipe}
           whileTap={{ scale: 0.96 }}
           className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-card/95 shadow-card backdrop-blur-sm"
           aria-label={t('home.dailyRewards')}
