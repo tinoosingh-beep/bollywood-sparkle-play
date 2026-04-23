@@ -10,10 +10,6 @@ interface HubHeaderProps {
 export function HubHeader({ trophies }: HubHeaderProps) {
   const { balance } = useBalance();
   const { lang, toggleLanguage } = useLanguage();
-  const capsuleStyle = {
-    background: 'linear-gradient(145deg, hsla(var(--glass), 0.96), hsla(var(--deep-purple), 0.88))',
-    boxShadow: '0 10px 26px hsla(var(--deep-purple), 0.3), 0 0 14px hsla(var(--gold), 0.08), inset 0 1px 0 hsla(var(--gold-glow), 0.16)',
-  } as const;
 
   return (
     <div className="flex items-center justify-between px-1">
@@ -22,10 +18,10 @@ export function HubHeader({ trophies }: HubHeaderProps) {
         <motion.button
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-full"
           style={{
-            background: 'linear-gradient(135deg, hsl(var(--royal-purple)), hsl(var(--crimson)) 52%, hsl(var(--gold-glow)) 100%)',
+            background: 'linear-gradient(135deg, hsl(280 80% 55%), hsl(320 90% 50%), hsl(45 100% 55%))',
             backgroundSize: '200% 200%',
-            boxShadow: '0 10px 28px hsla(var(--crimson), 0.36), 0 0 18px hsla(var(--gold), 0.2)',
-            border: '1px solid hsla(var(--gold-glow), 0.34)',
+            boxShadow: '0 4px 20px hsla(300, 80%, 50%, 0.5), 0 0 10px hsla(45, 100%, 55%, 0.3)',
+            border: '1px solid hsla(45, 100%, 70%, 0.4)',
           }}
           whileTap={{ scale: 0.95 }}
           animate={{
@@ -33,11 +29,11 @@ export function HubHeader({ trophies }: HubHeaderProps) {
           }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <Sparkles className="w-4 h-4 text-primary-foreground drop-shadow-[0_0_10px_hsla(var(--gold-glow),0.55)]" />
-          <span className="text-xs font-extrabold tracking-wide text-primary-foreground drop-shadow-[0_2px_8px_hsla(var(--deep-purple),0.45)]">BollyBet</span>
+          <Sparkles className="w-4 h-4 text-white drop-shadow-[0_0_6px_hsla(45,100%,80%,0.8)]" />
+          <span className="text-xs font-extrabold text-white tracking-wide drop-shadow-[0_0_4px_hsla(0,0%,0%,0.5)]">BollyBet</span>
           <span
-            className="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-primary-foreground"
-            style={{ background: 'hsla(var(--foreground), 0.18)', boxShadow: 'inset 0 1px 2px hsla(var(--deep-purple), 0.3)' }}
+            className="ml-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+            style={{ background: 'hsla(0, 0%, 100%, 0.25)', boxShadow: 'inset 0 1px 2px hsla(0,0%,0%,0.2)' }}
           >
             7
           </span>
@@ -46,16 +42,17 @@ export function HubHeader({ trophies }: HubHeaderProps) {
         {/* Language Toggle */}
         <motion.button
           onClick={toggleLanguage}
-          className="flex items-center gap-1 rounded-full border px-2.5 py-1.5"
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-full"
           style={{
-            ...capsuleStyle,
-            borderColor: 'hsla(var(--gold), 0.18)',
+            background: 'linear-gradient(135deg, hsl(250 30% 18%), hsl(250 35% 14%))',
+            boxShadow: '0 4px 12px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.3)',
+            border: '1px solid hsla(180, 100%, 50%, 0.3)',
           }}
           whileTap={{ scale: 0.9 }}
         >
-          <Languages className="w-3.5 h-3.5 text-primary" />
+          <Languages className="w-3.5 h-3.5 text-neon-cyan" />
           <span
-            className="text-[10px] font-bold text-primary"
+            className="text-[10px] font-bold text-neon-cyan"
             style={lang === 'hi' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
           >
             {lang === 'en' ? 'हिं' : 'EN'}
@@ -66,10 +63,11 @@ export function HubHeader({ trophies }: HubHeaderProps) {
       {/* Right: Trophies + MP */}
       <div className="flex items-center gap-2">
         <div
-            className="flex items-center gap-1.5 rounded-full border px-3 py-1.5"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
           style={{
-              ...capsuleStyle,
-              borderColor: 'hsla(var(--gold), 0.28)',
+            background: 'linear-gradient(135deg, hsl(250 30% 18%), hsl(250 35% 14%))',
+            boxShadow: '0 4px 12px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.3)',
+            border: '1px solid hsla(45, 100%, 50%, 0.3)',
           }}
         >
           <Trophy className="w-4 h-4 text-gold" />
@@ -77,19 +75,20 @@ export function HubHeader({ trophies }: HubHeaderProps) {
         </div>
 
         <div
-            className="flex items-center gap-1.5 rounded-full border px-3 py-1.5"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
           style={{
-              ...capsuleStyle,
-              borderColor: 'hsla(var(--crimson), 0.3)',
+            background: 'linear-gradient(135deg, hsl(250 30% 18%), hsl(250 35% 14%))',
+            boxShadow: '0 4px 12px hsla(250, 30%, 8%, 0.5), inset 0 1px 2px hsla(250, 20%, 30%, 0.3)',
+            border: '1px solid hsla(320, 100%, 55%, 0.3)',
           }}
         >
           <motion.div
             animate={{ y: [0, -3, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Coins className="w-4 h-4 text-crimson" />
+            <Coins className="w-4 h-4 text-neon-pink" />
           </motion.div>
-          <span className="text-sm font-bold text-crimson font-mono">{balance}</span>
+          <span className="text-sm font-bold text-neon-pink font-mono">{balance}</span>
         </div>
       </div>
     </div>
