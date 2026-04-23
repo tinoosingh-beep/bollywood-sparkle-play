@@ -8,11 +8,11 @@ interface BottomNavProps {
 }
 
 const NAV_COLORS: Record<string, string> = {
-  shop: '#8B5CF6',
-  home: '#00BFFF',
-  markets: '#00C853',
-  charts: '#FF8C00',
-  social: '#FFD700',
+  shop: 'hsl(var(--neon-purple))',
+  home: 'hsl(var(--gold))',
+  markets: 'hsl(var(--neon-cyan))',
+  charts: 'hsl(var(--accent))',
+  social: 'hsl(var(--crimson))',
 };
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
@@ -31,15 +31,15 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
       <div
         className="px-1 py-1.5 flex justify-around rounded-2xl backdrop-blur-xl"
         style={{
-          background: 'hsla(270, 20%, 10%, 0.9)',
-          borderTop: '1px solid hsla(270, 30%, 25%, 0.5)',
-          boxShadow: '0 -4px 30px hsla(270, 40%, 5%, 0.5), 0 0 40px hsla(280, 60%, 40%, 0.08)',
+          background: 'linear-gradient(180deg, hsla(var(--deep-purple), 0.88), hsla(var(--glass), 0.96))',
+          border: '1px solid hsla(var(--glass-border), 0.65)',
+          boxShadow: '0 -10px 36px hsla(var(--deep-purple), 0.48), inset 0 1px 0 hsla(var(--gold-glow), 0.12)',
         }}
       >
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
-          const color = NAV_COLORS[item.id] || '#00BFFF';
+          const color = NAV_COLORS[item.id] || 'hsl(var(--gold))';
 
           return (
             <motion.button
@@ -51,10 +51,10 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
             >
               {item.badge > 0 && (
                 <span
-                  className="absolute -top-0.5 right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-white z-10"
+                  className="absolute -top-0.5 right-1 z-10 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-bold text-primary-foreground"
                   style={{
-                    background: '#FF3B30',
-                    boxShadow: '0 2px 6px rgba(255, 59, 48, 0.5)',
+                    background: 'linear-gradient(135deg, hsl(var(--gold-glow)), hsl(var(--accent)))',
+                    boxShadow: '0 4px 12px hsla(var(--accent), 0.35)',
                   }}
                 >
                   {item.badge}
@@ -66,7 +66,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               >
                 <Icon
                   className="w-5 h-5"
-                  style={{ color: isActive ? color : 'hsla(270, 10%, 60%, 1)' }}
+                  style={{ color: isActive ? color : 'hsl(var(--muted-foreground))' }}
                 />
               </motion.div>
               {isActive && (
@@ -79,7 +79,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               )}
               <span
                 className="text-[10px] font-medium"
-                style={{ color: isActive ? color : 'hsla(270, 10%, 55%, 1)' }}
+                style={{ color: isActive ? color : 'hsl(var(--muted-foreground))' }}
               >
                 {t(item.labelKey)}
               </span>

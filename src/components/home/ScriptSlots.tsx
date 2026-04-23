@@ -73,7 +73,11 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
           dragMomentum={false}
           onDragEnd={handleSwipe}
           whileTap={{ scale: 0.96 }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-card/95 shadow-card backdrop-blur-sm"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 shadow-card backdrop-blur-sm"
+          style={{
+            background: 'linear-gradient(145deg, hsla(var(--glass), 0.96), hsla(var(--deep-purple), 0.94))',
+            boxShadow: '0 12px 30px hsla(var(--deep-purple), 0.42), 0 0 22px hsla(var(--crimson), 0.12), inset 0 1px 0 hsla(var(--gold-glow), 0.16)',
+          }}
           aria-label={t('home.dailyRewards')}
         >
           <Film className="h-6 w-6 text-primary" />
@@ -98,7 +102,11 @@ export function ScriptSlots({ onNavigateToNews }: ScriptSlotsProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.96 }}
               transition={{ duration: 0.18, ease: 'easeOut' }}
-              className="absolute left-0 top-[calc(100%+0.75rem)] z-20 w-[min(18rem,calc(100vw-2rem))] rounded-2xl border border-primary/20 bg-card/95 p-3 shadow-card backdrop-blur-xl"
+              className="absolute left-0 top-[calc(100%+0.75rem)] z-20 w-[min(18rem,calc(100vw-2rem))] rounded-2xl border border-primary/20 p-3 shadow-card backdrop-blur-xl"
+              style={{
+                background: 'linear-gradient(155deg, hsla(var(--gold), 0.08), transparent 22%), linear-gradient(145deg, hsla(var(--glass), 0.97), hsla(var(--deep-purple), 0.94))',
+                boxShadow: '0 20px 42px hsla(var(--deep-purple), 0.5), inset 0 1px 0 hsla(var(--gold-glow), 0.15)',
+              }}
             >
               <div className="mb-2 flex items-center justify-between gap-3">
                 <p className="text-xs font-display font-bold uppercase tracking-wider text-primary">
