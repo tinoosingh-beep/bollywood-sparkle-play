@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 320 34% 8%;
+    --background: 272 40% 9%;
     --foreground: 36 100% 97%;
     
     --card: 326 32% 12%;
@@ -71,10 +71,10 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'DM Sans', sans-serif;
     background:
-      radial-gradient(circle at top center, hsla(var(--gold), 0.22) 0%, transparent 30%),
-      radial-gradient(circle at 78% 14%, hsla(var(--crimson), 0.24) 0%, transparent 28%),
-      radial-gradient(circle at 18% 32%, hsla(var(--accent), 0.18) 0%, transparent 24%),
-      linear-gradient(180deg, hsl(328 42% 8%) 0%, hsl(321 42% 7%) 35%, hsl(312 46% 10%) 100%);
+      radial-gradient(circle at top center, hsla(var(--gold), 0.2) 0%, transparent 28%),
+      radial-gradient(circle at 78% 14%, hsla(var(--crimson), 0.2) 0%, transparent 26%),
+      radial-gradient(circle at 18% 32%, hsla(var(--accent), 0.14) 0%, transparent 22%),
+      linear-gradient(180deg, hsl(278 42% 12%) 0%, hsl(272 40% 10%) 42%, hsl(286 46% 12%) 100%);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
