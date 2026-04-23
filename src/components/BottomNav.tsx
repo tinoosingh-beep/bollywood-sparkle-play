@@ -31,9 +31,9 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
       <div
         className="px-1 py-1.5 flex justify-around rounded-2xl backdrop-blur-xl"
         style={{
-          background: 'linear-gradient(180deg, hsla(var(--deep-purple), 0.88), hsla(var(--glass), 0.96))',
-          border: '1px solid hsla(var(--glass-border), 0.65)',
-          boxShadow: '0 -10px 36px hsla(var(--deep-purple), 0.48), inset 0 1px 0 hsla(var(--gold-glow), 0.12)',
+          background: 'linear-gradient(180deg, hsla(var(--deep-purple), 0.84), hsla(var(--glass), 0.98))',
+          border: '1px solid hsla(var(--glass-border), 0.78)',
+          boxShadow: '0 -10px 36px hsla(var(--deep-purple), 0.4), 0 0 18px hsla(var(--crimson), 0.08), inset 0 1px 0 hsla(var(--gold-glow), 0.18)',
         }}
       >
         {navItems.map((item) => {
