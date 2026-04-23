@@ -11,8 +11,8 @@ export function HubHeader({ trophies }: HubHeaderProps) {
   const { balance } = useBalance();
   const { lang, toggleLanguage } = useLanguage();
   const capsuleStyle = {
-    background: 'linear-gradient(145deg, hsla(var(--glass), 0.94), hsla(var(--deep-purple), 0.92))',
-    boxShadow: '0 10px 26px hsla(var(--deep-purple), 0.38), inset 0 1px 0 hsla(var(--gold-glow), 0.1)',
+    background: 'linear-gradient(145deg, hsla(var(--glass), 0.96), hsla(var(--deep-purple), 0.88))',
+    boxShadow: '0 10px 26px hsla(var(--deep-purple), 0.3), 0 0 14px hsla(var(--gold), 0.08), inset 0 1px 0 hsla(var(--gold-glow), 0.16)',
   } as const;
 
   return (
